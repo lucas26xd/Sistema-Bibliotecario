@@ -13,7 +13,10 @@ public class Inicia {
     public Servicos Inicia(String login, String senha, String bd, String local){
         c = new Conexao();
         con = c.Abrir(login, senha, bd, local);
-        return new Servicos(con);
+        if(con != null)
+            return new Servicos(con);
+        else
+            return null;
     }
     /*
     public Connection Inicia_sem_banco(String login, String senha, String local){
