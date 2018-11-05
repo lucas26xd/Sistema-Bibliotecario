@@ -10,10 +10,10 @@ public class Inicia {
     private Connection con = null;
     private Conexao c = null;
     
-    public Connection Inicia(String login, String senha, String bd, String local){
+    public Servicos Inicia(String login, String senha, String bd, String local){
         c = new Conexao();
         con = c.Abrir(login, senha, bd, local);
-        return con;
+        return new Servicos(con);
     }
     /*
     public Connection Inicia_sem_banco(String login, String senha, String local){
