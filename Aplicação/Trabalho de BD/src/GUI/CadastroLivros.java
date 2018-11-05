@@ -23,7 +23,9 @@ public class CadastroLivros extends javax.swing.JFrame {
         tfTitulo1 = new javax.swing.JTextField();
         Cadastrar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastro de Livros");
+        setResizable(false);
 
         tfTitulo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         tfTitulo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Título", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
