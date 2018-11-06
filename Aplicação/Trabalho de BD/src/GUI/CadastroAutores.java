@@ -1,14 +1,22 @@
 package GUI;
 
+import BD.Servicos;
+
 /**
  *
  * @author lucas, arquivo criado dia 05/11/2018 às 14:44:44
  */
 public class CadastroAutores extends javax.swing.JFrame {
 
-    public CadastroAutores() {
+    private Servicos serv;
+    
+    public CadastroAutores(Servicos serv) {
+        this.serv = serv;
         initComponents();
+        setLocationRelativeTo(null);
     }
+
+    private CadastroAutores(){}
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

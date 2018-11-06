@@ -1,14 +1,22 @@
 package GUI;
 
+import BD.Servicos;
+
 /**
  *
  * @author angel, arquivo criado dia 05/11/2018 às 15:09:56
  */
 public class CadastroLivros extends javax.swing.JFrame {
 
-    public CadastroLivros() {
+    private Servicos serv;
+    
+    public CadastroLivros(Servicos serv) {
+        this.serv = serv;
         initComponents();
+        setLocationRelativeTo(null);
     }
+
+    private CadastroLivros(){}
 
    
     @SuppressWarnings("unchecked")
@@ -27,6 +35,8 @@ public class CadastroLivros extends javax.swing.JFrame {
         setTitle("Cadastro de Livros");
         setResizable(false);
 
+        painel.setBackground(new java.awt.Color(255, 255, 255));
+
         tfTitulo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         tfTitulo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Título", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
 
@@ -38,11 +48,6 @@ public class CadastroLivros extends javax.swing.JFrame {
 
         tfISBN.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         tfISBN.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "ISBN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
-        tfISBN.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfISBNActionPerformed(evt);
-            }
-        });
 
         tfTitulo1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         tfTitulo1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ano Lançamento", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
@@ -104,10 +109,6 @@ public class CadastroLivros extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void tfISBNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfISBNActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfISBNActionPerformed
 
    
     public static void main(String args[]) {

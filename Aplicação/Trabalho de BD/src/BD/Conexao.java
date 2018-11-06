@@ -19,7 +19,7 @@ public class Conexao {
             System.out.println("Conexão aberta com sucesso na classe Conexão.");
         }catch ( ClassNotFoundException | SQLException ex ){
             System.err.println("Error ao abrir conexão na classe Conexão.\n" + ex);
-            JOptionPane.showMessageDialog(null, "Error ao abrir conexão do banco de dados!", null, JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error ao abrir conexão do banco de dados!\nErro: " + ex, null, JOptionPane.WARNING_MESSAGE);
         }
         return con;
     }
