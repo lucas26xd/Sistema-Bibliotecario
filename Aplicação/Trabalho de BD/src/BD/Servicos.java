@@ -19,7 +19,7 @@ public class Servicos{
             SQL action = new SQL(con);
 
             if(sql.contains("select") || sql.contains("desc") || sql.contains("show")){
-                resultado = new ArrayList<>();
+                //resultado = new ArrayList<>();
                 resultado = action.retornarDados(sql);      //RETORNA O RESULTADO PEDIDO PELO USUÁRIO
                 if(resultado != null){
                     System.out.println("enviado: "+resultado.toString());
@@ -30,12 +30,7 @@ public class Servicos{
                 action.inserirDados(sql);
             }else{
                 System.out.println("Nada a Fazer :(");
-            }
-
-            try{
-                Thread.interrupted();
-            }catch(Exception exception){}
-            
+            }            
         }catch(Exception ex){
             System.out.println("Erro na classe: "+getClass()+" : "+ex.getMessage());
         }

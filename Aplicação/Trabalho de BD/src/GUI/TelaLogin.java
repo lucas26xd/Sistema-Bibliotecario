@@ -114,7 +114,7 @@ public class TelaLogin extends javax.swing.JFrame {
         if(autentica.autentica(tfLogin.getText(), tfSenha.getText()))
             JOptionPane.showMessageDialog(null, "Parabéns acertô!");
         else
-            JOptionPane.showMessageDialog(null, "ErÔÔÔ!");
+            JOptionPane.showMessageDialog(null, "Login e/ou Senha Incorretos!");
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     private void btnCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroActionPerformed
