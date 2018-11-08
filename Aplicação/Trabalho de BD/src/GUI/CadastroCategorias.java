@@ -1,6 +1,7 @@
 package GUI;
 
 import BD.Servicos;
+import Classes.categorias;
 
 /**
  *
@@ -9,13 +10,27 @@ import BD.Servicos;
 public class CadastroCategorias extends javax.swing.JFrame {
 
     private Servicos serv;
+    private categorias categorias;
     
     public CadastroCategorias(Servicos serv) {
         this.serv = serv;
+        categorias = new categorias(serv);
         initComponents();
         setLocationRelativeTo(null);
     }
-
+    
+    public CadastroCategorias(Servicos serv, String codigo, String descricao) {
+        this.serv = serv;
+        categorias = new categorias(serv);
+        initComponents();
+        setLocationRelativeTo(null);
+        
+        btn.setText("Alterar");
+        tfCod.setText(codigo);
+        tfCod.setEditable(false);
+        tfNome.setText(descricao);
+    }
+    
     private CadastroCategorias(){}
 
     @SuppressWarnings("unchecked")
@@ -35,11 +50,21 @@ public class CadastroCategorias extends javax.swing.JFrame {
 
         tfCod.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         tfCod.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Código da Categoria", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
+        tfCod.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfCodActionPerformed(evt);
+            }
+        });
 
         tfNome.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         tfNome.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Descrição", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
 
         btn.setText("Cadastrar");
+        btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout painelLayout = new javax.swing.GroupLayout(painel);
         painel.setLayout(painelLayout);
@@ -81,6 +106,18 @@ public class CadastroCategorias extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tfCodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCodActionPerformed
+
+    }//GEN-LAST:event_tfCodActionPerformed
+
+    private void btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActionPerformed
+        if(btn.getText().equals("Alterar")){
+            categorias.altera(tfCod.getText(), tfNome.getText());
+        }else{
+            categorias.cadastra(tfCod.getText(), tfNome.getText());
+        }
+    }//GEN-LAST:event_btnActionPerformed
 
     public static void main(String args[]) {
 
