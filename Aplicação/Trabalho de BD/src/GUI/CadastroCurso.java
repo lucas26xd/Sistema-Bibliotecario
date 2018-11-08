@@ -1,6 +1,7 @@
 package GUI;
 
 import BD.Servicos;
+import Classes.cursos;
 
 /**
  *
@@ -9,11 +10,25 @@ import BD.Servicos;
 public class CadastroCurso extends javax.swing.JFrame {
 
     private Servicos serv;
+    private cursos cursos;
     
     public CadastroCurso(Servicos serv) {
         this.serv = serv;
+        cursos = new cursos(serv);
         initComponents();
         setLocationRelativeTo(null);
+    }
+    
+    public CadastroCurso(Servicos serv, String cod_curso, String nome_curso) {
+        this.serv = serv;
+        cursos = new cursos(serv);
+        initComponents();
+        setLocationRelativeTo(null);
+        
+        btn.setText("Alterar");
+        tfCod.setText(cod_curso);
+        tfCod.setEditable(false);
+        tfNome.setText(nome_curso);
     }
 
     private CadastroCurso(){}
@@ -84,6 +99,14 @@ public class CadastroCurso extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnActionPerformed(java.awt.event.ActionEvent evt) {                                    
+        if(btn.getText().equals("Alterar")){
+            cursos.altera(tfNome.getText(), tfCod.getText());
+        }else{
+            cursos.cadastra(tfNome.getText(), tfCod.getText());
+        }
+    }   
+    
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
