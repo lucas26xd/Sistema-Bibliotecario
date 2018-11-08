@@ -39,9 +39,19 @@ public class TelaLogin extends javax.swing.JFrame {
 
         tfLogin.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         tfLogin.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 12), new java.awt.Color(255, 255, 255)), "   Login:   ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
+        tfLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfLoginActionPerformed(evt);
+            }
+        });
 
         tfSenha.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         tfSenha.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "   Senha:   ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
+        tfSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfSenhaActionPerformed(evt);
+            }
+        });
 
         btnEntrar.setBackground(new java.awt.Color(255, 255, 255));
         btnEntrar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -108,7 +118,7 @@ public class TelaLogin extends javax.swing.JFrame {
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         if(autentica.autentica(tfLogin.getText(), tfSenha.getText()))
-            new CadastroCategorias(serv).setVisible(true);
+            new ConsultaLivros(serv).setVisible(true);
         else
             JOptionPane.showMessageDialog(null, "Login e/ou Senha Incorretos!");
     }//GEN-LAST:event_btnEntrarActionPerformed
@@ -116,6 +126,14 @@ public class TelaLogin extends javax.swing.JFrame {
     private void btnCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCadastroActionPerformed
+
+    private void tfSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSenhaActionPerformed
+        btnEntrarActionPerformed(evt);
+    }//GEN-LAST:event_tfSenhaActionPerformed
+
+    private void tfLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfLoginActionPerformed
+        tfSenha.requestFocus();
+    }//GEN-LAST:event_tfLoginActionPerformed
 
     public static void main(String args[]) {
 

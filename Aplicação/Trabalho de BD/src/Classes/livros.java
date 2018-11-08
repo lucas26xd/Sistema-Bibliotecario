@@ -51,11 +51,11 @@ public class livros {
         JOptionPane.showMessageDialog(null, "Apagado com Sucesso!");
     }
     
-    public void consulta(JTable jt, String isbn, String titulo, String ano, String editora, String qtd, String categoria){
+    public void consulta(JTable jt, String isbn, String titulo, String ano, String editora, String qtd, String categoria, String autor){
         DefaultTableModel mod = (DefaultTableModel) jt.getModel();
         mod.setNumRows(0);
         try {
-            ArrayList<String> result = serv.Acao("select (isbn, titulo, ano_lancamento, editora, qtd_copias, c.descricao) from livros, categorias c where codigo_categoria = c.codigo and isbn like '" + isbn + "%' and titulo like '%" + titulo + "%' and ano_lancamento like '" + ano + "%'  and editora like '"+editora+"%' and qtd_copias like '"+qtd+"%' and categoria like '"+categoria+"%' order by titulo;");
+            ArrayList<String> result = serv.Acao("select (isbn, titulo, ano_lancamento, editora, qtd_copias, c.descricao) from livros as l, categorias as c, livros_tem_autores as lta, autores as a where lta.isbn = l.isbn and a.CPF = lta.CPF and a.nome like '%"+autor+"%' and codigo_categoria = c.codigo and isbn like '" + isbn + "%' and titulo like '%" + titulo + "%' and ano_lancamento like '" + ano + "%'  and editora like '"+editora+"%' and qtd_copias like '"+qtd+"%' and categoria like '"+categoria+"%' order by titulo;");
             if (result != null) {
                 for (int i = 0; i < result.size(); i++) {
                     mod.addRow(new Object[]{result.get(i), result.get(++i), result.get(++i), result.get(++i), result.get(++i), result.get(++i)});
@@ -86,8 +86,8 @@ public class livros {
         try{
             ArrayList<String> a = serv.Acao("select * from categorias;");
             for (int i = 0; i < a.size(); i++) {
-                cbCategorias.addItem(a.get(i));
-                cods.add(a.get(++i));
+                cods.add(a.get(i));
+                cbCategorias.addItem(a.get(++i));
             }
         }catch(IndexOutOfBoundsException ioob){
             JOptionPane.showMessageDialog(null, "Erro no povoamento do combobox!", "Erro", JOptionPane.ERROR_MESSAGE);

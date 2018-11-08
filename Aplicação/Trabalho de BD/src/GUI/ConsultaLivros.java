@@ -24,9 +24,9 @@ public class ConsultaLivros extends javax.swing.JFrame {
         codsCategoria = livros.povoaCategorias(cbCategoria);
         
         try{
-            livros.consulta(jtLivros, tfISBN.getText(), tfTitulo.getText(), tfAno.getText(), tfEditora.getText(), tfQntdCopias.getText(), codsCategoria.get(cbCategoria.getSelectedIndex()));
+            livros.consulta(jtLivros, tfISBN.getText(), tfTitulo.getText(), tfAno.getText(), tfEditora.getText(), tfQntdCopias.getText(), codsCategoria.get(cbCategoria.getSelectedIndex()), tfAutor.getText());
         }catch(IndexOutOfBoundsException ioob){
-            livros.consulta(jtLivros, tfISBN.getText(), tfTitulo.getText(), tfAno.getText(), tfEditora.getText(), tfQntdCopias.getText(), "");
+            livros.consulta(jtLivros, tfISBN.getText(), tfTitulo.getText(), tfAno.getText(), tfEditora.getText(), tfQntdCopias.getText(), "", tfAutor.getText());
         }
     }
 
@@ -97,6 +97,11 @@ public class ConsultaLivros extends javax.swing.JFrame {
 
         tfAutor.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         tfAutor.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Autor", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
+        tfAutor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfAutorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout painelLayout = new javax.swing.GroupLayout(painel);
         painel.setLayout(painelLayout);
@@ -168,6 +173,10 @@ public class ConsultaLivros extends javax.swing.JFrame {
             new CadastroLivros(serv, jtLivros.getValueAt(row, 0)+"", jtLivros.getValueAt(row, 1)+"", jtLivros.getValueAt(row, 2)+"", jtLivros.getValueAt(row, 3)+"", jtLivros.getValueAt(row, 4)+"", jtLivros.getValueAt(row, 5)+"").setVisible(true);
         }
     }//GEN-LAST:event_jtLivrosMouseClicked
+
+    private void tfAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfAutorActionPerformed
+        livros.consulta(jtLivros, tfISBN.getText(), tfTitulo.getText(), tfAno.getText(), tfEditora.getText(), tfQntdCopias.getText(), codsCategoria.get(cbCategoria.getSelectedIndex()), tfAutor.getText());
+    }//GEN-LAST:event_tfAutorActionPerformed
 
     public static void main(String args[]) {
 
