@@ -25,6 +25,7 @@ public class CadastroAutores extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         
+        setTitle("Alterar Autor");
         btn.setText("Alterar");
         tfNome.setText(nome);
         tfCPF.setText(cpf);
