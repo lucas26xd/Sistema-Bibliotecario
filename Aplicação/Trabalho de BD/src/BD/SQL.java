@@ -28,7 +28,7 @@ public class SQL {
     }
 
     public ArrayList<String> retornarDados(String sql) {
-        ArrayList<String> lista = new ArrayList<String>();
+        ArrayList<String> lista = new ArrayList<>();
         try {
             int cont = 1;
             boolean valor = true;

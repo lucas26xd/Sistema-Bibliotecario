@@ -1,6 +1,7 @@
 package GUI;
 
 import BD.Servicos;
+import Classes.autores;
 
 /**
  *
@@ -9,11 +10,26 @@ import BD.Servicos;
 public class CadastroAutores extends javax.swing.JFrame {
 
     private Servicos serv;
+    private autores autores;
     
     public CadastroAutores(Servicos serv) {
         this.serv = serv;
+        autores = new autores(serv);
         initComponents();
         setLocationRelativeTo(null);
+    }
+    
+    public CadastroAutores(Servicos serv, String nome, String cpf, String nacionalidade) {
+        this.serv = serv;
+        autores = new autores(serv);
+        initComponents();
+        setLocationRelativeTo(null);
+        
+        btn.setText("Alterar");
+        tfNome.setText(nome);
+        tfCPF.setText(cpf);
+        tfCPF.setEditable(false);
+        tfNacionalidade.setText(nacionalidade);
     }
 
     private CadastroAutores(){}
@@ -38,6 +54,11 @@ public class CadastroAutores extends javax.swing.JFrame {
         tfNome.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nome", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
 
         btn.setText("Cadastrar");
+        btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActionPerformed(evt);
+            }
+        });
 
         tfNacionalidade.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         tfNacionalidade.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nacionalidade", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
@@ -88,6 +109,14 @@ public class CadastroAutores extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActionPerformed
+        if(btn.getText().equals("Alterar")){
+            autores.altera(tfNome.getText(), tfCPF.getText(), tfNacionalidade.getText());
+        }else{
+            autores.cadastra(tfNome.getText(), tfCPF.getText(), tfNacionalidade.getText());
+        }
+    }//GEN-LAST:event_btnActionPerformed
 
     public static void main(String args[]) {
 
