@@ -49,6 +49,11 @@ public class CadastroCurso extends javax.swing.JFrame {
         painel.setBackground(new java.awt.Color(255, 255, 255));
 
         btn.setText("Cadastrar");
+        btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActionPerformed(evt);
+            }
+        });
 
         tfCod.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         tfCod.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Código do Curso", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
@@ -99,13 +104,13 @@ public class CadastroCurso extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnActionPerformed(java.awt.event.ActionEvent evt) {                                    
+    private void btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActionPerformed
         if(btn.getText().equals("Alterar")){
-            cursos.altera(tfNome.getText(), tfCod.getText());
+            cursos.altera(tfCod.getText(), tfNome.getText());
         }else{
-            cursos.cadastra(tfNome.getText(), tfCod.getText());
+            cursos.cadastra(tfCod.getText(), tfNome.getText());
         }
-    }   
+    }//GEN-LAST:event_btnActionPerformed
     
     public static void main(String args[]) {
 

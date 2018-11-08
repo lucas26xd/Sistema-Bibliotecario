@@ -18,17 +18,17 @@ public class cursos {
     }
     
     public void cadastra(String cod_curso, String nome_curso){
-        serv.Acao("insert into cursos values ('"+cod_curso+"', '"+nome_curso+"');");
+        serv.Acao("insert into curso values ('"+cod_curso+"', '"+nome_curso+"');");
         JOptionPane.showMessageDialog(null, "Curso Inserido com Sucesso!");
     }
     
     public void altera(String cod_curso, String nome_curso){
-        serv.Acao("update cursos set nome_curso = '"+nome_curso+"' where cod_curso = '"+cod_curso+"';");
+        serv.Acao("update curso set nome_curso = '"+nome_curso+"' where cod_curso = '"+cod_curso+"';");
         JOptionPane.showMessageDialog(null, "Alteração Realizada com Sucesso!");
     }
     
     public void apaga(String cod_curso) {
-        serv.Acao("delete from cursos where cod_curso = '"+cod_curso+"';");
+        serv.Acao("delete from curso where cod_curso = '"+cod_curso+"';");
         JOptionPane.showMessageDialog(null, "Apagado com Sucesso!");
     }
     
@@ -36,7 +36,7 @@ public class cursos {
         DefaultTableModel mod = (DefaultTableModel) jt.getModel();
         mod.setNumRows(0);
         try{
-            ArrayList<String> result = serv.Acao("select from cursos where cod_curso like '"+cod_curso+"'%, nome_curso like '%"+nome_curso+"%' order by nome_curso;");
+            ArrayList<String> result = serv.Acao("select from curso where cod_curso like '"+cod_curso+"'%, nome_curso like '%"+nome_curso+"%' order by nome_curso;");
             if (result != null) {
                 for (int i = 0; i < result.size(); i++){
                     mod.addRow(new Object[]{result.get(i), result.get(++i)});
