@@ -11,11 +11,13 @@ public class ConsultaAutores extends javax.swing.JFrame {
 
     private Servicos serv;
     private autores autores;    
+    private CadastroLivros Livros;
     
-    public ConsultaAutores(Servicos serv) {
+    public ConsultaAutores(Servicos serv, CadastroLivros Livros) {
         this.serv = serv;
         autores = new autores(serv);
-    
+        this.Livros = Livros;
+        
         initComponents();
         setLocationRelativeTo(null);
         
@@ -134,7 +136,11 @@ public class ConsultaAutores extends javax.swing.JFrame {
     private void jtAutoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtAutoresMouseClicked
         if(evt.getClickCount() >= 2){
             int row = jtAutores.getSelectedRow();
-            new CadastroAutores(serv, jtAutores.getValueAt(row, 0)+"", jtAutores.getValueAt(row, 1)+"", jtAutores.getValueAt(row, 2)+"").setVisible(true);
+            if(Livros != null){
+                Livros.adicionaAutor(jtAutores.getValueAt(row, 0)+"", jtAutores.getValueAt(row, 1)+"", jtAutores.getValueAt(row, 2)+"");
+                dispose();
+            }else
+                new CadastroAutores(serv, jtAutores.getValueAt(row, 0)+"", jtAutores.getValueAt(row, 1)+"", jtAutores.getValueAt(row, 2)+"").setVisible(true);
         }
     }//GEN-LAST:event_jtAutoresMouseClicked
 

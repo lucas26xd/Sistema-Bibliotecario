@@ -24,12 +24,12 @@ public class autores {
     }
 
     public void altera(String nome, String cpf, String nacionalidade) {
-        serv.Acao("update autores set nome = '" + nome + "', nacionalidade = '" + nacionalidade + "' where cpf = '" + cpf + "';");
+        serv.Acao("update autores set nome = '" + nome + "', nacionalidade = '" + nacionalidade + "' where CPF = '" + cpf + "';");
         JOptionPane.showMessageDialog(null, "Alterado com Sucesso!");
     }
 
     public void apaga(String cpf) {
-        serv.Acao("delete from autores where cpf = '" + cpf + "';");
+        serv.Acao("delete from autores where CPF = '" + cpf + "';");
         JOptionPane.showMessageDialog(null, "Apagado com Sucesso!");
     }
 
@@ -37,7 +37,7 @@ public class autores {
         DefaultTableModel mod = (DefaultTableModel) jt.getModel();
         mod.setNumRows(0);
         try {
-            ArrayList<String> result = serv.Acao("select * from autores where nome like '%" + nome + "%' and cpf like '" + cpf + "%' and nacionalidade like '%" + nacionalidade + "%'order by nome;");
+            ArrayList<String> result = serv.Acao("select * from autores where nome like '%" + nome + "%' and CPF like '" + cpf + "%' and nacionalidade like '%" + nacionalidade + "%' order by nome;");
             if (result != null) {
                 for (int i = 0; i < result.size(); i++) {
                     mod.addRow(new Object[]{result.get(i), mascaraCPF(result.get(++i)), result.get(++i)});

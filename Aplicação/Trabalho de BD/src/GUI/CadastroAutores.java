@@ -35,6 +35,12 @@ public class CadastroAutores extends javax.swing.JFrame {
 
     private CadastroAutores(){}
 
+    private void limpar(){
+        tfNome.setText("");
+        tfCPF.setText("");
+        tfNacionalidade.setText("");
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -114,8 +120,10 @@ public class CadastroAutores extends javax.swing.JFrame {
     private void btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActionPerformed
         if(btn.getText().equals("Alterar")){
             autores.altera(tfNome.getText(), tfCPF.getText(), tfNacionalidade.getText());
+            dispose();
         }else{
             autores.cadastra(tfNome.getText(), tfCPF.getText(), tfNacionalidade.getText());
+            limpar();
         }
     }//GEN-LAST:event_btnActionPerformed
 
