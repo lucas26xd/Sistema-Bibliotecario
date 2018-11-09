@@ -1,5 +1,6 @@
 package GUI;
 
+import BD.Inicia;
 import BD.Servicos;
 import Classes.autenticação;
 import javax.swing.JOptionPane;
@@ -118,7 +119,7 @@ public class TelaLogin extends javax.swing.JFrame {
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         if(autentica.autentica(tfLogin.getText(), tfSenha.getText()))
-            new ConsultaLivros(serv).setVisible(true);
+            new TelaPrincipal(serv).setVisible(true);
         else
             JOptionPane.showMessageDialog(null, "Login e/ou Senha Incorretos!");
     }//GEN-LAST:event_btnEntrarActionPerformed
@@ -161,7 +162,7 @@ public class TelaLogin extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaLogin().setVisible(true);
+                new TelaLogin(new Inicia().Inicia("root", "root", "equipe378981", "localhost")).setVisible(true);
             }
         });
     }

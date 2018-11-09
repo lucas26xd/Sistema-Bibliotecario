@@ -1,15 +1,22 @@
 package GUI;
 
+import BD.Servicos;
+
 /**
  *
  * @author angel, arquivo criado dia 05/11/2018 às 15:50:33
  */
 public class CadastroBibliotecario extends javax.swing.JFrame {
 
-    public CadastroBibliotecario() {
+    private Servicos serv;
+    
+    public CadastroBibliotecario(Servicos serv) {
+        this.serv = serv;
         initComponents();
+        setLocationRelativeTo(null);
     }
-
+    
+    private CadastroBibliotecario(){}
    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -26,17 +33,13 @@ public class CadastroBibliotecario extends javax.swing.JFrame {
         setTitle("Cadastro de Bibliotecários");
         setResizable(false);
 
+        painel.setBackground(new java.awt.Color(255, 255, 255));
+
         tfLogin.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         tfLogin.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Login", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
 
         pfSenha.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        pfSenha.setText("jPasswordField1");
         pfSenha.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Senha", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
-        pfSenha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pfSenhaActionPerformed(evt);
-            }
-        });
 
         tfNome.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         tfNome.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nome", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
@@ -60,7 +63,7 @@ public class CadastroBibliotecario extends javax.swing.JFrame {
                         .addComponent(pfSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
                         .addComponent(tfLogin)
                         .addComponent(tfNome)))
-                .addContainerGap(115, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         painelLayout.setVerticalGroup(
             painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -82,7 +85,9 @@ public class CadastroBibliotecario extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(painel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(painel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -91,10 +96,6 @@ public class CadastroBibliotecario extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void pfSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pfSenhaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pfSenhaActionPerformed
 
    
     public static void main(String args[]) {
