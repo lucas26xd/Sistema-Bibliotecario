@@ -35,6 +35,7 @@ public class TelaLogin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tela de Login no Sitema");
+        setResizable(false);
 
         painel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -118,9 +119,10 @@ public class TelaLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
-        if(autentica.autentica(tfLogin.getText(), tfSenha.getText()))
+        if(autentica.autentica(tfLogin.getText(), tfSenha.getText())){
             new TelaPrincipal(serv).setVisible(true);
-        else
+            dispose();
+        }else
             JOptionPane.showMessageDialog(null, "Login e/ou Senha Incorretos!");
     }//GEN-LAST:event_btnEntrarActionPerformed
 

@@ -20,7 +20,7 @@ public class autenticação {
     
     public boolean autentica(String login, String senha){
         try{
-            return serv.Acao("select * from usuarios where login = '"+login+"' and senha = '"+encripta(senha)+"';").size() > 0;
+            return serv.Acao("SELECT * FROM usuarios WHERE login = '"+login+"' AND senha = '"+encripta(senha)+"';").size() > 0;
         }catch(IndexOutOfBoundsException ioob){
             return false;
         }
@@ -40,7 +40,7 @@ public class autenticação {
     
     public String tipoUsuario(String login, String senha){
         try{
-            return serv.Acao("select tipo_usuario from usuarios where login = '"+login+"' and senha = '"+encripta(senha)+"';").get(0);
+            return serv.Acao("SELECT tipo_usuario FROM usuarios WHERE login = '"+login+"' AND senha = '"+encripta(senha)+"';").get(0);
         }catch(IndexOutOfBoundsException ioob){
             return "";
         }

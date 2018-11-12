@@ -19,17 +19,17 @@ public class autores {
     }
 
     public void cadastra(String nome, String cpf, String nacionalidade) {
-        serv.Acao("insert into autores values ('" + nome + "', '" + cpf + "', '" + nacionalidade + "');");
+        serv.Acao("INSERT INTO autores VALUES ('" + nome + "', '" + cpf + "', '" + nacionalidade + "');");
         JOptionPane.showMessageDialog(null, "Inserido com Sucesso!");
     }
 
     public void altera(String nome, String cpf, String nacionalidade) {
-        serv.Acao("update autores set nome = '" + nome + "', nacionalidade = '" + nacionalidade + "' where CPF = '" + cpf + "';");
+        serv.Acao("UPDATE autores SET nome = '" + nome + "', nacionalidade = '" + nacionalidade + "' WHERE CPF = '" + cpf + "';");
         JOptionPane.showMessageDialog(null, "Alterado com Sucesso!");
     }
 
     public void apaga(String cpf) {
-        serv.Acao("delete from autores where CPF = '" + cpf + "';");
+        serv.Acao("DELETE FROM autores WHERE CPF = '" + cpf + "';");
         JOptionPane.showMessageDialog(null, "Apagado com Sucesso!");
     }
 
@@ -37,7 +37,7 @@ public class autores {
         DefaultTableModel mod = (DefaultTableModel) jt.getModel();
         mod.setNumRows(0);
         try {
-            ArrayList<String> result = serv.Acao("select * from autores where nome like '%" + nome + "%' and CPF like '" + cpf + "%' and nacionalidade like '%" + nacionalidade + "%' order by nome;");
+            ArrayList<String> result = serv.Acao("SELECT * FROM autores WHERE nome LIKE '%" + nome + "%' AND CPF LIKE '" + cpf + "%' AND nacionalidade LIKE '%" + nacionalidade + "%' ORDER BY nome;");
             if (result != null) {
                 for (int i = 0; i < result.size(); i++) {
                     mod.addRow(new Object[]{result.get(i), mascaraCPF(result.get(++i)), result.get(++i)});

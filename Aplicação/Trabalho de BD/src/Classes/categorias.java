@@ -19,17 +19,17 @@ public class categorias {
     }
     
     public void cadastra(String codigo, String descricao){
-        serv.Acao("insert into categorias values ('"+codigo+"', '"+descricao+"');");
+        serv.Acao("INSERT INTO categorias VALUES ('"+codigo+"', '"+descricao+"');");
         JOptionPane.showMessageDialog(null, "Inserido com Sucesso!");
     }
     
     public void altera(String codigo, String descricao){
-        serv.Acao("update categorias set descricao = '"+descricao+"' where codigo = '"+codigo+"';");
+        serv.Acao("UPDATE categorias SET descricao = '"+descricao+"' WHERE codigo = '"+codigo+"';");
         JOptionPane.showMessageDialog(null, "Alteração Realizada com Sucesso!");
     }
     
      public void apaga(String codigo) {
-        serv.Acao("delete from categorias where codigo = '"+codigo+"';");
+        serv.Acao("DELETE FROM categorias WHERE codigo = '"+codigo+"';");
         JOptionPane.showMessageDialog(null, "Apagado com Sucesso!");
     }
      
@@ -37,7 +37,7 @@ public class categorias {
         DefaultTableModel mod = (DefaultTableModel) jt.getModel();
         mod.setNumRows(0);
         try{
-            ArrayList<String> result = serv.Acao("select from categorias where codigo like '"+codigo+"'%, descricao like '%"+descricao+"%' order by codigo;");
+            ArrayList<String> result = serv.Acao("SELECT FROM categorias WHERE codigo LIKE '"+codigo+"'%, descricao LIKE '%"+descricao+"%' ORDER BY codigo;");
             if (result != null) {
                 for (int i = 0; i < result.size(); i++){
                     mod.addRow(new Object[]{result.get(i), result.get(++i)});
