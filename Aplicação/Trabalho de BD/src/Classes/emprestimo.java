@@ -1,7 +1,9 @@
 package Classes;
 
 import BD.Servicos;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -143,11 +145,34 @@ public class emprestimo {
         }
     }
 
-    public void reserva(String usuario_id, String isbn) {
+    public void atendeReserva(String usuario_id, String isbn) {
         serv.Acao("UPDATE reserva SET atendida = 'Sim' WHERE usuario_id = '" + usuario_id + "' AND isbn_livro = '" + isbn + "';");
+        JOptionPane.showMessageDialog(null, "Alterado com Sucesso!");
+    }
+    
+    public void cadastraReserva(String usuario_id, String isbn, String data){
+        serv.Acao("INSERT INTO reserva VALUES ('"+usuario_id+"', '"+isbn+"', '"+data+"', 'Não');");
         JOptionPane.showMessageDialog(null, "Reservado com Sucesso!");
     }
 
+    public String pega_Data(){
+        return new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+    }
+    
+    public String pegaDataFormatada(){
+        return new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+    }
+    
+    public String converteDataBD(String data){
+        int y = Integer.parseInt(data.substring(data.length()-4)) - 1900, m = Integer.parseInt(data.substring(data.indexOf("/")+1, data.lastIndexOf("/"))) - 1, d = Integer.parseInt(data.substring(0, data.indexOf("/")));
+        return new SimpleDateFormat("yyyy-MM-dd").format(new Date(y, m, d));
+    }
+    
+    public String converteDataJava(String data){
+        int y = Integer.parseInt(data.substring(0, 4)) - 1900, m = Integer.parseInt(data.substring(data.indexOf("-")+1, data.lastIndexOf("-"))) - 1, d = Integer.parseInt(data.substring(data.lastIndexOf("-")+1));
+        return new SimpleDateFormat("dd/MM/yyyy").format(new Date(y, m, d));
+    }
+    
     public void consultar(String nome_usuario, String isbn_livro, String titulo, String data, String data_entrega, String entregue) {
 
     }
