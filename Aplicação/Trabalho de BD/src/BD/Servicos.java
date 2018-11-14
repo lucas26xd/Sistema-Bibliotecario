@@ -18,7 +18,7 @@ public class Servicos{
             
             SQL action = new SQL(con);
 
-            if(sql.matches("(?i)select.*") || sql.matches("(?i)desc.*") || sql.contains("(?i)show.*")){
+            if(sql.matches("(?i)select.*") || sql.matches("(?i)desc.*") || sql.matches("(?i)show.*")){
                 //resultado = new ArrayList<>();
                 resultado = action.retornarDados(sql);      //RETORNA O RESULTADO PEDIDO PELO USUÁRIO
                 if(resultado != null){
@@ -26,9 +26,9 @@ public class Servicos{
                 }else{
                     System.out.println("Resultado = null na classe: "+getClass());
                 }
-            }else if(sql.matches("(?i)delete.*") || sql.contains("(?i)drop.*") || 
-                    sql.contains("(?i)insert.*") || sql.contains("(?i)update.*") || 
-                    sql.contains("(?i)create.*")){
+            }else if(sql.matches("(?i)delete.*") || sql.matches("(?i)drop.*") || 
+                    sql.matches("(?i)insert.*") || sql.matches("(?i)update.*") || 
+                    sql.matches("(?i)create.*")){
                 action.inserirDados(sql);
             }else{
                 System.out.println("Nada a Fazer :(");

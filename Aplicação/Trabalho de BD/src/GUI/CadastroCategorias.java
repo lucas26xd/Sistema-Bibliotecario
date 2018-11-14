@@ -2,6 +2,7 @@ package GUI;
 
 import BD.Servicos;
 import Classes.categorias;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -11,10 +12,20 @@ public class CadastroCategorias extends javax.swing.JFrame {
 
     private Servicos serv;
     private categorias categorias;
+    private CadastroLivros cadastraLivros;
     
     public CadastroCategorias(Servicos serv) {
         this.serv = serv;
         categorias = new categorias(serv);
+        initComponents();
+        setLocationRelativeTo(null);
+    }
+    
+    public CadastroCategorias(CadastroLivros cadastraLivros, Servicos serv) {
+        this.serv = serv;
+        categorias = new categorias(serv);
+        this.cadastraLivros = cadastraLivros;
+        
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -33,6 +44,14 @@ public class CadastroCategorias extends javax.swing.JFrame {
     
     private CadastroCategorias(){}
 
+    private boolean camposPreenchidos(){
+        if(tfCod.getText().length() == 0 && tfNome.getText().length() == 0){
+            JOptionPane.showMessageDialog(null, "Preencha todos campos obrigatórios!", "Campos não preenchidos", JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+        return true;
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -50,11 +69,6 @@ public class CadastroCategorias extends javax.swing.JFrame {
 
         tfCod.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         tfCod.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Código da Categoria", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
-        tfCod.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfCodActionPerformed(evt);
-            }
-        });
 
         tfNome.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         tfNome.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Descrição", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
@@ -107,15 +121,17 @@ public class CadastroCategorias extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tfCodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCodActionPerformed
-
-    }//GEN-LAST:event_tfCodActionPerformed
-
     private void btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActionPerformed
-        if(btn.getText().equals("Alterar")){
-            categorias.altera(tfCod.getText(), tfNome.getText());
-        }else{
-            categorias.cadastra(tfCod.getText(), tfNome.getText());
+        if(camposPreenchidos()){
+            if(btn.getText().equals("Alterar")){
+                categorias.altera(tfCod.getText(), tfNome.getText());
+            }else{
+                categorias.cadastra(tfCod.getText(), tfNome.getText());
+                if(cadastraLivros != null){
+                    dispose();
+                    cadastraLivros.povoaCombo();
+                }
+            }
         }
     }//GEN-LAST:event_btnActionPerformed
 

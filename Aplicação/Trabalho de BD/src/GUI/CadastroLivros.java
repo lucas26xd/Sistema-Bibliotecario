@@ -3,6 +3,7 @@ package GUI;
 import BD.Servicos;
 import Classes.livros;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -15,6 +16,7 @@ public class CadastroLivros extends javax.swing.JFrame {
     private livros livro;
     private DefaultTableModel mod;
     private ArrayList<String> codCategorias;
+    private ConsultaLivros consultaLivros;
     
     public CadastroLivros(Servicos serv) {
         this.serv = serv;
@@ -27,9 +29,10 @@ public class CadastroLivros extends javax.swing.JFrame {
         mod = (DefaultTableModel) jtAutores.getModel();
     }
     
-    public CadastroLivros(Servicos serv, String isbn, String titulo, String ano, String editora, String qtd, String categoria) {
+    public CadastroLivros(ConsultaLivros consultaLivros, Servicos serv, String isbn, String titulo, String ano, String editora, String qtd, String categoria) {
         this.serv = serv;
         livro = new livros(serv);
+        this.consultaLivros = consultaLivros;
         
         initComponents();
         setLocationRelativeTo(null);
@@ -42,15 +45,20 @@ public class CadastroLivros extends javax.swing.JFrame {
         tfQntdCopias.setText(qtd);
         tfTitulo.setText(titulo);
         tfAno.setText(ano);
+        
+        povoaCombo();
+        mod = (DefaultTableModel) jtAutores.getModel();
+        
         cbCategoria.setSelectedItem(categoria);
         livro.consultaAutoresdosLivros(jtAutores, isbn);
-        
-        codCategorias = livro.povoaCategorias(cbCategoria);
-        mod = (DefaultTableModel) jtAutores.getModel();
     }
 
     private CadastroLivros(){}
 
+    public void povoaCombo(){
+        codCategorias = livro.povoaCategorias(cbCategoria);
+    }
+    
     public void adicionaAutor(String nome, String cpf, String nacionalidade){
         mod.addRow(new Object[]{nome, cpf, nacionalidade});
     }
@@ -70,6 +78,17 @@ public class CadastroLivros extends javax.swing.JFrame {
         mod.setNumRows(0);
     }
     
+    private boolean camposPreenchidos(){
+        if(tfISBN.getText().length() == 0 && tfQntdCopias.getText().length() == 0 &&
+            tfTitulo.getText().length() == 0 && tfEditora.getText().length() == 0 &&
+            tfAno.getText().length() == 0 && cbCategoria.getSelectedIndex() == -1 &&
+            jtAutores.getRowCount() == 0){
+            JOptionPane.showMessageDialog(null, "Preencha todos campos obrigatórios!", "Campos não preenchidos", JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+        return true;
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -86,9 +105,8 @@ public class CadastroLivros extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtAutores = new javax.swing.JTable();
         btnMenos = new javax.swing.JButton();
-        cbCategoria = new javax.swing.JComboBox<>();
         btnMaisCategoria = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        cbCategoria = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Livros");
@@ -150,7 +168,7 @@ public class CadastroLivros extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jtAutores);
 
         btnMenos.setBackground(new java.awt.Color(255, 255, 255));
-        btnMenos.setFont(new java.awt.Font("Ubuntu", 1, 36)); // NOI18N
+        btnMenos.setFont(new java.awt.Font("Ubuntu", 1, 32)); // NOI18N
         btnMenos.setForeground(new java.awt.Color(255, 0, 0));
         btnMenos.setText("-");
         btnMenos.addActionListener(new java.awt.event.ActionListener() {
@@ -187,9 +205,13 @@ public class CadastroLivros extends javax.swing.JFrame {
 
         btnMaisCategoria.setFont(new java.awt.Font("Ubuntu", 1, 36)); // NOI18N
         btnMaisCategoria.setText("+");
+        btnMaisCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMaisCategoriaActionPerformed(evt);
+            }
+        });
 
-        jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 16)); // NOI18N
-        jLabel1.setText("Categoria");
+        cbCategoria.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Categoria", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
 
         javax.swing.GroupLayout painelLayout = new javax.swing.GroupLayout(painel);
         painel.setLayout(painelLayout);
@@ -200,53 +222,48 @@ public class CadastroLivros extends javax.swing.JFrame {
                 .addComponent(btnCadastrar)
                 .addGap(22, 22, 22))
             .addGroup(painelLayout.createSequentialGroup()
-                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(painelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(painelLayout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(painelLayout.createSequentialGroup()
-                                    .addComponent(cbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(btnMaisCategoria)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(tfEditora))
-                                .addComponent(tfTitulo, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelLayout.createSequentialGroup()
-                                    .addComponent(tfISBN, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(tfQntdCopias, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(tfAno, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                            .addGroup(painelLayout.createSequentialGroup()
+                                .addComponent(cbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnMaisCategoria)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(tfEditora, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tfTitulo)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelLayout.createSequentialGroup()
+                                .addComponent(tfISBN)
+                                .addGap(18, 18, 18)
+                                .addComponent(tfQntdCopias, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(tfAno, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
         painelLayout.setVerticalGroup(
             painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(30, 30, 30)
                 .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfISBN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfAno, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfQntdCopias, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfQntdCopias, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfAno))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(tfTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnMaisCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfEditora, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(cbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnMaisCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(19, 19, 19)
+                    .addComponent(cbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 41, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19)
                 .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         painelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {tfEditora, tfISBN, tfQntdCopias, tfTitulo});
@@ -276,13 +293,20 @@ public class CadastroLivros extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMaisActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        if(btnCadastrar.getText().equals("Alterar")){
-            livro.altera(tfISBN.getText(), tfTitulo.getText(), tfAno.getText(), tfEditora.getText(), tfQntdCopias.getText(), codCategorias.get(cbCategoria.getSelectedIndex()), jtAutores);
-            dispose();
-        }else
-            livro.cadastra(tfISBN.getText(), tfTitulo.getText(), tfAno.getText(), tfEditora.getText(), tfQntdCopias.getText(), codCategorias.get(cbCategoria.getSelectedIndex()), jtAutores);
-        limpar();
+        if(camposPreenchidos()){    
+            if(btnCadastrar.getText().equals("Alterar")){
+                livro.altera(tfISBN.getText(), tfTitulo.getText(), tfAno.getText(), tfEditora.getText(), tfQntdCopias.getText(), codCategorias.get(cbCategoria.getSelectedIndex()), jtAutores);
+                dispose();
+                consultaLivros.consulta();
+            }else
+                livro.cadastra(tfISBN.getText(), tfTitulo.getText(), tfAno.getText(), tfEditora.getText(), tfQntdCopias.getText(), codCategorias.get(cbCategoria.getSelectedIndex()), jtAutores);
+            limpar();
+        }
     }//GEN-LAST:event_btnCadastrarActionPerformed
+
+    private void btnMaisCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMaisCategoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMaisCategoriaActionPerformed
 
    
     public static void main(String args[]) {
@@ -322,7 +346,6 @@ public class CadastroLivros extends javax.swing.JFrame {
     private javax.swing.JButton btnMaisCategoria;
     private javax.swing.JButton btnMenos;
     private javax.swing.JComboBox<String> cbCategoria;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jtAutores;

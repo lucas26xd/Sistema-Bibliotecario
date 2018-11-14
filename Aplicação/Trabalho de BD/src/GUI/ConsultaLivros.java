@@ -30,6 +30,11 @@ public class ConsultaLivros extends javax.swing.JFrame {
 
     private ConsultaLivros(){}
     
+    public void consulta(){
+        index = cbCategoria.getSelectedIndex();
+        livros.consulta(jtLivros, tfISBN.getText(), tfTitulo.getText(), tfAno.getText(), tfEditora.getText(), tfQntdCopias.getText(), (index == -1 ? "" : codsCategoria.get(index)), tfAutor.getText());
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -194,7 +199,7 @@ public class ConsultaLivros extends javax.swing.JFrame {
     private void jtLivrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtLivrosMouseClicked
         if(evt.getClickCount() >= 2){
             int row = jtLivros.getSelectedRow();
-            new CadastroLivros(serv, jtLivros.getValueAt(row, 0)+"", jtLivros.getValueAt(row, 1)+"", jtLivros.getValueAt(row, 2)+"", jtLivros.getValueAt(row, 3)+"", jtLivros.getValueAt(row, 4)+"", jtLivros.getValueAt(row, 5)+"").setVisible(true);
+            new CadastroLivros(this, serv, jtLivros.getValueAt(row, 0)+"", jtLivros.getValueAt(row, 1)+"", jtLivros.getValueAt(row, 2)+"", jtLivros.getValueAt(row, 3)+"", jtLivros.getValueAt(row, 4)+"", jtLivros.getValueAt(row, 5)+"").setVisible(true);
         }
     }//GEN-LAST:event_jtLivrosMouseClicked
 

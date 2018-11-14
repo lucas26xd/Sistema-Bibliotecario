@@ -2,6 +2,7 @@ package GUI;
 
 import BD.Servicos;
 import Classes.autores;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -39,6 +40,15 @@ public class CadastroAutores extends javax.swing.JFrame {
         tfNome.setText("");
         tfCPF.setText("");
         tfNacionalidade.setText("");
+    }
+    
+    private boolean camposPreenchidos(){
+        if(tfCPF.getText().length() == 0 && tfNacionalidade.getText().length() == 0 &&
+            tfNome.getText().length() == 0){
+            JOptionPane.showMessageDialog(null, "Preencha todos campos obrigatórios!", "Campos não preenchidos", JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+        return true;
     }
     
     @SuppressWarnings("unchecked")
@@ -118,11 +128,12 @@ public class CadastroAutores extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActionPerformed
-        if(btn.getText().equals("Alterar")){
-            autores.altera(tfNome.getText(), tfCPF.getText(), tfNacionalidade.getText());
-            dispose();
-        }else{
-            autores.cadastra(tfNome.getText(), tfCPF.getText(), tfNacionalidade.getText());
+        if(camposPreenchidos()){    
+            if(btn.getText().equals("Alterar")){
+                autores.altera(tfNome.getText(), tfCPF.getText(), tfNacionalidade.getText());
+                dispose();
+            }else
+                autores.cadastra(tfNome.getText(), tfCPF.getText(), tfNacionalidade.getText());
             limpar();
         }
     }//GEN-LAST:event_btnActionPerformed

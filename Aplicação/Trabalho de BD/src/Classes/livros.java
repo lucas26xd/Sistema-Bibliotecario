@@ -33,7 +33,7 @@ public class livros {
     }
     
     private void apagaAutoresdosLivros(String isbn){
-        serv.Acao("DELETE FROM livros_tem_autores WHERE isbn = '"+isbn+"';");
+        serv.Acao("DELETE FROM livros_tem_autores WHERE isbn_livro = '"+isbn+"';");
     }
     
     public void altera(String isbn, String titulo, String ano, String editora, String qtd, String categoria, JTable jtAutores){
@@ -77,7 +77,9 @@ public class livros {
         DefaultTableModel mod = (DefaultTableModel) jtAutores.getModel();
         mod.setNumRows(0);
         try {
-            ArrayList<String> result = serv.Acao("SELECT a.nome, a.CPF, a.nacionalidade FROM livros_tem_autores AS lta, autores AS a WHERE lta.CPF_autor = a.CPF AND lta.isbn = '" + isbn + "' ORDER BY a.nome;");
+            ArrayList<String> result = serv.Acao("SELECT a.nome, a.CPF, a.nacionalidade "
+                                                + "FROM (livros_tem_autores lta JOIN autores a ON lta.CPF_autor = a.CPF) "
+                                                + "WHERE lta.isbn_livro = '" + isbn + "' ORDER BY a.nome;");
             if (result != null) {
                 for (int i = 0; i < result.size(); i++) {
                     mod.addRow(new Object[]{result.get(i), result.get(++i), result.get(++i)});
@@ -89,6 +91,7 @@ public class livros {
     }
     
     public ArrayList<String> povoaCategorias(JComboBox cbCategorias){
+        cbCategorias.removeAllItems();
         ArrayList<String> cods = new ArrayList<>();
         try{
             ArrayList<String> a = serv.Acao("SELECT * FROM categorias;");
