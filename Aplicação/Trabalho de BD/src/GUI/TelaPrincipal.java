@@ -32,6 +32,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btnCadastraCategoria = new javax.swing.JButton();
         btnCadastraCurso = new javax.swing.JButton();
         btnConsultaLivros = new javax.swing.JButton();
+        btnConsultaCategoria = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -84,6 +85,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnConsultaCategoria.setText("Consultar Categorias");
+        btnConsultaCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultaCategoriaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout painelLayout = new javax.swing.GroupLayout(painel);
         painel.setLayout(painelLayout);
         painelLayout.setHorizontalGroup(
@@ -98,7 +106,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
                             .addComponent(btnCadastraLivros, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnCadastraBibliotecario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(98, 98, 98)
-                        .addComponent(btnConsultaLivros, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE))
+                        .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnConsultaLivros, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                            .addComponent(btnConsultaCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelLayout.createSequentialGroup()
                         .addComponent(btnCadastraAutores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(98, 98, 98)
@@ -117,7 +127,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     .addComponent(btnCadastraLivros, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnConsultaLivros, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btnCadastraCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCadastraCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnConsultaCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addComponent(btnCadastraCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -164,12 +176,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCadastraBibliotecarioActionPerformed
 
     private void btnConsultaAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaAutorActionPerformed
-        new ConsultaAutores(serv, null).setVisible(true);
+        new ConsultaAutores(serv).setVisible(true);
     }//GEN-LAST:event_btnConsultaAutorActionPerformed
 
     private void btnConsultaLivrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaLivrosActionPerformed
         new ConsultaLivros(serv).setVisible(true);
     }//GEN-LAST:event_btnConsultaLivrosActionPerformed
+
+    private void btnConsultaCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaCategoriaActionPerformed
+        new ConsultaCategoria(serv).setVisible(true);
+    }//GEN-LAST:event_btnConsultaCategoriaActionPerformed
 
    
     public static void main(String args[]) {
@@ -210,6 +226,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnCadastraCurso;
     private javax.swing.JButton btnCadastraLivros;
     private javax.swing.JButton btnConsultaAutor;
+    private javax.swing.JButton btnConsultaCategoria;
     private javax.swing.JButton btnConsultaLivros;
     private javax.swing.JPanel painel;
     // End of variables declaration//GEN-END:variables
