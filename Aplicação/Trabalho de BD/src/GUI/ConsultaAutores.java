@@ -13,6 +13,16 @@ public class ConsultaAutores extends javax.swing.JFrame {
     private autores autores;    
     private CadastroLivros Livros;
     
+    public ConsultaAutores(Servicos serv) {
+        this.serv = serv;
+        autores = new autores(serv);
+        
+        initComponents();
+        setLocationRelativeTo(null);
+        
+        autores.consulta(jtAutores, tfNome.getText(), tfCPF.getText(), tfNacionalidade.getText());
+    }
+    
     public ConsultaAutores(Servicos serv, CadastroLivros Livros) {
         this.serv = serv;
         autores = new autores(serv);
