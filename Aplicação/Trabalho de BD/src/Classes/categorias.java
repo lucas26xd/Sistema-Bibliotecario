@@ -37,7 +37,7 @@ public class categorias {
         DefaultTableModel mod = (DefaultTableModel) jt.getModel();
         mod.setNumRows(0);
         try{
-            ArrayList<String> result = serv.Acao("SELECT FROM categorias WHERE codigo LIKE '"+codigo+"'%, descricao LIKE '%"+descricao+"%' ORDER BY codigo;");
+            ArrayList<String> result = serv.Acao("SELECT * FROM categorias WHERE codigo LIKE '"+codigo+"%' AND descricao LIKE '%"+descricao+"%' ORDER BY codigo;");
             if (result != null) {
                 for (int i = 0; i < result.size(); i++){
                     mod.addRow(new Object[]{result.get(i), result.get(++i)});
