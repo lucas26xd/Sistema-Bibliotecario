@@ -8,25 +8,26 @@ import javax.swing.JOptionPane;
  *
  * @author lucas, arquivo criado dia 13/11/2018 às 22:31:51
  */
-public class reserva {
+public class emprestimo {
 
     private Servicos serv;
 
-    public reserva(Servicos serv) {
+    public emprestimo(Servicos serv) {
         this.serv = serv;
     }
 
     public void cadastra(String usuario_id, String isbn_livro, String data, String data_entrega) {
         if (verificaSePodePegar(usuario_id)) {
-            serv.Acao("INSERT INTO reserva VALUES ('" + usuario_id + "', '" + isbn_livro + "', '" + data + "', '" + data_entrega + "', 'Não');");
+            serv.Acao("INSERT INTO emprestimo VALUES ('" + usuario_id + "', '" + isbn_livro + "', '" + data + "', '" + data_entrega + "', 'Não');");
             JOptionPane.showMessageDialog(null, "Cadastrado com Sucesso!");
-        } else
+        } else {
             JOptionPane.showMessageDialog(null, "Usuário atingiu o limite de empréstimos!", "Limite de Empréstimos", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private boolean verificaSePodePegar(String usuario_id) {
         String tipo_usuario = tipo_usuario(usuario_id);
-        int qtdEmprestimos = qtdLivrosPegados(usuario_id);
+        int qtdEmprestimos = qtdLivrosPegos(usuario_id);
 
         if (tipo_usuario.equals("alunos") && qtdEmprestimos < 3) {
             return true;
@@ -40,9 +41,9 @@ public class reserva {
         }
     }
 
-    private int qtdLivrosPegados(String usuario_id) {
+    private int qtdLivrosPegos(String usuario_id) {
         try {
-            return Integer.parseInt(serv.Acao("SELECT COUNT(*) FROM reservas WHERE entregue = 'Não' AND usuarios_id = '" + usuario_id + "';").get(0));
+            return Integer.parseInt(serv.Acao("SELECT COUNT(*) FROM emprestimo WHERE entregue = 'Não' AND usuarios_id = '" + usuario_id + "';").get(0));
         } catch (IndexOutOfBoundsException ioob) {
             return 0;
         }
@@ -95,18 +96,59 @@ public class reserva {
     }
 
     public void alterar(String usuario_id, String isbn_livro, String data, String entregue) {
-        serv.Acao("UPDATE reserva SET entregue = '"+entregue+"' "
-                + "WHERE usuario_id = '"+usuario_id+"' AND isbn_livro = '"+isbn_livro+"' AND data = '"+data+"';");
+        serv.Acao("UPDATE emprestimo SET entregue = '" + entregue + "' "
+                + "WHERE usuario_id = '" + usuario_id + "' AND isbn_livro = '" + isbn_livro + "' AND data = '" + data + "';");
         JOptionPane.showMessageDialog(null, "Alterado com Sucesso!");
     }
-    
+
     public void apagar(String usuario_id, String isbn_livro, String data) {
-        serv.Acao("DELETE FROM reserva WHERE usuario_id = '"+usuario_id+"' AND isbn_livro = '"+isbn_livro+"' AND data = '"+data+"';");
+        serv.Acao("DELETE FROM emprestimo WHERE usuario_id = '" + usuario_id + "' AND isbn_livro = '" + isbn_livro + "' AND data = '" + data + "';");
         JOptionPane.showMessageDialog(null, "Apagado com Sucesso!");
     }
-    
-    
+
+    public int qtdLivrosDisponiveis(String isbn) {
+        try {
+            return Integer.parseInt(serv.Acao("SELECT (SELECT qtd_copias FROM livros WHERE isbn = '" + isbn + "') - COUNT(*) FROM emprestimo WHERE entregue = 'Não' AND isbn_livro = '" + isbn + "';").get(0));
+        } catch (IndexOutOfBoundsException ioob) {
+            return 0;
+        }
+    }
+
+    public int qtdReserva(String isbn) {
+        try {
+            return Integer.parseInt(serv.Acao("SELECT COUNT(*) FROM reserva "
+                    + "WHERE atendida = 'Não' AND isbn_livro = '" + isbn + "';").get(0));
+        } catch (IndexOutOfBoundsException ioob) {
+            return 0;
+        }
+    }
+
+    public boolean usuarioReservou(String usuario_id, String isbn) {
+        try {
+            return serv.Acao("SELECT * FROM reserva "
+                    + "WHERE atendida = 'Não' AND isbn_livro = '" + isbn + "' AND usuario_id = '" + usuario_id + "'").size() > 0;
+        } catch (IndexOutOfBoundsException ioob) {
+            return false;
+        }
+    }
+
+    public boolean noRanking(String usuario_id, String isbn, String ranking) {
+        try {
+            ArrayList<String> a = serv.Acao("SELECT usuario_id FROM reserva "
+                    + "WHERE atendida = 'Não' AND isbn_livro = '" + isbn + "' "
+                    + "ORDER BY data LIMIT " + ranking + ";");
+            return a.contains(usuario_id);
+        } catch (IndexOutOfBoundsException ioob) {
+            return false;
+        }
+    }
+
+    public void reserva(String usuario_id, String isbn) {
+        serv.Acao("UPDATE reserva SET atendida = 'Sim' WHERE usuario_id = '" + usuario_id + "' AND isbn_livro = '" + isbn + "';");
+        JOptionPane.showMessageDialog(null, "Reservado com Sucesso!");
+    }
+
     public void consultar(String nome_usuario, String isbn_livro, String titulo, String data, String data_entrega, String entregue) {
-        
+
     }
 }
