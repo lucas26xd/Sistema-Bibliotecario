@@ -12,29 +12,42 @@ public class ConsultaLivros extends javax.swing.JFrame {
 
     private Servicos serv;
     private livros livros;
+    private Emprestimo emp;
     private ArrayList<String> codsCategoria;
     private int index;
-    
+
     public ConsultaLivros(Servicos serv) {
         this.serv = serv;
         livros = new livros(serv);
-        
+
         initComponents();
         setLocationRelativeTo(null);
-        
+
         codsCategoria = livros.povoaCategorias(cbCategoria);
-        
+
         //index = cbCategoria.getSelectedIndex();
         //livros.consulta(jtLivros, tfISBN.getText(), tfTitulo.getText(), tfAno.getText(), tfEditora.getText(), tfQntdCopias.getText(), (index == -1 ? "" : codsCategoria.get(index)), tfAutor.getText());
     }
 
-    private ConsultaLivros(){}
-    
-    public void consulta(){
+    public ConsultaLivros(Emprestimo emp, Servicos serv) {
+        this.serv = serv;
+        livros = new livros(serv);
+        this.emp = emp;
+
+        initComponents();
+        setLocationRelativeTo(null);
+
+        codsCategoria = livros.povoaCategorias(cbCategoria);
+    }
+
+    private ConsultaLivros() {
+    }
+
+    public void consulta() {
         index = cbCategoria.getSelectedIndex();
         livros.consulta(jtLivros, tfISBN.getText(), tfTitulo.getText(), tfAno.getText(), tfEditora.getText(), tfQntdCopias.getText(), (index == -1 ? "" : codsCategoria.get(index)), tfAutor.getText());
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -195,9 +208,13 @@ public class ConsultaLivros extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtLivrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtLivrosMouseClicked
-        if(evt.getClickCount() >= 2){
+        if (evt.getClickCount() >= 2) {
             int row = jtLivros.getSelectedRow();
-            new CadastroLivros(this, serv, jtLivros.getValueAt(row, 0)+"", jtLivros.getValueAt(row, 1)+"", jtLivros.getValueAt(row, 2)+"", jtLivros.getValueAt(row, 3)+"", jtLivros.getValueAt(row, 4)+"", jtLivros.getValueAt(row, 5)+"").setVisible(true);
+            if (emp != null) {
+                emp.pesquisa(jtLivros.getValueAt(row, 0) + "");
+                dispose();
+            } else
+                new CadastroLivros(this, serv, jtLivros.getValueAt(row, 0) + "", jtLivros.getValueAt(row, 1) + "", jtLivros.getValueAt(row, 2) + "", jtLivros.getValueAt(row, 3) + "", jtLivros.getValueAt(row, 4) + "", jtLivros.getValueAt(row, 5) + "").setVisible(true);
         }
     }//GEN-LAST:event_jtLivrosMouseClicked
 
@@ -222,10 +239,11 @@ public class ConsultaLivros extends javax.swing.JFrame {
     }//GEN-LAST:event_tfAnoActionPerformed
 
     private void cbCategoriaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbCategoriaItemStateChanged
-        try{
+        try {
             index = cbCategoria.getSelectedIndex();
             livros.consulta(jtLivros, tfISBN.getText(), tfTitulo.getText(), tfAno.getText(), tfEditora.getText(), tfQntdCopias.getText(), (index == -1 ? "" : codsCategoria.get(index)), tfAutor.getText());
-        }catch(NullPointerException npe){}
+        } catch (NullPointerException npe) {
+        }
     }//GEN-LAST:event_cbCategoriaItemStateChanged
 
     private void tfTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfTituloActionPerformed

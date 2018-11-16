@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -19,11 +21,22 @@ public class emprestimo {
     }
 
     public void cadastra(String usuario_id, String isbn_livro, String data, String data_entrega) {
-        if (verificaSePodePegar(usuario_id)) {
-            serv.Acao("INSERT INTO emprestimo VALUES ('" + usuario_id + "', '" + isbn_livro + "', '" + data + "', '" + data_entrega + "', 'Não');");
-            JOptionPane.showMessageDialog(null, "Cadastrado com Sucesso!");
-        } else {
-            JOptionPane.showMessageDialog(null, "Usuário atingiu o limite de empréstimos!", "Limite de Empréstimos", JOptionPane.ERROR_MESSAGE);
+        if(verificaSeEstaEmDebito(usuario_id) > 0){
+            if (verificaSePodePegar(usuario_id)) {
+                serv.Acao("INSERT INTO emprestimo VALUES ('" + usuario_id + "', '" + isbn_livro + "', '" + data + "', '" + data_entrega + "', 'Não');");
+                JOptionPane.showMessageDialog(null, "Cadastrado com Sucesso!");
+            } else
+                JOptionPane.showMessageDialog(null, "Usuário atingiu o limite de empréstimos!", "Limite de Empréstimos", JOptionPane.ERROR_MESSAGE);
+        }else
+            JOptionPane.showMessageDialog(null, "Usuário está em débito!", "Usuário com livro não entregue", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public int verificaSeEstaEmDebito(String usuario_id) {
+        try {
+            return Integer.parseInt(serv.Acao("SELECT COUNT(*) FROM emprestimo "
+                    + "WHERE usuarios_id = '" + usuario_id + "' AND entregue = 'Não' AND data_entrega < '" + pegaDataFormatada() + "';").get(0));
+        } catch (IndexOutOfBoundsException ioob) {
+            return 0;
         }
     }
 
@@ -46,7 +59,7 @@ public class emprestimo {
     private int qtdLivrosPegos(String usuario_id) {
         try {
             return Integer.parseInt(serv.Acao("SELECT COUNT(*) FROM emprestimo WHERE entregue = 'Não' AND usuarios_id = '" + usuario_id + "';").get(0));
-        } catch (IndexOutOfBoundsException ioob) {
+        } catch (IndexOutOfBoundsException | NumberFormatException ioob) {
             return 0;
         }
     }
@@ -99,20 +112,28 @@ public class emprestimo {
 
     public void alterar(String usuario_id, String isbn_livro, String data, String entregue) {
         serv.Acao("UPDATE emprestimo SET entregue = '" + entregue + "' "
-                + "WHERE usuario_id = '" + usuario_id + "' AND isbn_livro = '" + isbn_livro + "' AND data = '" + data + "';");
+                + "WHERE usuarios_id = '" + usuario_id + "' AND isbn_livro = '" + isbn_livro + "' AND data = '" + data + "';");
         JOptionPane.showMessageDialog(null, "Alterado com Sucesso!");
     }
 
     public void apagar(String usuario_id, String isbn_livro, String data) {
-        serv.Acao("DELETE FROM emprestimo WHERE usuario_id = '" + usuario_id + "' AND isbn_livro = '" + isbn_livro + "' AND data = '" + data + "';");
+        serv.Acao("DELETE FROM emprestimo WHERE usuarios_id = '" + usuario_id + "' AND isbn_livro = '" + isbn_livro + "' AND data = '" + data + "';");
         JOptionPane.showMessageDialog(null, "Apagado com Sucesso!");
     }
 
     public int qtdLivrosDisponiveis(String isbn) {
         try {
             return Integer.parseInt(serv.Acao("SELECT (SELECT qtd_copias FROM livros WHERE isbn = '" + isbn + "') - COUNT(*) FROM emprestimo WHERE entregue = 'Não' AND isbn_livro = '" + isbn + "';").get(0));
-        } catch (IndexOutOfBoundsException ioob) {
+        } catch (IndexOutOfBoundsException | NumberFormatException ioob) {
             return 0;
+        }
+    }
+
+    public String tituloLivro(String isbn) {
+        try {
+            return serv.Acao("SELECT titulo FROM livros WHERE isbn = '" + isbn + "';").get(0);
+        } catch (IndexOutOfBoundsException ioob) {
+            return "";
         }
     }
 
@@ -120,7 +141,7 @@ public class emprestimo {
         try {
             return Integer.parseInt(serv.Acao("SELECT COUNT(*) FROM reserva "
                     + "WHERE atendida = 'Não' AND isbn_livro = '" + isbn + "';").get(0));
-        } catch (IndexOutOfBoundsException ioob) {
+        } catch (IndexOutOfBoundsException | NumberFormatException ioob) {
             return 0;
         }
     }
@@ -128,7 +149,7 @@ public class emprestimo {
     public boolean usuarioReservou(String usuario_id, String isbn) {
         try {
             return serv.Acao("SELECT * FROM reserva "
-                    + "WHERE atendida = 'Não' AND isbn_livro = '" + isbn + "' AND usuario_id = '" + usuario_id + "'").size() > 0;
+                    + "WHERE atendida = 'Não' AND isbn_livro = '" + isbn + "' AND usuarios_id = '" + usuario_id + "'").size() > 0;
         } catch (IndexOutOfBoundsException ioob) {
             return false;
         }
@@ -136,9 +157,9 @@ public class emprestimo {
 
     public boolean noRanking(String usuario_id, String isbn, String ranking) {
         try {
-            ArrayList<String> a = serv.Acao("SELECT usuario_id FROM reserva "
+            ArrayList<String> a = serv.Acao("SELECT usuarios_id FROM reserva "
                     + "WHERE atendida = 'Não' AND isbn_livro = '" + isbn + "' "
-                    + "ORDER BY data LIMIT " + ranking + ";");
+                    + "ORDER BY data LIMIT " + (ranking.equals("") ? "1000" : ranking) + ";");
             return a.contains(usuario_id);
         } catch (IndexOutOfBoundsException ioob) {
             return false;
@@ -146,34 +167,47 @@ public class emprestimo {
     }
 
     public void atendeReserva(String usuario_id, String isbn) {
-        serv.Acao("UPDATE reserva SET atendida = 'Sim' WHERE usuario_id = '" + usuario_id + "' AND isbn_livro = '" + isbn + "';");
+        serv.Acao("UPDATE reserva SET atendida = 'Sim' WHERE usuarios_id = '" + usuario_id + "' AND isbn_livro = '" + isbn + "';");
         JOptionPane.showMessageDialog(null, "Alterado com Sucesso!");
     }
-    
-    public void cadastraReserva(String usuario_id, String isbn, String data){
-        serv.Acao("INSERT INTO reserva VALUES ('"+usuario_id+"', '"+isbn+"', '"+data+"', 'Não');");
+
+    public void cadastraReserva(String usuario_id, String isbn, String data) {
+        serv.Acao("INSERT INTO reserva VALUES ('" + usuario_id + "', '" + isbn + "', '" + data + "', 'Não');");
         JOptionPane.showMessageDialog(null, "Reservado com Sucesso!");
     }
 
-    public String pega_Data(){
+    public String pega_Data() {
         return new SimpleDateFormat("dd/MM/yyyy").format(new Date());
     }
-    
-    public String pegaDataFormatada(){
+
+    public String pegaDataFormatada() {
         return new SimpleDateFormat("yyyy-MM-dd").format(new Date());
     }
-    
-    public String converteDataBD(String data){
-        int y = Integer.parseInt(data.substring(data.length()-4)) - 1900, m = Integer.parseInt(data.substring(data.indexOf("/")+1, data.lastIndexOf("/"))) - 1, d = Integer.parseInt(data.substring(0, data.indexOf("/")));
+
+    public String converteDataBD(String data) {
+        int y = Integer.parseInt(data.substring(data.length() - 4)) - 1900, m = Integer.parseInt(data.substring(data.indexOf("/") + 1, data.lastIndexOf("/"))) - 1, d = Integer.parseInt(data.substring(0, data.indexOf("/")));
         return new SimpleDateFormat("yyyy-MM-dd").format(new Date(y, m, d));
     }
-    
-    public String converteDataJava(String data){
-        int y = Integer.parseInt(data.substring(0, 4)) - 1900, m = Integer.parseInt(data.substring(data.indexOf("-")+1, data.lastIndexOf("-"))) - 1, d = Integer.parseInt(data.substring(data.lastIndexOf("-")+1));
+
+    public String converteDataJava(String data) {
+        int y = Integer.parseInt(data.substring(0, 4)) - 1900, m = Integer.parseInt(data.substring(data.indexOf("-") + 1, data.lastIndexOf("-"))) - 1, d = Integer.parseInt(data.substring(data.lastIndexOf("-") + 1));
         return new SimpleDateFormat("dd/MM/yyyy").format(new Date(y, m, d));
     }
-    
-    public void consultar(String nome_usuario, String isbn_livro, String titulo, String data, String data_entrega, String entregue) {
 
+    public void consultar(JTable jt, String nome_usuario, String isbn_livro, String titulo, String data, String data_entrega, String entregue) {
+        try {
+            ArrayList<String> a = serv.Acao("SELECT (e.isbn_livro, l.titulo, e.data, e.data_entrega, e.entregue) "
+                    + "FROM ((emprestimo e JOIN livros l ON l.isbn = e.isbn_livro AND l.titulo LIKE '%" + titulo + "%') "
+                    + "JOIN usuarios u ON e.usuarios_id = u.id AND nome LIKE '%" + nome_usuario + "%') "
+                    + "WHERE e.isbn LIKE '" + isbn_livro + "%' AND e.data LIKE '" + data + "%' AND e.data_entrega LIKE '" + data_entrega + "%' AND entregue = '" + entregue + "';");
+            if (a != null) {
+                DefaultTableModel mod = (DefaultTableModel) jt.getModel();
+                mod.setNumRows(0);
+                for (int i = 0; i < a.size(); i++) {
+                    mod.addRow(new Object[]{a.get(i), a.get(++i), a.get(++i), a.get(++i), a.get(++i)});
+                }
+            }
+        } catch (IndexOutOfBoundsException ioob) {
+        }
     }
 }

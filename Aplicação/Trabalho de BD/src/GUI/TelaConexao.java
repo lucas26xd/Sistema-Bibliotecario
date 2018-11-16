@@ -2,6 +2,7 @@ package GUI;
 
 import BD.Inicia;
 import BD.Servicos;
+import java.awt.Toolkit;
 
 /**
  *
@@ -12,8 +13,14 @@ public class TelaConexao extends javax.swing.JFrame {
     public TelaConexao() {
         initComponents();
         setLocationRelativeTo(null);
+        
+        setIcon();
     }
 
+    private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagens/conexao.png")));
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
