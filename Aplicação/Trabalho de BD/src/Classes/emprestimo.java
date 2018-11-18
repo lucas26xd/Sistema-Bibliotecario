@@ -21,17 +21,29 @@ public class emprestimo {
     }
 
     public void cadastra(String usuario_id, String isbn_livro, String data, String data_entrega) {
-        if(verificaSeEstaEmDebito(usuario_id) > 0){
+        if(verificaSeEstaEmDebito(usuario_id) == 0){
             if (verificaSePodePegar(usuario_id)) {
-                serv.Acao("INSERT INTO emprestimo VALUES ('" + usuario_id + "', '" + isbn_livro + "', '" + data + "', '" + data_entrega + "', 'Não');");
-                JOptionPane.showMessageDialog(null, "Cadastrado com Sucesso!");
+                if(verificaSeUsuarioNaoPegouLivro(isbn_livro, usuario_id)) {
+                    serv.Acao("INSERT INTO emprestimo VALUES ('" + usuario_id + "', '" + isbn_livro + "', '" + converteDataBD(data) + "', '" + converteDataBD(data_entrega) + "', 'Não');");
+                    JOptionPane.showMessageDialog(null, "Cadastrado com Sucesso!");
+                } else
+                    JOptionPane.showMessageDialog(null, "Usuário já pegou este livro!", "Usuário já está com este livro", JOptionPane.ERROR_MESSAGE);
             } else
                 JOptionPane.showMessageDialog(null, "Usuário atingiu o limite de empréstimos!", "Limite de Empréstimos", JOptionPane.ERROR_MESSAGE);
         }else
             JOptionPane.showMessageDialog(null, "Usuário está em débito!", "Usuário com livro não entregue", JOptionPane.ERROR_MESSAGE);
     }
 
-    public int verificaSeEstaEmDebito(String usuario_id) {
+    private boolean verificaSeUsuarioNaoPegouLivro(String isbn, String usuario_id){
+        try{
+            return serv.Acao("SELECT * FROM emprestimo "
+                    + "WHERE entregue = 'Não' AND isbn_livro = '" + isbn + "' AND usuarios_id = '" + usuario_id + "';").isEmpty();
+        }catch(IndexOutOfBoundsException ioob){
+            return false;
+        }
+    }
+    
+    private int verificaSeEstaEmDebito(String usuario_id) {
         try {
             return Integer.parseInt(serv.Acao("SELECT COUNT(*) FROM emprestimo "
                     + "WHERE usuarios_id = '" + usuario_id + "' AND entregue = 'Não' AND data_entrega < '" + pegaDataFormatada() + "';").get(0));

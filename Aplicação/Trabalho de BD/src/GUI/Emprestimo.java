@@ -52,6 +52,17 @@ public class Emprestimo extends javax.swing.JFrame {
         tfNome.setEnabled(true);
     }
     
+    private void limpar(){
+        tfDataEntrega.setText("");
+        tfISBN.setText("");
+        tfNome.setText("");
+        tfQtdDisponiveis.setText("");
+        tfTipo.setText("");
+        tfTitulo.setText("");
+        tfNome.setEnabled(false);
+        usuario_id = "";
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -187,7 +198,7 @@ public class Emprestimo extends javax.swing.JFrame {
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         if(tfDataEntrega.getText().length() > 0)
-            if(!tfQtdDisponiveis.equals("0")){
+            if(!tfQtdDisponiveis.getText().equals("0")){
                 if(emp.qtdLivrosDisponiveis(tfISBN.getText())> emp.qtdReserva(tfISBN.getText())){
                     emp.cadastra(usuario_id, tfISBN.getText(), tfData.getText(), tfDataEntrega.getText());
                     if(emp.usuarioReservou(usuario_id, tfISBN.getText()))
@@ -204,6 +215,7 @@ public class Emprestimo extends javax.swing.JFrame {
                         }
                     }
                 }
+                limpar();
             }else
                 JOptionPane.showMessageDialog(null, "Este livro não pode ser emprestado, pois não há nenhum exemplar disponível!", "Livro já foi reservado", JOptionPane.ERROR_MESSAGE);
         else
