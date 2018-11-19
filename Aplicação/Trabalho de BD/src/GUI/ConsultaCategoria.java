@@ -20,7 +20,7 @@ public class ConsultaCategoria extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         
-        categorias.consulta(jCategorias, tfCodigo.getText(), tfDescricao.getText());
+        categorias.consulta(jtCategorias, tfCodigo.getText(), tfDescricao.getText());
     }
     
     private ConsultaCategoria(){}
@@ -33,7 +33,7 @@ public class ConsultaCategoria extends javax.swing.JFrame {
         tfCodigo = new javax.swing.JTextField();
         tfDescricao = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jCategorias = new javax.swing.JTable();
+        jtCategorias = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -56,7 +56,7 @@ public class ConsultaCategoria extends javax.swing.JFrame {
             }
         });
 
-        jCategorias.setModel(new javax.swing.table.DefaultTableModel(
+        jtCategorias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -72,7 +72,7 @@ public class ConsultaCategoria extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jCategorias);
+        jScrollPane1.setViewportView(jtCategorias);
 
         javax.swing.GroupLayout painelLayout = new javax.swing.GroupLayout(painel);
         painel.setLayout(painelLayout);
@@ -119,12 +119,19 @@ public class ConsultaCategoria extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jtCategoriasMouseClicked(java.awt.event.MouseEvent evt) {
+        if (evt.getClickCount() >= 2) {
+            int row = jtCategorias.getSelectedRow(); //Parei AQUI
+            new CadastroCategorias(serv, jtCategorias.getValueAt(row, 0) + "", jtCategorias.getValueAt(row, 1) + "").setVisible(true);
+        }
+    }   
+    
     private void tfCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCodigoActionPerformed
-       categorias.consulta(jCategorias, tfCodigo.getText(), tfDescricao.getText());
+       categorias.consulta(jtCategorias, tfCodigo.getText(), tfDescricao.getText());
     }//GEN-LAST:event_tfCodigoActionPerformed
 
     private void tfDescricaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfDescricaoActionPerformed
-       categorias.consulta(jCategorias, tfCodigo.getText(), tfDescricao.getText());
+       categorias.consulta(jtCategorias, tfCodigo.getText(), tfDescricao.getText());
     }//GEN-LAST:event_tfDescricaoActionPerformed
 
    
@@ -160,8 +167,8 @@ public class ConsultaCategoria extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable jCategorias;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jtCategorias;
     private javax.swing.JPanel painel;
     private javax.swing.JTextField tfCodigo;
     private javax.swing.JTextField tfDescricao;
