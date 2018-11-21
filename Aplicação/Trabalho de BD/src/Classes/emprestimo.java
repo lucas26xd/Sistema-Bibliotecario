@@ -124,12 +124,12 @@ public class emprestimo {
 
     public void alterar(String usuario_id, String isbn_livro, String data, String entregue) {
         if(serv.Acao("UPDATE emprestimo SET entregue = '" + entregue + "' "
-                + "WHERE usuarios_id = '" + usuario_id + "' AND isbn_livro = '" + isbn_livro + "' AND data = '" + data + "';") != null)
+                + "WHERE usuarios_id = '" + usuario_id + "' AND isbn_livro = '" + isbn_livro + "' AND data = '" + converteDataBD(data) + "';") != null)
             JOptionPane.showMessageDialog(null, "Alterado com Sucesso!");
     }
 
     public void apagar(String usuario_id, String isbn_livro, String data) {
-        if(serv.Acao("DELETE FROM emprestimo WHERE usuarios_id = '" + usuario_id + "' AND isbn_livro = '" + isbn_livro + "' AND data = '" + data + "';") != null)
+        if(serv.Acao("DELETE FROM emprestimo WHERE usuarios_id = '" + usuario_id + "' AND isbn_livro = '" + isbn_livro + "' AND data = '" + converteDataBD(data) + "';") != null)
             JOptionPane.showMessageDialog(null, "Apagado com Sucesso!");
     }
 
@@ -184,7 +184,7 @@ public class emprestimo {
     }
 
     public void cadastraReserva(String usuario_id, String isbn, String data) {
-        if(serv.Acao("INSERT INTO reserva VALUES ('" + usuario_id + "', '" + isbn + "', '" + data + "', 'Não');") != null)
+        if(serv.Acao("INSERT INTO reserva VALUES ('" + usuario_id + "', '" + isbn + "', '" + converteDataBD(data) + "', 'Não');") != null)
             JOptionPane.showMessageDialog(null, "Reservado com Sucesso!");
     }
 
@@ -211,7 +211,7 @@ public class emprestimo {
             ArrayList<String> a = serv.Acao("SELECT (e.isbn_livro, l.titulo, e.data, e.data_entrega, e.entregue) "
                     + "FROM ((emprestimo e JOIN livros l ON l.isbn = e.isbn_livro AND l.titulo LIKE '%" + titulo + "%') "
                     + "JOIN usuarios u ON e.usuarios_id = u.id AND nome LIKE '%" + nome_usuario + "%') "
-                    + "WHERE e.isbn LIKE '" + isbn_livro + "%' AND e.data LIKE '" + data + "%' AND e.data_entrega LIKE '" + data_entrega + "%' AND entregue = '" + entregue + "';");
+                    + "WHERE e.isbn LIKE '" + isbn_livro + "%' AND e.data LIKE '" + converteDataBD(data) + "%' AND e.data_entrega LIKE '" + converteDataBD(data_entrega) + "%' AND entregue = '" + entregue + "';");
             if (a != null) {
                 DefaultTableModel mod = (DefaultTableModel) jt.getModel();
                 mod.setNumRows(0);
