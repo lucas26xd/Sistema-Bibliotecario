@@ -191,6 +191,9 @@ public class CadastroLivros extends javax.swing.JFrame {
                     .addComponent(btnMenos))
                 .addContainerGap())
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnMais, btnMenos});
+
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -203,6 +206,8 @@ public class CadastroLivros extends javax.swing.JFrame {
                         .addComponent(btnMenos, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnMais, btnMenos});
 
         btnMaisCategoria.setFont(new java.awt.Font("Ubuntu", 1, 36)); // NOI18N
         btnMaisCategoria.setText("+");

@@ -39,4 +39,8 @@ public class usuario {
             return "";
         }
     }
+    
+    public void cadastra(){
+        
+    }
 }
