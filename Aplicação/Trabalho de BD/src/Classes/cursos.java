@@ -18,18 +18,18 @@ public class cursos {
     }
     
     public void cadastra(String cod_curso, String nome_curso){
-        serv.Acao("INSERT INTO curso VALUES ('"+cod_curso+"', '"+nome_curso+"');");
-        JOptionPane.showMessageDialog(null, "Curso Inserido com Sucesso!");
+        if(serv.Acao("INSERT INTO curso VALUES ('"+cod_curso+"', '"+nome_curso+"');") != null)
+            JOptionPane.showMessageDialog(null, "Curso Inserido com Sucesso!");
     }
     
     public void altera(String cod_curso, String nome_curso){
-        serv.Acao("UPDATE curso SET nome_curso = '"+nome_curso+"' WHERE cod_curso = '"+cod_curso+"';");
-        JOptionPane.showMessageDialog(null, "Alteração Realizada com Sucesso!");
+        if(serv.Acao("UPDATE curso SET nome_curso = '"+nome_curso+"' WHERE cod_curso = '"+cod_curso+"';") != null)
+            JOptionPane.showMessageDialog(null, "Alteração Realizada com Sucesso!");
     }
     
     public void apaga(String cod_curso) {
-        serv.Acao("DELETE FROM curso WHERE cod_curso = '"+cod_curso+"';");
-        JOptionPane.showMessageDialog(null, "Apagado com Sucesso!");
+        if(serv.Acao("DELETE FROM curso WHERE cod_curso = '"+cod_curso+"';") != null)
+            JOptionPane.showMessageDialog(null, "Apagado com Sucesso!");
     }
     
     public void consulta(JTable jt, String cod_curso, String nome_curso){

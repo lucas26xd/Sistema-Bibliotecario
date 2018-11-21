@@ -20,16 +20,20 @@ public class livros {
     }
     
     public void cadastra(String isbn, String titulo, String ano, String editora, String qtd, String categoria, JTable jtAutores){
-        serv.Acao("INSERT INTO livros VALUES ('"+isbn+"', '"+titulo+"', '"+ano+"', '"+editora+"', '"+qtd+"', '"+categoria+"');");
-        cadastraAutoresdosLivros(isbn, jtAutores);
-        JOptionPane.showMessageDialog(null, "Cadastrado com Sucesso!");
+        if(serv.Acao("INSERT INTO livros VALUES ('"+isbn+"', '"+titulo+"', '"+ano+"', '"+editora+"', '"+qtd+"', '"+categoria+"');") != null){
+            if(cadastraAutoresdosLivros(isbn, jtAutores))
+                JOptionPane.showMessageDialog(null, "Cadastrado com Sucesso!");
+        }
     }
     
-    private void cadastraAutoresdosLivros(String isbn, JTable jtAutores){
+    private boolean cadastraAutoresdosLivros(String isbn, JTable jtAutores){
+        boolean b = true;
         for (int i = 0; i < jtAutores.getRowCount(); i++) {
             String cpf = jtAutores.getValueAt(i, 1).toString().replaceAll("\\.", "").replaceAll("-", "");
-            serv.Acao("INSERT INTO livros_tem_autores VALUES ('"+isbn+"', '"+cpf+"');");
+            if(serv.Acao("INSERT INTO livros_tem_autores VALUES ('"+isbn+"', '"+cpf+"');") == null)
+                b = false;
         }
+        return b;
     }
     
     private void apagaAutoresdosLivros(String isbn){
@@ -37,19 +41,19 @@ public class livros {
     }
     
     public void altera(String isbn, String titulo, String ano, String editora, String qtd, String categoria, JTable jtAutores){
-        serv.Acao("UPDATE livros SET titulo = '"+titulo+"', ano_lancamento = '"+ano+"', editora = '"+editora+"', qtd_copias = '"+qtd+"', "
-                    + "codigo_categoria = '"+categoria+"' WHERE isbn = '"+isbn+"';");
+        if(serv.Acao("UPDATE livros SET titulo = '"+titulo+"', ano_lancamento = '"+ano+"', editora = '"+editora+"', qtd_copias = '"+qtd+"', "
+                    + "codigo_categoria = '"+categoria+"' WHERE isbn = '"+isbn+"';") != null){
         
-        apagaAutoresdosLivros(isbn);
-        cadastraAutoresdosLivros(isbn, jtAutores);
-        
-        JOptionPane.showMessageDialog(null, "Alterado com Sucesso!");
+            apagaAutoresdosLivros(isbn);
+            if(cadastraAutoresdosLivros(isbn, jtAutores))
+                JOptionPane.showMessageDialog(null, "Alterado com Sucesso!");
+        }
     }
     
     public void apaga(String isbn){
-        serv.Acao("DELETE FROM livros WHERE isbn = '"+isbn+"';");
         apagaAutoresdosLivros(isbn);
-        JOptionPane.showMessageDialog(null, "Apagado com Sucesso!");
+        if(serv.Acao("DELETE FROM livros WHERE isbn = '"+isbn+"';") != null)
+            JOptionPane.showMessageDialog(null, "Apagado com Sucesso!");
     }
     
     public void consulta(JTable jt, String isbn, String titulo, String ano, String editora, String qtd, String categoria, String autor){
@@ -95,9 +99,11 @@ public class livros {
         ArrayList<String> cods = new ArrayList<>();
         try{
             ArrayList<String> a = serv.Acao("SELECT * FROM categorias;");
-            for (int i = 0; i < a.size(); i++) {
-                cods.add(a.get(i));
-                cbCategorias.addItem(a.get(++i));
+            if(a != null){
+                for (int i = 0; i < a.size(); i++) {
+                    cods.add(a.get(i));
+                    cbCategorias.addItem(a.get(++i));
+                }
             }
         }catch(IndexOutOfBoundsException ioob){
             JOptionPane.showMessageDialog(null, "Erro no povoamento do combobox!", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -105,5 +111,4 @@ public class livros {
         cbCategorias.setSelectedIndex(-1);
         return cods;
     }
-    
 }

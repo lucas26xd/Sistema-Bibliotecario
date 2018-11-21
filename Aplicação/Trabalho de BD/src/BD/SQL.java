@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 public class SQL {
 
@@ -19,11 +20,14 @@ public class SQL {
         }
     }
 
-    public void inserirDados(String sql) {
+    public boolean inserirDados(String sql) {
         try {
             stmt.execute(sql);
+            return true;
         } catch (SQLException ex) {
-            System.out.println("erro ao inserir dados na " + getClass() + " -> " + ex.getMessage());
+            //System.out.println("erro ao inserir dados na " + getClass() + " -> " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro no Banco de Dados", JOptionPane.ERROR_MESSAGE);
+            return false;
         }
     }
 
@@ -50,7 +54,8 @@ public class SQL {
                 lista = null;
             }
         } catch (SQLException ex) {
-            System.out.println("erro ao retornar os dados na " + getClass() + " -> " + ex.getMessage());
+            //System.out.println("erro ao retornar os dados na " + getClass() + " -> " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro no Banco de Dados", JOptionPane.ERROR_MESSAGE);
             return null;
         }
         return lista;

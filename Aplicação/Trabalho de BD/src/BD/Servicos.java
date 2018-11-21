@@ -21,15 +21,17 @@ public class Servicos{
             if(sql.matches("(?i)select.*") || sql.matches("(?i)desc.*") || sql.matches("(?i)show.*")){
                 //resultado = new ArrayList<>();
                 resultado = action.retornarDados(sql);      //RETORNA O RESULTADO PEDIDO PELO USUÁRIO
-                if(resultado != null){
+                if(resultado != null)
                     System.out.println("enviado: "+resultado.toString());
-                }else{
+                else
                     System.out.println("Resultado = null na classe: "+getClass());
-                }
             }else if(sql.matches("(?i)delete.*") || sql.matches("(?i)drop.*") || 
                     sql.matches("(?i)insert.*") || sql.matches("(?i)update.*") || 
                     sql.matches("(?i)create.*")){
-                action.inserirDados(sql);
+                if(action.inserirDados(sql)){
+                    resultado = new ArrayList<>();
+                    resultado.add("1");//apenas para marcar q a sql rodou lisa (sem problemas)
+                }
             }else{
                 System.out.println("Nada a Fazer :(");
             }            

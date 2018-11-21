@@ -24,8 +24,8 @@ public class emprestimo {
         if(verificaSeEstaEmDebito(usuario_id) == 0){
             if (verificaSePodePegar(usuario_id)) {
                 if(verificaSeUsuarioNaoPegouLivro(isbn_livro, usuario_id)) {
-                    serv.Acao("INSERT INTO emprestimo VALUES ('" + usuario_id + "', '" + isbn_livro + "', '" + converteDataBD(data) + "', '" + converteDataBD(data_entrega) + "', 'Não');");
-                    JOptionPane.showMessageDialog(null, "Cadastrado com Sucesso!");
+                    if(serv.Acao("INSERT INTO emprestimo VALUES ('" + usuario_id + "', '" + isbn_livro + "', '" + converteDataBD(data) + "', '" + converteDataBD(data_entrega) + "', 'Não');") != null)
+                        JOptionPane.showMessageDialog(null, "Cadastrado com Sucesso!");
                 } else
                     JOptionPane.showMessageDialog(null, "Usuário já pegou este livro!", "Usuário já está com este livro", JOptionPane.ERROR_MESSAGE);
             } else
@@ -123,14 +123,14 @@ public class emprestimo {
     }
 
     public void alterar(String usuario_id, String isbn_livro, String data, String entregue) {
-        serv.Acao("UPDATE emprestimo SET entregue = '" + entregue + "' "
-                + "WHERE usuarios_id = '" + usuario_id + "' AND isbn_livro = '" + isbn_livro + "' AND data = '" + data + "';");
-        JOptionPane.showMessageDialog(null, "Alterado com Sucesso!");
+        if(serv.Acao("UPDATE emprestimo SET entregue = '" + entregue + "' "
+                + "WHERE usuarios_id = '" + usuario_id + "' AND isbn_livro = '" + isbn_livro + "' AND data = '" + data + "';") != null)
+            JOptionPane.showMessageDialog(null, "Alterado com Sucesso!");
     }
 
     public void apagar(String usuario_id, String isbn_livro, String data) {
-        serv.Acao("DELETE FROM emprestimo WHERE usuarios_id = '" + usuario_id + "' AND isbn_livro = '" + isbn_livro + "' AND data = '" + data + "';");
-        JOptionPane.showMessageDialog(null, "Apagado com Sucesso!");
+        if(serv.Acao("DELETE FROM emprestimo WHERE usuarios_id = '" + usuario_id + "' AND isbn_livro = '" + isbn_livro + "' AND data = '" + data + "';") != null)
+            JOptionPane.showMessageDialog(null, "Apagado com Sucesso!");
     }
 
     public int qtdLivrosDisponiveis(String isbn) {
@@ -179,13 +179,13 @@ public class emprestimo {
     }
 
     public void atendeReserva(String usuario_id, String isbn) {
-        serv.Acao("UPDATE reserva SET atendida = 'Sim' WHERE usuarios_id = '" + usuario_id + "' AND isbn_livro = '" + isbn + "';");
-        JOptionPane.showMessageDialog(null, "Alterado com Sucesso!");
+        if(serv.Acao("UPDATE reserva SET atendida = 'Sim' WHERE usuarios_id = '" + usuario_id + "' AND isbn_livro = '" + isbn + "';") != null)
+            JOptionPane.showMessageDialog(null, "Alterado com Sucesso!");
     }
 
     public void cadastraReserva(String usuario_id, String isbn, String data) {
-        serv.Acao("INSERT INTO reserva VALUES ('" + usuario_id + "', '" + isbn + "', '" + data + "', 'Não');");
-        JOptionPane.showMessageDialog(null, "Reservado com Sucesso!");
+        if(serv.Acao("INSERT INTO reserva VALUES ('" + usuario_id + "', '" + isbn + "', '" + data + "', 'Não');") != null)
+            JOptionPane.showMessageDialog(null, "Reservado com Sucesso!");
     }
 
     public String pega_Data() {
@@ -220,6 +220,7 @@ public class emprestimo {
                 }
             }
         } catch (IndexOutOfBoundsException ioob) {
+            JOptionPane.showMessageDialog(null, "Erro na consulta!", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 }

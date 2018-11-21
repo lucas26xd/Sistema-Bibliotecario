@@ -19,18 +19,18 @@ public class categorias {
     }
     
     public void cadastra(String codigo, String descricao){
-        serv.Acao("INSERT INTO categorias VALUES ('"+codigo+"', '"+descricao+"');");
-        JOptionPane.showMessageDialog(null, "Inserido com Sucesso!");
+        if(serv.Acao("INSERT INTO categorias VALUES ('"+codigo+"', '"+descricao+"');") != null)
+            JOptionPane.showMessageDialog(null, "Inserido com Sucesso!");
     }
     
     public void altera(String codigo, String descricao){
-        serv.Acao("UPDATE categorias SET descricao = '"+descricao+"' WHERE codigo = '"+codigo+"';");
-        JOptionPane.showMessageDialog(null, "Alteração Realizada com Sucesso!");
+        if(serv.Acao("UPDATE categorias SET descricao = '"+descricao+"' WHERE codigo = '"+codigo+"';") != null)
+            JOptionPane.showMessageDialog(null, "Alteração Realizada com Sucesso!");
     }
     
      public void apaga(String codigo) {
-        serv.Acao("DELETE FROM categorias WHERE codigo = '"+codigo+"';");
-        JOptionPane.showMessageDialog(null, "Apagado com Sucesso!");
+        if(serv.Acao("DELETE FROM categorias WHERE codigo = '"+codigo+"';") != null)
+            JOptionPane.showMessageDialog(null, "Apagado com Sucesso!");
     }
      
     public void consulta(JTable jt, String codigo, String descricao){
