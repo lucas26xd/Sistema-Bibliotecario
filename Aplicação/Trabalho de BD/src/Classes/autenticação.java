@@ -46,4 +46,11 @@ public class autenticação {
         }
     }
     
+    public String usuario_id(String login){
+        try{
+            return serv.Acao("SELECT id FROM usuarios WHERE login = '"+login+"';").get(0);
+        }catch(IndexOutOfBoundsException ioob){
+            return "";
+        }
+    }    
 }

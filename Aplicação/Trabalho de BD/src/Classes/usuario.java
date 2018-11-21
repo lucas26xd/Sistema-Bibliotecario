@@ -19,7 +19,7 @@ public class usuario {
 
     public void consulta(JTable jt, String nome, String tipo) {
         try {
-            ArrayList<String> a = serv.Acao("SELECT nome, login, endereço, tipo_usuario FROM usuarios "
+            ArrayList<String> a = serv.Acao("SELECT nome, login, endereco, tipo_usuario FROM usuarios "
                     + "WHERE nome LIKE '%" + nome + "%' AND tipo_usuario"
                     + (tipo != null ? " <> 'administrador' AND tipo_usuario <> 'bibliotecario'" : " = '" + tipo + "'") + " GROUP BY tipo_usuario, nome, login, endereço ORDER BY nome ;");
             if (a != null) {

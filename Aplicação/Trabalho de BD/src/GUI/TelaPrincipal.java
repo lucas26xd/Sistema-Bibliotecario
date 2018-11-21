@@ -9,16 +9,16 @@ import BD.Servicos;
 public class TelaPrincipal extends javax.swing.JFrame {
 
     private Servicos serv;
+    private String usuario_id;
     
-    public TelaPrincipal(Servicos serv) {
+    public TelaPrincipal(Servicos serv, String usuario_id) {
+        this.usuario_id = usuario_id;
         initComponents();
         this.serv = serv;
         setLocationRelativeTo(null);
     }
 
-    private TelaPrincipal(){
-        
-    }
+    private TelaPrincipal(){}
    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -34,6 +34,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btnConsultaLivros = new javax.swing.JButton();
         btnConsultaCategoria = new javax.swing.JButton();
         btnEmprestimo = new javax.swing.JButton();
+        btnEmprestimo1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -100,6 +101,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnEmprestimo1.setText("Reserva");
+        btnEmprestimo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEmprestimo1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout painelLayout = new javax.swing.GroupLayout(painel);
         painel.setLayout(painelLayout);
         painelLayout.setHorizontalGroup(
@@ -117,7 +125,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnConsultaLivros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnConsultaCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnEmprestimo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(btnEmprestimo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnEmprestimo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelLayout.createSequentialGroup()
                         .addComponent(btnCadastraAutores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(98, 98, 98)
@@ -144,7 +153,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     .addComponent(btnCadastraCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btnCadastraBibliotecario, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCadastraBibliotecario, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEmprestimo1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -202,6 +213,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         new Emprestimo(serv).setVisible(true);
     }//GEN-LAST:event_btnEmprestimoActionPerformed
 
+    private void btnEmprestimo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmprestimo1ActionPerformed
+        new ConsultaLivros(serv, true, usuario_id).setVisible(true);
+    }//GEN-LAST:event_btnEmprestimo1ActionPerformed
+
    
     public static void main(String args[]) {
        
@@ -244,6 +259,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnConsultaCategoria;
     private javax.swing.JButton btnConsultaLivros;
     private javax.swing.JButton btnEmprestimo;
+    private javax.swing.JButton btnEmprestimo1;
     private javax.swing.JPanel painel;
     // End of variables declaration//GEN-END:variables
 }
