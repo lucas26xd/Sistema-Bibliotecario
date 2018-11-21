@@ -2,6 +2,7 @@ package GUI;
 
 import BD.Servicos;
 import Classes.emprestimo;
+import Classes.funcoes;
 import Classes.livros;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -244,7 +245,7 @@ public class ConsultaLivros extends javax.swing.JFrame {
             } else if(reserva){
                 if(JOptionPane.showConfirmDialog(null, "Deseja realemnte raservar este livro?", "Confirmar reserva?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
                     emprestimo emp = new emprestimo(serv);
-                    emp.cadastraReserva(usuario_id, jtLivros.getValueAt(row, 0) + "", emp.pega_Data());
+                    emp.cadastraReserva(usuario_id, jtLivros.getValueAt(row, 0) + "", new funcoes().pegaDataAtual());
                     limpar();
                     consulta();
                 }

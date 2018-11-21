@@ -2,6 +2,7 @@ package GUI;
 
 import BD.Servicos;
 import Classes.emprestimo;
+import Classes.funcoes;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,7 +22,7 @@ public class Emprestimo extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         
-        tfData.setText(emp.pega_Data());
+        tfData.setText(new funcoes().pegaDataAtual());
     }
 
     private Emprestimo(){}

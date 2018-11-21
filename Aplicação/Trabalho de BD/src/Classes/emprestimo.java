@@ -1,9 +1,7 @@
 package Classes;
 
 import BD.Servicos;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -15,7 +13,8 @@ import javax.swing.table.DefaultTableModel;
 public class emprestimo {
 
     private Servicos serv;
-
+    private funcoes f = new funcoes();
+    
     public emprestimo(Servicos serv) {
         this.serv = serv;
     }
@@ -24,7 +23,7 @@ public class emprestimo {
         if(verificaSeEstaEmDebito(usuario_id) == 0){
             if (verificaSePodePegar(usuario_id)) {
                 if(verificaSeUsuarioNaoPegouLivro(isbn_livro, usuario_id)) {
-                    if(serv.Acao("INSERT INTO emprestimo VALUES ('" + usuario_id + "', '" + isbn_livro + "', '" + converteDataBD(data) + "', '" + converteDataBD(data_entrega) + "', 'Não');") != null)
+                    if(serv.Acao("INSERT INTO emprestimo VALUES ('" + usuario_id + "', '" + isbn_livro + "', '" + f.converteDataJ2BD(data) + "', '" + f.converteDataJ2BD(data_entrega) + "', 'Não');") != null)
                         JOptionPane.showMessageDialog(null, "Cadastrado com Sucesso!");
                 } else
                     JOptionPane.showMessageDialog(null, "Usuário já pegou este livro!", "Usuário já está com este livro", JOptionPane.ERROR_MESSAGE);
@@ -46,7 +45,7 @@ public class emprestimo {
     private int verificaSeEstaEmDebito(String usuario_id) {
         try {
             return Integer.parseInt(serv.Acao("SELECT COUNT(*) FROM emprestimo "
-                    + "WHERE usuarios_id = '" + usuario_id + "' AND entregue = 'Não' AND data_entrega < '" + pegaDataFormatada() + "';").get(0));
+                    + "WHERE usuarios_id = '" + usuario_id + "' AND entregue = 'Não' AND data_entrega < '" + f.pegaDataAtualBD() + "';").get(0));
         } catch (IndexOutOfBoundsException ioob) {
             return 0;
         }
@@ -124,12 +123,12 @@ public class emprestimo {
 
     public void alterar(String usuario_id, String isbn_livro, String data, String entregue) {
         if(serv.Acao("UPDATE emprestimo SET entregue = '" + entregue + "' "
-                + "WHERE usuarios_id = '" + usuario_id + "' AND isbn_livro = '" + isbn_livro + "' AND data = '" + converteDataBD(data) + "';") != null)
+                + "WHERE usuarios_id = '" + usuario_id + "' AND isbn_livro = '" + isbn_livro + "' AND data = '" + f.converteDataJ2BD(data) + "';") != null)
             JOptionPane.showMessageDialog(null, "Alterado com Sucesso!");
     }
 
     public void apagar(String usuario_id, String isbn_livro, String data) {
-        if(serv.Acao("DELETE FROM emprestimo WHERE usuarios_id = '" + usuario_id + "' AND isbn_livro = '" + isbn_livro + "' AND data = '" + converteDataBD(data) + "';") != null)
+        if(serv.Acao("DELETE FROM emprestimo WHERE usuarios_id = '" + usuario_id + "' AND isbn_livro = '" + isbn_livro + "' AND data = '" + f.converteDataJ2BD(data) + "';") != null)
             JOptionPane.showMessageDialog(null, "Apagado com Sucesso!");
     }
 
@@ -184,26 +183,8 @@ public class emprestimo {
     }
 
     public void cadastraReserva(String usuario_id, String isbn, String data) {
-        if(serv.Acao("INSERT INTO reserva VALUES ('" + usuario_id + "', '" + isbn + "', '" + converteDataBD(data) + "', 'Não');") != null)
+        if(serv.Acao("INSERT INTO reserva VALUES ('" + usuario_id + "', '" + isbn + "', '" + f.converteDataJ2BD(data) + "', 'Não');") != null)
             JOptionPane.showMessageDialog(null, "Reservado com Sucesso!");
-    }
-
-    public String pega_Data() {
-        return new SimpleDateFormat("dd/MM/yyyy").format(new Date());
-    }
-
-    public String pegaDataFormatada() {
-        return new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-    }
-
-    public String converteDataBD(String data) {
-        int y = Integer.parseInt(data.substring(data.length() - 4)) - 1900, m = Integer.parseInt(data.substring(data.indexOf("/") + 1, data.lastIndexOf("/"))) - 1, d = Integer.parseInt(data.substring(0, data.indexOf("/")));
-        return new SimpleDateFormat("yyyy-MM-dd").format(new Date(y, m, d));
-    }
-
-    public String converteDataJava(String data) {
-        int y = Integer.parseInt(data.substring(0, 4)) - 1900, m = Integer.parseInt(data.substring(data.indexOf("-") + 1, data.lastIndexOf("-"))) - 1, d = Integer.parseInt(data.substring(data.lastIndexOf("-") + 1));
-        return new SimpleDateFormat("dd/MM/yyyy").format(new Date(y, m, d));
     }
 
     public void consultar(JTable jt, String nome_usuario, String isbn_livro, String titulo, String data, String data_entrega, String entregue) {
@@ -211,12 +192,12 @@ public class emprestimo {
             ArrayList<String> a = serv.Acao("SELECT (e.isbn_livro, l.titulo, e.data, e.data_entrega, e.entregue) "
                     + "FROM ((emprestimo e JOIN livros l ON l.isbn = e.isbn_livro AND l.titulo LIKE '%" + titulo + "%') "
                     + "JOIN usuarios u ON e.usuarios_id = u.id AND nome LIKE '%" + nome_usuario + "%') "
-                    + "WHERE e.isbn LIKE '" + isbn_livro + "%' AND e.data LIKE '" + converteDataBD(data) + "%' AND e.data_entrega LIKE '" + converteDataBD(data_entrega) + "%' AND entregue = '" + entregue + "';");
+                    + "WHERE e.isbn LIKE '" + isbn_livro + "%' AND e.data LIKE '" + f.converteDataJ2BD(data) + "%' AND e.data_entrega LIKE '" + f.converteDataJ2BD(data_entrega) + "%' AND entregue = '" + entregue + "';");
             if (a != null) {
                 DefaultTableModel mod = (DefaultTableModel) jt.getModel();
                 mod.setNumRows(0);
                 for (int i = 0; i < a.size(); i++) {
-                    mod.addRow(new Object[]{a.get(i), a.get(++i), a.get(++i), a.get(++i), a.get(++i)});
+                    mod.addRow(new Object[]{a.get(i), a.get(++i), f.converteDataBD2J(a.get(++i)), f.converteDataBD2J(a.get(++i)), a.get(++i)});
                 }
             }
         } catch (IndexOutOfBoundsException ioob) {
