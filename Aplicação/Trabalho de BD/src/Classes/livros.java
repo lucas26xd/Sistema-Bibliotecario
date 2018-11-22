@@ -27,33 +27,37 @@ public class livros {
     }
     
     private boolean cadastraAutoresdosLivros(String isbn, JTable jtAutores){
-        boolean b = true;
+        String sql = "INSERT INTO livros_tem_autores VALUES ";
         for (int i = 0; i < jtAutores.getRowCount(); i++) {
             String cpf = jtAutores.getValueAt(i, 1).toString().replaceAll("\\.", "").replaceAll("-", "");
-            if(serv.Acao("INSERT INTO livros_tem_autores VALUES ('"+isbn+"', '"+cpf+"');") == null)
-                b = false;
+            sql += "('"+isbn+"', '"+cpf+"')";
+            if (i < jtAutores.getRowCount()-1)
+                sql += ", ";
         }
-        return b;
+        sql += ";";
+        return serv.Acao(sql) != null;
     }
     
-    private void apagaAutoresdosLivros(String isbn){
-        serv.Acao("DELETE FROM livros_tem_autores WHERE isbn_livro = '"+isbn+"';");
+    private boolean apagaAutoresdosLivros(String isbn){
+        return serv.Acao("DELETE FROM livros_tem_autores WHERE isbn_livro = '"+isbn+"';") != null;
     }
     
     public void altera(String isbn, String titulo, String ano, String editora, String qtd, String categoria, JTable jtAutores){
         if(serv.Acao("UPDATE livros SET titulo = '"+titulo+"', ano_lancamento = '"+ano+"', editora = '"+editora+"', qtd_copias = '"+qtd+"', "
                     + "codigo_categoria = '"+categoria+"' WHERE isbn = '"+isbn+"';") != null){
         
-            apagaAutoresdosLivros(isbn);
-            if(cadastraAutoresdosLivros(isbn, jtAutores))
-                JOptionPane.showMessageDialog(null, "Alterado com Sucesso!");
+            if(apagaAutoresdosLivros(isbn)){
+                if(cadastraAutoresdosLivros(isbn, jtAutores))
+                    JOptionPane.showMessageDialog(null, "Alterado com Sucesso!");
+            }
         }
     }
     
     public void apaga(String isbn){
-        apagaAutoresdosLivros(isbn);
-        if(serv.Acao("DELETE FROM livros WHERE isbn = '"+isbn+"';") != null)
-            JOptionPane.showMessageDialog(null, "Apagado com Sucesso!");
+        if(apagaAutoresdosLivros(isbn)){
+            if(serv.Acao("DELETE FROM livros WHERE isbn = '"+isbn+"';") != null)
+                JOptionPane.showMessageDialog(null, "Apagado com Sucesso!");
+        }
     }
     
     public void consulta(JTable jt, String isbn, String titulo, String ano, String editora, String qtd, String categoria, String autor){

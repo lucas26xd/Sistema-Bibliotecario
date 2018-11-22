@@ -202,6 +202,7 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         tfDataContratacao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
         tfDataContratacao.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
 
+        cbRegime.setBackground(new java.awt.Color(255, 255, 255));
         cbRegime.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cbRegime.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "20h", "40h", "DE" }));
         cbRegime.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Regime de Trabalho", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
@@ -379,8 +380,9 @@ public class CadastrarUsuario extends javax.swing.JFrame {
                     .addGroup(painelLayout.createSequentialGroup()
                         .addComponent(jPasswordField1)
                         .addGap(1, 1, 1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(abas, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addComponent(btn)
                 .addContainerGap())
         );
