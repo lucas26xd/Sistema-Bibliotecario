@@ -127,10 +127,10 @@ public class CadastroCategorias extends javax.swing.JFrame {
                 categorias.altera(tfCod.getText(), tfNome.getText());
             }else{
                 categorias.cadastra(tfCod.getText(), tfNome.getText());
-                if(cadastraLivros != null){
-                    dispose();
-                    cadastraLivros.povoaCombo();
-                }
+            }
+            if(cadastraLivros != null){
+                dispose();
+                cadastraLivros.povoaCombo();
             }
         }
     }//GEN-LAST:event_btnActionPerformed
