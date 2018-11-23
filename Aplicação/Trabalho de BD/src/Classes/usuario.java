@@ -22,6 +22,80 @@ public class usuario {
         this.serv = serv;
     }
 
+    public void povoaCombo(JComboBox cb, String sql){
+        try{
+            a = serv.Acao(sql);
+            if(a != null){
+                for (int i = 0; i < a.size(); i++) {
+                    cb.addItem(a.get(i));
+                }
+            }
+        }catch(IndexOutOfBoundsException ioob){}
+    }
+    
+    public boolean autentica(String login, String senha){
+        try{
+            return serv.Acao("SELECT * FROM usuarios WHERE login = '" + login + "' AND senha = '" + f.encripta(senha) + "';").size() > 0;
+        }catch(IndexOutOfBoundsException ioob){
+            return false;
+        }
+    }
+    
+    public String pegaTipo(String login) {
+        try{
+            return serv.Acao("SELECT tipo_usuario FROM usuarios WHERE login = '" + login + "';").get(0);
+        }catch(IndexOutOfBoundsException ioob){
+            return "";
+        }
+    }
+    
+    public String pegaID(String login) {
+        try {
+            return serv.Acao("SELECT id FROM usuarios WHERE login = '" + login + "';").get(0);
+        } catch (IndexOutOfBoundsException ioob) {
+            return "";
+        }
+    }
+    
+    public String pegaNome(String usuario_id) {
+        try {
+            return serv.Acao("SELECT nome FROM usuarios WHERE id = '" + usuario_id + "';").get(0);
+        } catch (IndexOutOfBoundsException ioob) {
+            return "";
+        }
+    }
+    
+    private boolean temEmprestimos(String usuario_id){
+        try{
+            return Integer.parseInt(serv.Acao("SELECT COUNT(*) FROM emprestimo WHERE entregue = 'Não' AND usuarios_id = '" + usuario_id + "';").get(0)) > 0;
+        }catch(IndexOutOfBoundsException | NumberFormatException e){
+            return false;
+        }
+    }
+    
+    public void apaga(String usuario_id){
+        if(temEmprestimos(usuario_id))
+            JOptionPane.showMessageDialog(null, "Usuário tem empréstimos ativos! Não poderá ser excluído!", "Usuário com livro emprestado!", JOptionPane.ERROR_MESSAGE);
+        else{
+            serv.Acao("START TRANSACTION;");
+            if (serv.Acao("DELETE FROM emprestimo WHERE usuarios_id = '" + usuario_id + "';") != null){
+                if (serv.Acao("DELETE FROM reserva WHERE usuarios_id = '" + usuario_id + "';") != null){
+                    String tipo = pegaTipo(usuario_id);
+                    boolean b = true;
+                    if (tipo.matches("alunos|professores|funcionarios")){
+                        b = serv.Acao("DELETE FROM " + tipo + " WHERE id_usuario = '" + usuario_id + "';") != null;
+                    }
+                    if(b){
+                        if (serv.Acao("DELETE FROM usuarios WHERE id = '" + usuario_id + "';") != null){
+                            JOptionPane.showMessageDialog(null, "Apagado com Sucesso!");
+                        }
+                    }
+                }
+            }
+            serv.Acao("COMMIT;");
+        }
+    }
+    
     public void consulta(JTable jt, String nome, String tipo) {
         try {
             ArrayList<String> a = serv.Acao("SELECT nome, login, endereco, tipo_usuario FROM usuarios "
@@ -34,16 +108,7 @@ public class usuario {
                     mod.addRow(new Object[]{a.get(i), a.get(++i), a.get(++i), a.get(++i)});
                 }
             }
-        } catch (IndexOutOfBoundsException ioob) {
-        }
-    }
-
-    public String pegaUsuario_id(String login) {
-        try {
-            return serv.Acao("SELECT id FROM usuarios WHERE login = '" + login + "';").get(0);
-        } catch (IndexOutOfBoundsException ioob) {
-            return "";
-        }
+        } catch (IndexOutOfBoundsException ioob) {}
     }
 
     public String cadastraUsuario(String login, String senha, String nome, String endereco, String tipo_usuario) {
@@ -137,14 +202,13 @@ public class usuario {
         }
     }
     
-    public String consultaUsuario(String usuario_id, JTextField tfNome, JTextField tfEndereco, JTextField tfLogin, JTextField tfSenha){
+    public String consultaUsuario(String usuario_id, JTextField tfNome, JTextField tfEndereco, JTextField tfLogin){
         try{
-            a = serv.Acao("SELECT * FROM usuarios WHERE id = '"+usuario_id+"';");
-            tfLogin.setText(a.get(1));
-            tfSenha.setText(a.get(2));
-            tfNome.setText(a.get(3));
-            tfEndereco.setText(a.get(4));
-            return a.get(5); //tipo_usuario
+            a = serv.Acao("SELECT login, nome, endereco, tipo_usuario FROM usuarios WHERE id = '"+usuario_id+"';");
+            tfLogin.setText(a.get(0));
+            tfNome.setText(a.get(1));
+            tfEndereco.setText(a.get(2));
+            return a.get(3); //tipo_usuario
         }catch(IndexOutOfBoundsException ioob){
             return "";
         }
@@ -152,12 +216,12 @@ public class usuario {
     
     public void consultaAluno(String usuario_id, JTextField tfMat, JTextField tfDataIngresso, JTextField tfDataConclusao, JComboBox cbCurso, JTable jtAlunos){
         try{
-            a = serv.Acao("SELECT (matricula, data_ingresso, data_conclusao, nome_curso) FROM (alunos NATURAL JOIN curso) WHERE id_usuario = '"+usuario_id+"';");
+            a = serv.Acao("SELECT matricula, data_ingresso, data_conclusao, nome_curso FROM (alunos NATURAL JOIN curso) WHERE id_usuario = '"+usuario_id+"';");
             tfMat.setText(a.get(0));
-            tfDataIngresso.setText(a.get(1));
-            tfDataConclusao.setText(a.get(2));
+            tfDataIngresso.setText(f.converteDataBD2J(a.get(1)));
+            tfDataConclusao.setText(f.converteDataBD2J(a.get(2)));
             cbCurso.setSelectedItem(a.get(3));
-            a = serv.Acao("SELECT telefone_aluno FROM telefones_alunos WHERE id_funcionario = '"+usuario_id+"';");
+            a = serv.Acao("SELECT telefone_aluno FROM telefones_alunos WHERE id_aluno = '"+usuario_id+"';");
             if(a != null){
                 DefaultTableModel mod = (DefaultTableModel) jtAlunos.getModel();
                 mod.setNumRows(0);
@@ -170,9 +234,9 @@ public class usuario {
     
     public void consultaProfessor(String usuario_id, JTextField tfSiape, JTextField tfDataContratacao, JTextField tfCelular, JComboBox cbCurso, JComboBox cbRegime){
         try{
-            a = serv.Acao("SELECT (mat_siape, data_contratacao, telefone_celular, regime_trabalho, nome_curso) FROM (professor NATURAL JOIN curso) WHERE id_usuario = '"+usuario_id+"';");
+            a = serv.Acao("SELECT mat_siape, data_contratacao, telefone_celular, regime_trabalho, nome_curso FROM (professor NATURAL JOIN curso) WHERE id_usuario = '"+usuario_id+"';");
             tfSiape.setText(a.get(0));
-            tfDataContratacao.setText(a.get(1));
+            tfDataContratacao.setText(f.converteDataBD2J(a.get(1)));
             tfCelular.setText(a.get(2));
             cbCurso.setSelectedItem(a.get(3));
             cbRegime.setSelectedItem(a.get(4));

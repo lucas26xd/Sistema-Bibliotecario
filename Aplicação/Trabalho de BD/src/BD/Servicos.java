@@ -27,7 +27,8 @@ public class Servicos{
                     System.out.println("Resultado = null na classe: "+getClass());
             }else if(sql.matches("(?i)delete.*") || sql.matches("(?i)drop.*") || 
                     sql.matches("(?i)insert.*") || sql.matches("(?i)update.*") || 
-                    sql.matches("(?i)create.*")){
+                    sql.matches("(?i)create.*") || sql.matches("(?i)start.*") || 
+                    sql.matches("(?i)commit.*")){
                 if(action.inserirDados(sql)){
                     resultado = new ArrayList<>();
                     resultado.add("1");//apenas para marcar q a sql rodou lisa (sem problemas)

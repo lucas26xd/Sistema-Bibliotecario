@@ -2,7 +2,7 @@ package GUI;
 
 import BD.Inicia;
 import BD.Servicos;
-import Classes.autenticação;
+import Classes.usuario;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,11 +12,11 @@ import javax.swing.JOptionPane;
 public class TelaLogin extends javax.swing.JFrame {
 
     private Servicos serv;
-    private autenticação autentica;
+    private usuario user;
     
     public TelaLogin(Servicos serv) {
         this.serv = serv;
-        autentica = new autenticação(serv);
+        user = new usuario(serv);
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -33,7 +33,7 @@ public class TelaLogin extends javax.swing.JFrame {
         btnEntrar = new javax.swing.JButton();
         btnCadastro = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela de Login no Sitema");
         setResizable(false);
 
@@ -119,15 +119,18 @@ public class TelaLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
-        if(autentica.autentica(tfLogin.getText(), tfSenha.getText())){
-            new TelaPrincipal(serv, autentica.usuario_id(tfLogin.getText())).setVisible(true);
+        if(user.autentica(tfLogin.getText(), tfSenha.getText())){
+            if (user.pegaTipo(tfLogin.getText()).matches("alunos|professores|funcionarios"))
+                new TelaPrincipalUsuario(serv, user.pegaID(tfLogin.getText())).setVisible(true);
+            else
+                new TelaPrincipal(serv, user.pegaID(tfLogin.getText())).setVisible(true);
             dispose();
         }else
             JOptionPane.showMessageDialog(null, "Login e/ou Senha Incorretos!");
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     private void btnCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroActionPerformed
-        // TODO add your handling code here:
+        new CadastroUsuario(serv).setVisible(true);
     }//GEN-LAST:event_btnCadastroActionPerformed
 
     private void tfSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSenhaActionPerformed

@@ -1,15 +1,69 @@
 package GUI;
 
+import BD.Servicos;
+import Classes.usuario;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author lucas, arquivo criado dia 20/11/2018 às 23:40:51
  */
-public class CadastrarUsuario extends javax.swing.JFrame {
+public class CadastroUsuario extends javax.swing.JFrame {
 
-    public CadastrarUsuario() {
+    private Servicos serv;
+    private usuario u;
+    private String usuario_id = "";
+    
+    public CadastroUsuario(Servicos serv) {
+        this.serv = serv;
+        
+        u = new usuario(serv);
+        
         initComponents();
+        setLocationRelativeTo(null);
+        
+        povoaCombos();
+    }
+    
+    public CadastroUsuario(Servicos serv, String usuario_id) {
+        this.serv = serv;
+        this.usuario_id = usuario_id;
+        
+        u = new usuario(serv);
+        
+        initComponents();
+        setLocationRelativeTo(null);
+        
+        setTitle("Alterar Usuário");
+        btn.setText("Alterar");
+        
+        povoaCombos();
+        
+        String tipo = u.consultaUsuario(usuario_id, tfNome, tfEndereco, tfLogin);
+        
+        abas.setEnabled(false);
+        
+        if (tipo.equals("alunos")){
+            abas.setEnabledAt(0, true);
+            u.consultaAluno(usuario_id, tfMatrAluno, tfDataIngresso, tfDataConclusao, cbCursoAluno, jtTelefonesAlunos);
+        } else if (tipo.equals("professores")){
+            abas.setEnabledAt(1, true);
+            u.consultaProfessor(usuario_id, tfMatSiape, tfDataContratacao, tfTelCelular, cbCursoProf, cbRegime);
+        } else if (tipo.equals("funcionarios")){
+            abas.setEnabledAt(2, true);
+            u.consultaFuncionario(usuario_id, tfMatrFunc, jtTelefonesFunc);
+        }
     }
 
+    private CadastroUsuario(){}
+    
+    private void povoaCombos(){
+        u.povoaCombo(cbCursoAluno, "SELECT nome_curso FROM curso;");
+        for (int i = 0; i < cbCursoAluno.getItemCount(); i++) {
+            cbCursoProf.addItem(cbCursoAluno.getItemAt(i));
+        }
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -19,14 +73,14 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         btn = new javax.swing.JButton();
         tfEndereco = new javax.swing.JTextField();
         tfLogin = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        tfSenha = new javax.swing.JPasswordField();
         abas = new javax.swing.JTabbedPane();
         painelAluno = new javax.swing.JPanel();
         tfMatrAluno = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         btnMaisTelAluno = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jtTelefonesFunc1 = new javax.swing.JTable();
+        jtTelefonesAlunos = new javax.swing.JTable();
         btnMenosAluno = new javax.swing.JButton();
         tfDataIngresso = new javax.swing.JFormattedTextField();
         tfDataConclusao = new javax.swing.JFormattedTextField();
@@ -44,8 +98,10 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtTelefonesFunc = new javax.swing.JTable();
         btnMenosTelFunc = new javax.swing.JButton();
+        btnApagar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastro de Usuário");
 
         painel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -65,8 +121,8 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         tfLogin.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         tfLogin.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Login", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
 
-        jPasswordField1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        jPasswordField1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Senha", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
+        tfSenha.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        tfSenha.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Senha", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
 
         abas.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -88,7 +144,7 @@ public class CadastrarUsuario extends javax.swing.JFrame {
             }
         });
 
-        jtTelefonesFunc1.setModel(new javax.swing.table.DefaultTableModel(
+        jtTelefonesAlunos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -104,7 +160,7 @@ public class CadastrarUsuario extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jtTelefonesFunc1);
+        jScrollPane2.setViewportView(jtTelefonesAlunos);
 
         btnMenosAluno.setBackground(new java.awt.Color(255, 255, 255));
         btnMenosAluno.setFont(new java.awt.Font("Ubuntu", 1, 32)); // NOI18N
@@ -344,12 +400,21 @@ public class CadastrarUsuario extends javax.swing.JFrame {
 
         abas.addTab("Funcionário", painelFunc);
 
+        btnApagar.setText("Apagar");
+        btnApagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnApagarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout painelLayout = new javax.swing.GroupLayout(painel);
         painel.setLayout(painelLayout);
         painelLayout.setHorizontalGroup(
             painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(btnApagar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn))
             .addGroup(painelLayout.createSequentialGroup()
                 .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -364,7 +429,7 @@ public class CadastrarUsuario extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(tfEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
-                            .addComponent(jPasswordField1))))
+                            .addComponent(tfSenha))))
                 .addContainerGap(48, Short.MAX_VALUE))
         );
         painelLayout.setVerticalGroup(
@@ -378,12 +443,13 @@ public class CadastrarUsuario extends javax.swing.JFrame {
                 .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(tfLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(painelLayout.createSequentialGroup()
-                        .addComponent(jPasswordField1)
+                        .addComponent(tfSenha)
                         .addGap(1, 1, 1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(abas, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
-                .addComponent(btn)
+                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn)
+                    .addComponent(btnApagar))
                 .addContainerGap())
         );
 
@@ -428,6 +494,15 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnMenosAlunoActionPerformed
 
+    private void btnApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarActionPerformed
+        if(!usuario_id.equals("")){
+            if(JOptionPane.showConfirmDialog(null, "Deseja realmente excluir o registro deste usuário?", "Excluir?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+                u.apaga(usuario_id);
+                dispose();
+            }
+        }
+    }//GEN-LAST:event_btnApagarActionPerformed
+
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -442,19 +517,20 @@ public class CadastrarUsuario extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastrarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastrarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastrarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastrarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CadastrarUsuario().setVisible(true);
+                new CadastroUsuario().setVisible(true);
             }
         });
     }
@@ -462,6 +538,7 @@ public class CadastrarUsuario extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane abas;
     private javax.swing.JButton btn;
+    private javax.swing.JButton btnApagar;
     private javax.swing.JButton btnMaisTelAluno;
     private javax.swing.JButton btnMaisTelFunc;
     private javax.swing.JButton btnMenosAluno;
@@ -471,11 +548,10 @@ public class CadastrarUsuario extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbRegime;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jtTelefonesAlunos;
     private javax.swing.JTable jtTelefonesFunc;
-    private javax.swing.JTable jtTelefonesFunc1;
     private javax.swing.JPanel painel;
     private javax.swing.JPanel painelAluno;
     private javax.swing.JPanel painelFunc;
@@ -489,6 +565,7 @@ public class CadastrarUsuario extends javax.swing.JFrame {
     private javax.swing.JTextField tfMatrAluno;
     private javax.swing.JTextField tfMatrFunc;
     private javax.swing.JTextField tfNome;
+    private javax.swing.JPasswordField tfSenha;
     private javax.swing.JTextField tfTelCelular;
     // End of variables declaration//GEN-END:variables
 }

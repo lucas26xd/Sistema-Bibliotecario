@@ -189,7 +189,7 @@ public class emprestimo {
 
     public void consultar(JTable jt, String nome_usuario, String isbn_livro, String titulo, String data, String data_entrega, String entregue) {
         try {
-            ArrayList<String> a = serv.Acao("SELECT (e.isbn_livro, l.titulo, e.data, e.data_entrega, e.entregue) "
+            ArrayList<String> a = serv.Acao("SELECT e.isbn_livro, l.titulo, e.data, e.data_entrega, e.entregue "
                     + "FROM ((emprestimo e JOIN livros l ON l.isbn = e.isbn_livro AND l.titulo LIKE '%" + titulo + "%') "
                     + "JOIN usuarios u ON e.usuarios_id = u.id AND nome LIKE '%" + nome_usuario + "%') "
                     + "WHERE e.isbn LIKE '" + isbn_livro + "%' AND e.data LIKE '" + f.converteDataJ2BD(data) + "%' AND e.data_entrega LIKE '" + f.converteDataJ2BD(data_entrega) + "%' AND entregue = '" + entregue + "';");

@@ -29,6 +29,10 @@ public class funcoes {
         return new SimpleDateFormat("dd/MM/yyyy").format(new Date());
     }
 
+    public String pegaHoraAtual(){
+        return new SimpleDateFormat("HH:mm:ss").format(new Date());
+    }
+    
     public String pegaDataAtualBD() {
         return new SimpleDateFormat("yyyy-MM-dd").format(new Date());
     }
