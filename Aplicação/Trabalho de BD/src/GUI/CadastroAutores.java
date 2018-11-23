@@ -12,17 +12,32 @@ public class CadastroAutores extends javax.swing.JFrame {
 
     private Servicos serv;
     private autores autores;
+    private ConsultaAutores ca;
     
     public CadastroAutores(Servicos serv) {
         this.serv = serv;
+        
         autores = new autores(serv);
+        
+        initComponents();
+        setLocationRelativeTo(null);
+    }
+    
+    public CadastroAutores(Servicos serv, ConsultaAutores ca) {
+        this.serv = serv;
+        this.ca = ca;
+        
+        autores = new autores(serv);
+        
         initComponents();
         setLocationRelativeTo(null);
     }
     
     public CadastroAutores(Servicos serv, String nome, String cpf, String nacionalidade) {
         this.serv = serv;
+        
         autores = new autores(serv);
+        
         initComponents();
         setLocationRelativeTo(null);
         
@@ -129,12 +144,13 @@ public class CadastroAutores extends javax.swing.JFrame {
 
     private void btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActionPerformed
         if(camposPreenchidos()){    
-            if(btn.getText().equals("Alterar")){
-                autores.altera(tfNome.getText(), tfCPF.getText(), tfNacionalidade.getText());
-                dispose();
-            }else
+            if(btn.getText().equals("Alterar"))
+                autores.altera(tfNome.getText(), tfCPF.getText(), tfNacionalidade.getText());               
+            else
                 autores.cadastra(tfNome.getText(), tfCPF.getText(), tfNacionalidade.getText());
-            limpar();
+            if(ca != null)
+                ca.consulta();
+            dispose();
         }
     }//GEN-LAST:event_btnActionPerformed
 

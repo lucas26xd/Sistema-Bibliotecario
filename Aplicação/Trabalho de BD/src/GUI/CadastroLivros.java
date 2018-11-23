@@ -122,7 +122,7 @@ public class CadastroLivros extends javax.swing.JFrame {
         tfEditora.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Editora", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
 
         tfQntdCopias.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        tfQntdCopias.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cópias Disponíveis", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
+        tfQntdCopias.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Qtd. de Cópias no Acervo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
 
         tfISBN.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         tfISBN.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "ISBN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
@@ -217,7 +217,6 @@ public class CadastroLivros extends javax.swing.JFrame {
             }
         });
 
-        cbCategoria.setBackground(new java.awt.Color(255, 255, 255));
         cbCategoria.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cbCategoria.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Categoria", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
 
@@ -246,10 +245,10 @@ public class CadastroLivros extends javax.swing.JFrame {
                             .addComponent(tfTitulo)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelLayout.createSequentialGroup()
                                 .addComponent(tfISBN)
-                                .addGap(18, 18, 18)
-                                .addComponent(tfQntdCopias, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(tfAno, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(tfQntdCopias, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(tfAno, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
         painelLayout.setVerticalGroup(
@@ -313,7 +312,7 @@ public class CadastroLivros extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnMaisCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMaisCategoriaActionPerformed
-        // TODO add your handling code here:
+        new CadastroCategorias(this, serv).setVisible(true);
     }//GEN-LAST:event_btnMaisCategoriaActionPerformed
 
    
