@@ -84,7 +84,6 @@ public class ConsultaUsuario extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jtUsuario);
 
-        cbTipo.setBackground(new java.awt.Color(255, 255, 255));
         cbTipo.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Aluno", "Professor", "Funcionários" }));
         cbTipo.setSelectedIndex(-1);
@@ -92,6 +91,11 @@ public class ConsultaUsuario extends javax.swing.JFrame {
         cbTipo.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbTipoItemStateChanged(evt);
+            }
+        });
+        cbTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTipoActionPerformed(evt);
             }
         });
 
@@ -158,6 +162,10 @@ public class ConsultaUsuario extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jtUsuarioMouseClicked
+
+    private void cbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbTipoActionPerformed
 
     public static void main(String args[]) {
 

@@ -94,6 +94,7 @@ public class Emprestimo extends javax.swing.JFrame {
         });
 
         tfTitulo.setEditable(false);
+        tfTitulo.setBackground(new java.awt.Color(255, 255, 255));
         tfTitulo.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         tfTitulo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Título", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
         tfTitulo.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -103,10 +104,12 @@ public class Emprestimo extends javax.swing.JFrame {
         });
 
         tfQtdDisponiveis.setEditable(false);
+        tfQtdDisponiveis.setBackground(new java.awt.Color(255, 255, 255));
         tfQtdDisponiveis.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         tfQtdDisponiveis.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Disponíveis", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
 
         tfNome.setEditable(false);
+        tfNome.setBackground(new java.awt.Color(255, 255, 255));
         tfNome.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         tfNome.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nome do Usuário", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
         tfNome.setEnabled(false);
@@ -117,6 +120,7 @@ public class Emprestimo extends javax.swing.JFrame {
         });
 
         tfTipo.setEditable(false);
+        tfTipo.setBackground(new java.awt.Color(255, 255, 255));
         tfTipo.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         tfTipo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tipo do Usuário", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
 
@@ -125,7 +129,11 @@ public class Emprestimo extends javax.swing.JFrame {
         tfDataEntrega.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         tfDataEntrega.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Data de Entrega", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
 
+        btnCadastrar.setBackground(new java.awt.Color(255, 255, 255));
+        btnCadastrar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/ok30.png"))); // NOI18N
         btnCadastrar.setText("Cadastrar");
+        btnCadastrar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCadastrarActionPerformed(evt);
@@ -150,7 +158,6 @@ public class Emprestimo extends javax.swing.JFrame {
                         .addComponent(tfTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(tfQtdDisponiveis, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnCadastrar)
                     .addGroup(painelLayout.createSequentialGroup()
                         .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(painelLayout.createSequentialGroup()
@@ -159,7 +166,8 @@ public class Emprestimo extends javax.swing.JFrame {
                                 .addComponent(tfDataEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(tfTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(tfTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnCadastrar))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
         painelLayout.setVerticalGroup(
@@ -179,8 +187,8 @@ public class Emprestimo extends javax.swing.JFrame {
                     .addComponent(tfData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfDataEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCadastrar)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

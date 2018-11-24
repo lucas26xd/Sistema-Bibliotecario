@@ -85,7 +85,11 @@ public class CadastroAutores extends javax.swing.JFrame {
         tfNome.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         tfNome.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nome", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
 
+        btn.setBackground(new java.awt.Color(255, 255, 255));
+        btn.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/ok30.png"))); // NOI18N
         btn.setText("Cadastrar");
+        btn.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActionPerformed(evt);

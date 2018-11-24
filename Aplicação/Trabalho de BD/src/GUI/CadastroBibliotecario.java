@@ -47,8 +47,11 @@ public class CadastroBibliotecario extends javax.swing.JFrame {
         tfEndereco.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         tfEndereco.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Endereço", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
 
+        Cadastrar.setBackground(new java.awt.Color(255, 255, 255));
         Cadastrar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        Cadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/ok30.png"))); // NOI18N
         Cadastrar.setText("Cadastrar");
+        Cadastrar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
         javax.swing.GroupLayout painelLayout = new javax.swing.GroupLayout(painel);
         painel.setLayout(painelLayout);

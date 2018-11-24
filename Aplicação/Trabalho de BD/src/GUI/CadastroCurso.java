@@ -48,7 +48,11 @@ public class CadastroCurso extends javax.swing.JFrame {
 
         painel.setBackground(new java.awt.Color(255, 255, 255));
 
+        btn.setBackground(new java.awt.Color(255, 255, 255));
+        btn.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/ok30.png"))); // NOI18N
         btn.setText("Cadastrar");
+        btn.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActionPerformed(evt);

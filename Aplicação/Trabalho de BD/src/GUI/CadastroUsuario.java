@@ -132,7 +132,11 @@ public class CadastroUsuario extends javax.swing.JFrame {
         tfNome.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         tfNome.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nome", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
 
+        btn.setBackground(new java.awt.Color(255, 255, 255));
+        btn.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/ok30.png"))); // NOI18N
         btn.setText("Cadastrar");
+        btn.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActionPerformed(evt);
@@ -160,8 +164,8 @@ public class CadastroUsuario extends javax.swing.JFrame {
 
         btnMaisTelAluno.setBackground(new java.awt.Color(255, 255, 255));
         btnMaisTelAluno.setFont(new java.awt.Font("Ubuntu", 1, 36)); // NOI18N
-        btnMaisTelAluno.setForeground(new java.awt.Color(0, 255, 0));
-        btnMaisTelAluno.setText("+");
+        btnMaisTelAluno.setForeground(new java.awt.Color(255, 255, 255));
+        btnMaisTelAluno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/adcionar30.png"))); // NOI18N
         btnMaisTelAluno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMaisTelAlunoActionPerformed(evt);
@@ -188,8 +192,8 @@ public class CadastroUsuario extends javax.swing.JFrame {
 
         btnMenosAluno.setBackground(new java.awt.Color(255, 255, 255));
         btnMenosAluno.setFont(new java.awt.Font("Ubuntu", 1, 32)); // NOI18N
-        btnMenosAluno.setForeground(new java.awt.Color(255, 0, 0));
-        btnMenosAluno.setText("-");
+        btnMenosAluno.setForeground(new java.awt.Color(255, 255, 255));
+        btnMenosAluno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/remover30.png"))); // NOI18N
         btnMenosAluno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMenosAlunoActionPerformed(evt);
@@ -208,31 +212,28 @@ public class CadastroUsuario extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(tfTelefoneAluno)
                     .addComponent(jScrollPane2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnMaisTelAluno, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnMenosAluno, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addComponent(btnMenosAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnMaisTelAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(37, 37, 37))
         );
-
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnMaisTelAluno, btnMenosAluno});
-
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnMaisTelAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfTelefoneAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(tfTelefoneAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnMaisTelAluno))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnMenosAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 71, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addComponent(btnMenosAluno)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
-
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnMaisTelAluno, btnMenosAluno});
 
         tfDataIngresso.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Data de Ingresso", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
         tfDataIngresso.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
@@ -242,9 +243,13 @@ public class CadastroUsuario extends javax.swing.JFrame {
         tfDataConclusao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
         tfDataConclusao.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
 
-        cbCursoAluno.setBackground(new java.awt.Color(255, 255, 255));
         cbCursoAluno.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cbCursoAluno.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Curso", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
+        cbCursoAluno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbCursoAlunoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout painelAlunoLayout = new javax.swing.GroupLayout(painelAluno);
         painelAluno.setLayout(painelAlunoLayout);
@@ -255,7 +260,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
                 .addGroup(painelAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(painelAlunoLayout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 114, Short.MAX_VALUE))
                     .addGroup(painelAlunoLayout.createSequentialGroup()
                         .addComponent(tfMatrAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -263,7 +268,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(tfDataConclusao, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbCursoAluno, 0, 172, Short.MAX_VALUE)))
+                        .addComponent(cbCursoAluno, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         painelAlunoLayout.setVerticalGroup(
@@ -287,7 +292,6 @@ public class CadastroUsuario extends javax.swing.JFrame {
         tfMatSiape.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         tfMatSiape.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "SIAPE", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
 
-        cbCursoProf.setBackground(new java.awt.Color(255, 255, 255));
         cbCursoProf.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cbCursoProf.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Curso", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
 
@@ -295,7 +299,6 @@ public class CadastroUsuario extends javax.swing.JFrame {
         tfDataContratacao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
         tfDataContratacao.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
 
-        cbRegime.setBackground(new java.awt.Color(255, 255, 255));
         cbRegime.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cbRegime.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "20h", "40h", "DE" }));
         cbRegime.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Regime de Trabalho", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
@@ -332,7 +335,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
                 .addGroup(painelProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(cbRegime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfTelCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(142, Short.MAX_VALUE))
+                .addContainerGap(151, Short.MAX_VALUE))
         );
 
         abas.addTab("Professor", painelProfessor);
@@ -348,7 +351,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
         btnMaisTelFunc.setBackground(new java.awt.Color(255, 255, 255));
         btnMaisTelFunc.setFont(new java.awt.Font("Ubuntu", 1, 36)); // NOI18N
         btnMaisTelFunc.setForeground(new java.awt.Color(0, 255, 0));
-        btnMaisTelFunc.setText("+");
+        btnMaisTelFunc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/adcionar30.png"))); // NOI18N
         btnMaisTelFunc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMaisTelFuncActionPerformed(evt);
@@ -376,7 +379,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
         btnMenosTelFunc.setBackground(new java.awt.Color(255, 255, 255));
         btnMenosTelFunc.setFont(new java.awt.Font("Ubuntu", 1, 32)); // NOI18N
         btnMenosTelFunc.setForeground(new java.awt.Color(255, 0, 0));
-        btnMenosTelFunc.setText("-");
+        btnMenosTelFunc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/remover30.png"))); // NOI18N
         btnMenosTelFunc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMenosTelFuncActionPerformed(evt);
@@ -397,29 +400,24 @@ public class CadastroUsuario extends javax.swing.JFrame {
                     .addComponent(jScrollPane1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnMaisTelFunc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnMenosTelFunc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(btnMaisTelFunc, javax.swing.GroupLayout.PREFERRED_SIZE, 42, Short.MAX_VALUE)
+                    .addComponent(btnMenosTelFunc, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
-
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnMaisTelFunc, btnMenosTelFunc});
-
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(tfTelefoneFunc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnMaisTelFunc, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnMaisTelFunc))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnMenosTelFunc, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 79, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addComponent(btnMenosTelFunc)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
-
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnMaisTelFunc, btnMenosTelFunc});
 
         javax.swing.GroupLayout painelFuncLayout = new javax.swing.GroupLayout(painelFunc);
         painelFunc.setLayout(painelFuncLayout);
@@ -430,7 +428,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
                 .addGroup(painelFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tfMatrFunc, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(145, Short.MAX_VALUE))
+                .addContainerGap(124, Short.MAX_VALUE))
         );
         painelFuncLayout.setVerticalGroup(
             painelFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -444,7 +442,11 @@ public class CadastroUsuario extends javax.swing.JFrame {
 
         abas.addTab("Funcionário", painelFunc);
 
+        btnApagar.setBackground(new java.awt.Color(255, 255, 255));
+        btnApagar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnApagar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/apagar30.png"))); // NOI18N
         btnApagar.setText("Apagar");
+        btnApagar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnApagar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnApagarActionPerformed(evt);
@@ -455,16 +457,8 @@ public class CadastroUsuario extends javax.swing.JFrame {
         painel.setLayout(painelLayout);
         painelLayout.setHorizontalGroup(
             painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnApagar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn))
             .addGroup(painelLayout.createSequentialGroup()
                 .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(painelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(abas, javax.swing.GroupLayout.PREFERRED_SIZE, 692, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, painelLayout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -473,7 +467,15 @@ public class CadastroUsuario extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(tfEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
-                            .addComponent(tfSenha))))
+                            .addComponent(tfSenha)))
+                    .addGroup(painelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelLayout.createSequentialGroup()
+                                .addComponent(btnApagar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btn))
+                            .addComponent(abas, javax.swing.GroupLayout.PREFERRED_SIZE, 692, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(48, Short.MAX_VALUE))
         );
         painelLayout.setVerticalGroup(
@@ -490,11 +492,11 @@ public class CadastroUsuario extends javax.swing.JFrame {
                         .addComponent(tfSenha)
                         .addGap(1, 1, 1)))
                 .addComponent(abas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn)
-                    .addComponent(btnApagar))
-                .addContainerGap())
+                    .addComponent(btn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnApagar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 38, 38))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -593,6 +595,10 @@ public class CadastroUsuario extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnApagarActionPerformed
+
+    private void cbCursoAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCursoAlunoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbCursoAlunoActionPerformed
 
     public static void main(String args[]) {
 
