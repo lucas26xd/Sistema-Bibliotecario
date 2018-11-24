@@ -12,11 +12,23 @@ public class ConsultaUsuario extends javax.swing.JFrame {
     private Servicos serv;
     private usuario user;
     private Emprestimo emp;
+    private Reserva res;
     
     public ConsultaUsuario(Emprestimo emp, Servicos serv) {
         this.serv = serv;
         user = new usuario(serv);
         this.emp = emp;
+        
+        initComponents();
+        setLocationRelativeTo(null);
+        
+        user.consulta(jtUsuario, tfNome.getText(), cbTipo.getSelectedItem()+"");
+    }
+    
+    public ConsultaUsuario(Reserva res, Servicos serv) {
+        this.serv = serv;
+        user = new usuario(serv);
+        this.res = res;
         
         initComponents();
         setLocationRelativeTo(null);
@@ -156,6 +168,9 @@ public class ConsultaUsuario extends javax.swing.JFrame {
             int row = jtUsuario.getSelectedRow();
             if (emp != null) {
                 emp.setaValoresUsuario(user.pegaID(jtUsuario.getValueAt(row, 1)+""), jtUsuario.getValueAt(row, 0)+"", jtUsuario.getValueAt(row, 3)+"");
+                dispose();
+            }else if (res != null) {
+                res.setaValoresUsuario(user.pegaID(jtUsuario.getValueAt(row, 1)+""), jtUsuario.getValueAt(row, 0)+"", jtUsuario.getValueAt(row, 3)+"");
                 dispose();
             } else {
                 new CadastroUsuario(serv, user.pegaID(jtUsuario.getValueAt(row, 1)+"")).setVisible(true);

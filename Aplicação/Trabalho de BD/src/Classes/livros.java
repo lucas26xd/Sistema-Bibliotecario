@@ -81,6 +81,26 @@ public class livros {
         }
     }
     
+    public void consultaView(JTable jt, String isbn, String titulo, String ano, String editora, String qtd, String categoria, String autor){
+        try {
+            ArrayList<String> a = serv.Acao("SELECT * FROM viewLivrosbyCategoria "
+                                            + "WHERE isbn LIKE '"+isbn+"%' AND titulo LIKE '%"+titulo+"%' AND qtd_copias LIKE '"+qtd+"%' AND "
+                                            + "nome LIKE '%"+autor+"%' AND ano_lancamento LIKE '"+ano+"%'  AND "
+                                            + "editora LIKE '" + editora + "%' AND descricao LIKE '" + categoria + "%';");
+            String ISBN, emprestados, reservas;
+            if (a != null) {
+                DefaultTableModel mod = (DefaultTableModel) jt.getModel();
+                mod.setNumRows(0);
+                for (int i = 0; i < a.size(); i++) {
+                    ISBN = a.get(i);
+                    emprestados = serv.Acao("SELECT COUNT(*) FROM emprestimo WHERE entregue = 'Não' AND isbn_livro = '" + ISBN + "';").get(0);
+                    reservas = serv.Acao("SELECT COUNT(*) FROM reserva WHERE atendida = 'Não' AND isbn_livro = '" + ISBN + "';").get(0);
+                    mod.addRow(new Object[]{ISBN, a.get(++i), a.get(++i), a.get(++i), a.get(++i), emprestados, reservas, a.get(++i), a.get(++i)});
+                }
+            }
+        } catch (IndexOutOfBoundsException ioob) {}
+    }
+    
     public void consultaAutoresdosLivros(JTable jtAutores, String isbn){
         DefaultTableModel mod = (DefaultTableModel) jtAutores.getModel();
         mod.setNumRows(0);
