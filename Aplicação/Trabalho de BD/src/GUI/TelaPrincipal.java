@@ -40,6 +40,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btnConsultaBibliotec = new javax.swing.JButton();
         btnCadastroUsuario = new javax.swing.JButton();
         BarraDeMenu = new javax.swing.JMenuBar();
+        menuBiblioteca = new javax.swing.JMenu();
+        itemEmprestimo = new javax.swing.JMenuItem();
+        jSeparator12 = new javax.swing.JPopupMenu.Separator();
+        itemReserva = new javax.swing.JMenuItem();
+        jSeparator13 = new javax.swing.JPopupMenu.Separator();
         menuCadastros = new javax.swing.JMenu();
         itemAutor = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
@@ -53,13 +58,27 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jSeparator5 = new javax.swing.JPopupMenu.Separator();
         itemUsuario = new javax.swing.JMenuItem();
         menuConsultas = new javax.swing.JMenu();
+        itemCAutor = new javax.swing.JMenuItem();
+        jSeparator6 = new javax.swing.JPopupMenu.Separator();
+        itemCLivro = new javax.swing.JMenuItem();
+        jSeparator7 = new javax.swing.JPopupMenu.Separator();
+        itemCCategoria = new javax.swing.JMenuItem();
+        jSeparator8 = new javax.swing.JPopupMenu.Separator();
+        itemCCurso = new javax.swing.JMenuItem();
+        jSeparator9 = new javax.swing.JPopupMenu.Separator();
+        itemCBibliotec = new javax.swing.JMenuItem();
+        jSeparator10 = new javax.swing.JPopupMenu.Separator();
+        itemCUsuario = new javax.swing.JMenuItem();
+        jSeparator11 = new javax.swing.JPopupMenu.Separator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela Principal");
+        setResizable(false);
 
         painel.setBackground(new java.awt.Color(255, 255, 255));
         painel.setName(""); // NOI18N
 
+        btnCadastraAutores.setBackground(new java.awt.Color(255, 255, 255));
         btnCadastraAutores.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnCadastraAutores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/autor2-70.png"))); // NOI18N
         btnCadastraAutores.setText("Cadastrar Autor");
@@ -69,6 +88,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnCadastraBibliotecario.setBackground(new java.awt.Color(255, 255, 255));
         btnCadastraBibliotecario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnCadastraBibliotecario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/bibliotecario70.png"))); // NOI18N
         btnCadastraBibliotecario.setText("Cadastrar Bibliotecário");
@@ -78,6 +98,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnConsultaAutor.setBackground(new java.awt.Color(255, 255, 255));
         btnConsultaAutor.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnConsultaAutor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/buscaautor70.png"))); // NOI18N
         btnConsultaAutor.setText("Consultar Autor");
@@ -87,6 +108,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnCadastraLivros.setBackground(new java.awt.Color(255, 255, 255));
         btnCadastraLivros.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnCadastraLivros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/livros4-70.png"))); // NOI18N
         btnCadastraLivros.setText("Cadastrar Livro");
@@ -96,6 +118,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnCadastraCategoria.setBackground(new java.awt.Color(255, 255, 255));
         btnCadastraCategoria.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnCadastraCategoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/categoria70.png"))); // NOI18N
         btnCadastraCategoria.setText("Cadastrar Categoria");
@@ -105,6 +128,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnCadastraCurso.setBackground(new java.awt.Color(255, 255, 255));
         btnCadastraCurso.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnCadastraCurso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/curso70.png"))); // NOI18N
         btnCadastraCurso.setText("Cadastrar Curso");
@@ -114,6 +138,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnConsultaLivros.setBackground(new java.awt.Color(255, 255, 255));
         btnConsultaLivros.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnConsultaLivros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/buscalivros70.png"))); // NOI18N
         btnConsultaLivros.setText("Consultar Livro");
@@ -123,6 +148,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnConsultaCategoria.setBackground(new java.awt.Color(255, 255, 255));
         btnConsultaCategoria.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnConsultaCategoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/buscacategoria70.png"))); // NOI18N
         btnConsultaCategoria.setText("Consultar Categoria");
@@ -132,6 +158,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnEmprestimo.setBackground(new java.awt.Color(255, 255, 255));
         btnEmprestimo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnEmprestimo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/emprestimo70.png"))); // NOI18N
         btnEmprestimo.setText("Fazer Empréstimo");
@@ -141,6 +168,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnReserva.setBackground(new java.awt.Color(255, 255, 255));
         btnReserva.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnReserva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/reserva1-70.png"))); // NOI18N
         btnReserva.setText("Fazer Reserva");
@@ -150,6 +178,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnConsultaUsuarios.setBackground(new java.awt.Color(255, 255, 255));
         btnConsultaUsuarios.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnConsultaUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/buscausuario70.png"))); // NOI18N
         btnConsultaUsuarios.setText("Consultar Usuário");
@@ -159,6 +188,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnConsultaCurso.setBackground(new java.awt.Color(255, 255, 255));
         btnConsultaCurso.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnConsultaCurso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/buscacurso70.png"))); // NOI18N
         btnConsultaCurso.setText("Consultar Curso");
@@ -168,13 +198,20 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnConsultaBibliotec.setBackground(new java.awt.Color(255, 255, 255));
         btnConsultaBibliotec.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnConsultaBibliotec.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/buscabibliotecario70.png"))); // NOI18N
         btnConsultaBibliotec.setText("Consultar Bibilotecário");
 
+        btnCadastroUsuario.setBackground(new java.awt.Color(255, 255, 255));
         btnCadastroUsuario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnCadastroUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/usuario70.png"))); // NOI18N
         btnCadastroUsuario.setText("Cadastrar Usuário");
+        btnCadastroUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastroUsuarioActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout painelLayout = new javax.swing.GroupLayout(painel);
         painel.setLayout(painelLayout);
@@ -240,40 +277,67 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         painelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnCadastraAutores, btnCadastraBibliotecario, btnCadastraCategoria, btnCadastraCurso, btnCadastraLivros, btnCadastroUsuario, btnConsultaAutor, btnConsultaBibliotec, btnConsultaCategoria, btnConsultaCurso, btnConsultaLivros, btnConsultaUsuarios, btnEmprestimo, btnReserva});
 
         BarraDeMenu.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
+        menuBiblioteca.setText("Biblioteca");
+        menuBiblioteca.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        itemEmprestimo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
+        itemEmprestimo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/emprestimo30.png"))); // NOI18N
+        itemEmprestimo.setText("Fazer Empréstimo");
+        itemEmprestimo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemEmprestimoActionPerformed(evt);
+            }
+        });
+        menuBiblioteca.add(itemEmprestimo);
+        menuBiblioteca.add(jSeparator12);
+
+        itemReserva.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
+        itemReserva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/reserva1-30.png"))); // NOI18N
+        itemReserva.setText("Fazer Reserva");
+        itemReserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemReservaActionPerformed(evt);
+            }
+        });
+        menuBiblioteca.add(itemReserva);
+        menuBiblioteca.add(jSeparator13);
+
+        BarraDeMenu.add(menuBiblioteca);
+
         menuCadastros.setText("Cadastros");
-        menuCadastros.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        menuCadastros.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         itemAutor.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
         itemAutor.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        itemAutor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/adcionar30.png"))); // NOI18N
+        itemAutor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/autor2-30.png"))); // NOI18N
         itemAutor.setText("Cadastro de Autor");
         menuCadastros.add(itemAutor);
         menuCadastros.add(jSeparator1);
 
         itemLivro.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
         itemLivro.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        itemLivro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/adcionar30.png"))); // NOI18N
+        itemLivro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/livros4-30.png"))); // NOI18N
         itemLivro.setText("Cadastro de Livro");
         menuCadastros.add(itemLivro);
         menuCadastros.add(jSeparator2);
 
         itemCategoria.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_MASK));
         itemCategoria.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        itemCategoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/adcionar30.png"))); // NOI18N
+        itemCategoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/categoria30.png"))); // NOI18N
         itemCategoria.setText("Cadastro de Categoria");
         menuCadastros.add(itemCategoria);
         menuCadastros.add(jSeparator3);
 
         itemCurso.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
         itemCurso.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        itemCurso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/adcionar30.png"))); // NOI18N
+        itemCurso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/curso30.png"))); // NOI18N
         itemCurso.setText("Cadastro de Curso");
         itemCurso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -285,7 +349,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         itemBibliotec.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_MASK));
         itemBibliotec.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        itemBibliotec.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/adcionar30.png"))); // NOI18N
+        itemBibliotec.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/bibliotecario30.png"))); // NOI18N
         itemBibliotec.setText("Cadastro de Bibliotecário");
         itemBibliotec.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -297,7 +361,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         itemUsuario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.CTRL_MASK));
         itemUsuario.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        itemUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/adcionar30.png"))); // NOI18N
+        itemUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/usuario30.png"))); // NOI18N
         itemUsuario.setText("Cadastro de Usuário");
         itemUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -309,7 +373,74 @@ public class TelaPrincipal extends javax.swing.JFrame {
         BarraDeMenu.add(menuCadastros);
 
         menuConsultas.setText("Consultas");
-        menuConsultas.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        menuConsultas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        itemCAutor.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        itemCAutor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/buscaautor30.png"))); // NOI18N
+        itemCAutor.setText("Consulta de Autor");
+        itemCAutor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemCAutorActionPerformed(evt);
+            }
+        });
+        menuConsultas.add(itemCAutor);
+        menuConsultas.add(jSeparator6);
+
+        itemCLivro.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        itemCLivro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/buscalivros30.png"))); // NOI18N
+        itemCLivro.setText("Consulta de Livro");
+        itemCLivro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemCLivroActionPerformed(evt);
+            }
+        });
+        menuConsultas.add(itemCLivro);
+        menuConsultas.add(jSeparator7);
+
+        itemCCategoria.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        itemCCategoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/buscacategoria30.png"))); // NOI18N
+        itemCCategoria.setText("Consulta de Categoria");
+        itemCCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemCCategoriaActionPerformed(evt);
+            }
+        });
+        menuConsultas.add(itemCCategoria);
+        menuConsultas.add(jSeparator8);
+
+        itemCCurso.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        itemCCurso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/buscacurso30.png"))); // NOI18N
+        itemCCurso.setText("Consulta de Curso");
+        itemCCurso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemCCursoActionPerformed(evt);
+            }
+        });
+        menuConsultas.add(itemCCurso);
+        menuConsultas.add(jSeparator9);
+
+        itemCBibliotec.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        itemCBibliotec.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/buscabibliotecario30.png"))); // NOI18N
+        itemCBibliotec.setText("Consulta de Bibliotecário");
+        itemCBibliotec.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemCBibliotecActionPerformed(evt);
+            }
+        });
+        menuConsultas.add(itemCBibliotec);
+        menuConsultas.add(jSeparator10);
+
+        itemCUsuario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        itemCUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/buscausuario30.png"))); // NOI18N
+        itemCUsuario.setText("Consulta de Usuário");
+        itemCUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemCUsuarioActionPerformed(evt);
+            }
+        });
+        menuConsultas.add(itemCUsuario);
+        menuConsultas.add(jSeparator11);
+
         BarraDeMenu.add(menuConsultas);
 
         setJMenuBar(BarraDeMenu);
@@ -394,6 +525,42 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_itemUsuarioActionPerformed
 
+    private void btnCadastroUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroUsuarioActionPerformed
+        new CadastroUsuario(serv).setVisible(true);
+    }//GEN-LAST:event_btnCadastroUsuarioActionPerformed
+
+    private void itemCAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCAutorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_itemCAutorActionPerformed
+
+    private void itemCLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCLivroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_itemCLivroActionPerformed
+
+    private void itemCCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCCategoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_itemCCategoriaActionPerformed
+
+    private void itemCCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCCursoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_itemCCursoActionPerformed
+
+    private void itemCBibliotecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCBibliotecActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_itemCBibliotecActionPerformed
+
+    private void itemCUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_itemCUsuarioActionPerformed
+
+    private void itemEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemEmprestimoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_itemEmprestimoActionPerformed
+
+    private void itemReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemReservaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_itemReservaActionPerformed
+
    
     public static void main(String args[]) {
        
@@ -444,15 +611,32 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnReserva;
     private javax.swing.JMenuItem itemAutor;
     private javax.swing.JMenuItem itemBibliotec;
+    private javax.swing.JMenuItem itemCAutor;
+    private javax.swing.JMenuItem itemCBibliotec;
+    private javax.swing.JMenuItem itemCCategoria;
+    private javax.swing.JMenuItem itemCCurso;
+    private javax.swing.JMenuItem itemCLivro;
+    private javax.swing.JMenuItem itemCUsuario;
     private javax.swing.JMenuItem itemCategoria;
     private javax.swing.JMenuItem itemCurso;
+    private javax.swing.JMenuItem itemEmprestimo;
     private javax.swing.JMenuItem itemLivro;
+    private javax.swing.JMenuItem itemReserva;
     private javax.swing.JMenuItem itemUsuario;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator10;
+    private javax.swing.JPopupMenu.Separator jSeparator11;
+    private javax.swing.JPopupMenu.Separator jSeparator12;
+    private javax.swing.JPopupMenu.Separator jSeparator13;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
     private javax.swing.JPopupMenu.Separator jSeparator5;
+    private javax.swing.JPopupMenu.Separator jSeparator6;
+    private javax.swing.JPopupMenu.Separator jSeparator7;
+    private javax.swing.JPopupMenu.Separator jSeparator8;
+    private javax.swing.JPopupMenu.Separator jSeparator9;
+    private javax.swing.JMenu menuBiblioteca;
     private javax.swing.JMenu menuCadastros;
     private javax.swing.JMenu menuConsultas;
     private javax.swing.JPanel painel;
