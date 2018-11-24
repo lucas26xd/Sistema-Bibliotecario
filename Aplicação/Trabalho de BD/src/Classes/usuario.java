@@ -22,15 +22,20 @@ public class usuario {
         this.serv = serv;
     }
 
-    public void povoaCombo(JComboBox cb, String sql){
+    public ArrayList<String> povoaCombo(JComboBox cb, String sql){
         try{
             a = serv.Acao(sql);
+            ArrayList<String> cods = new ArrayList<>();
             if(a != null){
                 for (int i = 0; i < a.size(); i++) {
-                    cb.addItem(a.get(i));
+                    cods.add(a.get(i));
+                    cb.addItem(a.get(++i));
                 }
             }
-        }catch(IndexOutOfBoundsException ioob){}
+            return cods;
+        }catch(IndexOutOfBoundsException ioob){
+            return null;
+        }
     }
     
     public boolean autentica(String login, String senha){
@@ -100,7 +105,7 @@ public class usuario {
         try {
             ArrayList<String> a = serv.Acao("SELECT nome, login, endereco, tipo_usuario FROM usuarios "
                     + "WHERE nome LIKE '%" + nome + "%' AND tipo_usuario"
-                    + (tipo != null ? " <> 'administrador' AND tipo_usuario <> 'bibliotecario'" : " = '" + tipo + "'") + " GROUP BY tipo_usuario, nome, login, endereço ORDER BY nome ;");
+                    + (tipo != null ? " <> 'administrador' AND tipo_usuario <> 'bibliotecario'" : " = '" + tipo + "'") + " GROUP BY tipo_usuario, nome, login, endereco;");
             if (a != null) {
                 DefaultTableModel mod = (DefaultTableModel) jt.getModel();
                 mod.setNumRows(0);
@@ -113,7 +118,7 @@ public class usuario {
 
     public String cadastraUsuario(String login, String senha, String nome, String endereco, String tipo_usuario) {
         try {
-            if (serv.Acao("INSERT INTO usuarios VALUES ('DEFAULT', '" + login + "', '" + f.encripta(senha) + "', '" + nome + "', '" + endereco + "', '" + tipo_usuario + "');") != null) {
+            if (serv.Acao("INSERT INTO usuarios VALUES ('0', '" + login + "', '" + f.encripta(senha) + "', '" + nome + "', '" + endereco + "', '" + tipo_usuario + "');") != null) {
                 //JOptionPane.showMessageDialog(null, "Cadastrado com Sucesso");
                 try {Thread.sleep(100);} catch (InterruptedException ie) {}
                 return serv.Acao("SELECT MAX(id) FROM usuarios;").get(0);
@@ -234,7 +239,7 @@ public class usuario {
     
     public void consultaProfessor(String usuario_id, JTextField tfSiape, JTextField tfDataContratacao, JTextField tfCelular, JComboBox cbCurso, JComboBox cbRegime){
         try{
-            a = serv.Acao("SELECT mat_siape, data_contratacao, telefone_celular, regime_trabalho, nome_curso FROM (professor NATURAL JOIN curso) WHERE id_usuario = '"+usuario_id+"';");
+            a = serv.Acao("SELECT mat_siape, data_contratacao, telefone_celular, regime_trabalho, nome_curso FROM (professores NATURAL JOIN curso) WHERE id_usuario = '"+usuario_id+"';");
             tfSiape.setText(a.get(0));
             tfDataContratacao.setText(f.converteDataBD2J(a.get(1)));
             tfCelular.setText(a.get(2));

@@ -150,9 +150,11 @@ public class ConsultaUsuario extends javax.swing.JFrame {
     private void jtUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtUsuarioMouseClicked
         if(evt.getClickCount() >= 2){
             int row = jtUsuario.getSelectedRow();
-            if(emp != null){
+            if (emp != null) {
                 emp.setaValoresUsuario(user.pegaID(jtUsuario.getValueAt(row, 1)+""), jtUsuario.getValueAt(row, 0)+"", jtUsuario.getValueAt(row, 3)+"");
                 dispose();
+            } else {
+                new CadastroUsuario(serv, user.pegaID(jtUsuario.getValueAt(row, 1)+"")).setVisible(true);
             }
         }
     }//GEN-LAST:event_jtUsuarioMouseClicked

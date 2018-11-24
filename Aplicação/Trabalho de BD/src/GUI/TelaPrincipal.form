@@ -23,7 +23,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="400" max="32767" attributes="0"/>
+          <EmptySpace min="0" pref="450" max="32767" attributes="0"/>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Component id="painel" alignment="1" max="32767" attributes="0"/>
           </Group>
@@ -31,7 +31,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="308" max="32767" attributes="0"/>
+          <EmptySpace min="0" pref="395" max="32767" attributes="0"/>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Component id="painel" alignment="0" max="32767" attributes="0"/>
           </Group>
@@ -47,6 +47,11 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="btnCadastraAutores" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
+                          <Component id="btnConsultaAutor" min="-2" pref="141" max="-2" attributes="0"/>
+                      </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
                               <Component id="btnCadastraCurso" max="32767" attributes="0"/>
@@ -56,16 +61,12 @@
                           </Group>
                           <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="btnConsultaUsuarios" alignment="1" max="32767" attributes="0"/>
                               <Component id="btnConsultaLivros" max="32767" attributes="0"/>
                               <Component id="btnConsultaCategoria" max="32767" attributes="0"/>
                               <Component id="btnEmprestimo" max="32767" attributes="0"/>
-                              <Component id="btnEmprestimo1" max="32767" attributes="0"/>
+                              <Component id="btnReserva" max="32767" attributes="0"/>
                           </Group>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="btnCadastraAutores" max="32767" attributes="0"/>
-                          <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
-                          <Component id="btnConsultaAutor" min="-2" pref="141" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -90,7 +91,7 @@
                       <Component id="btnCadastraCategoria" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                       <Component id="btnConsultaCategoria" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="19" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnCadastraCurso" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                       <Component id="btnEmprestimo" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
@@ -98,9 +99,11 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnCadastraBibliotecario" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="btnEmprestimo1" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="btnReserva" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="btnConsultaUsuarios" min="-2" pref="40" max="-2" attributes="0"/>
+                  <EmptySpace pref="41" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -178,12 +181,20 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEmprestimoActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnEmprestimo1">
+        <Component class="javax.swing.JButton" name="btnReserva">
           <Properties>
             <Property name="text" type="java.lang.String" value="Reserva"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEmprestimo1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnReservaActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnConsultaUsuarios">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Consultar Usu&#xe1;rios"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConsultaUsuariosActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

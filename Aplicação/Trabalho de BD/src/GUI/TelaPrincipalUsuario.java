@@ -72,6 +72,7 @@ public class TelaPrincipalUsuario extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tela Principal");
+        setResizable(false);
 
         painel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -86,7 +87,7 @@ public class TelaPrincipalUsuario extends javax.swing.JFrame {
         boasVindas.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         boasVindas.setText("Seja Bem Vindo abcdef ghijk! Hoje é dia 22 de Novembro de 2018, 14:05:13");
 
-        img.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/principal.jpg"))); // NOI18N
 
         javax.swing.GroupLayout painelLayout = new javax.swing.GroupLayout(painel);
         painel.setLayout(painelLayout);
@@ -97,7 +98,7 @@ public class TelaPrincipalUsuario extends javax.swing.JFrame {
                 .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(img, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(painelLayout.createSequentialGroup()
-                        .addComponent(boasVindas, javax.swing.GroupLayout.DEFAULT_SIZE, 733, Short.MAX_VALUE)
+                        .addComponent(boasVindas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnLogout)))
                 .addContainerGap())
@@ -106,7 +107,7 @@ public class TelaPrincipalUsuario extends javax.swing.JFrame {
             painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(img, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
+                .addComponent(img, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnLogout)

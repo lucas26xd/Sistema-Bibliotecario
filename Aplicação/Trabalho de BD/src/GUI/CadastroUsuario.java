@@ -2,7 +2,9 @@ package GUI;
 
 import BD.Servicos;
 import Classes.usuario;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -13,6 +15,8 @@ public class CadastroUsuario extends javax.swing.JFrame {
     private Servicos serv;
     private usuario u;
     private String usuario_id = "";
+    private DefaultTableModel mod;
+    private ArrayList<String> cods;
     
     public CadastroUsuario(Servicos serv) {
         this.serv = serv;
@@ -44,13 +48,13 @@ public class CadastroUsuario extends javax.swing.JFrame {
         abas.setEnabled(false);
         
         if (tipo.equals("alunos")){
-            abas.setEnabledAt(0, true);
+            abas.setSelectedIndex(0);
             u.consultaAluno(usuario_id, tfMatrAluno, tfDataIngresso, tfDataConclusao, cbCursoAluno, jtTelefonesAlunos);
         } else if (tipo.equals("professores")){
-            abas.setEnabledAt(1, true);
+            abas.setSelectedIndex(1);
             u.consultaProfessor(usuario_id, tfMatSiape, tfDataContratacao, tfTelCelular, cbCursoProf, cbRegime);
         } else if (tipo.equals("funcionarios")){
-            abas.setEnabledAt(2, true);
+            abas.setSelectedIndex(2);
             u.consultaFuncionario(usuario_id, tfMatrFunc, jtTelefonesFunc);
         }
     }
@@ -58,10 +62,27 @@ public class CadastroUsuario extends javax.swing.JFrame {
     private CadastroUsuario(){}
     
     private void povoaCombos(){
-        u.povoaCombo(cbCursoAluno, "SELECT nome_curso FROM curso;");
+        cods = u.povoaCombo(cbCursoAluno, "SELECT * FROM curso;");
         for (int i = 0; i < cbCursoAluno.getItemCount(); i++) {
             cbCursoProf.addItem(cbCursoAluno.getItemAt(i));
         }
+    }
+    
+    private boolean camposPreenchidos(){
+        if (tfNome.getText().length() > 0 && tfEndereco.getText().length() > 0 && 
+            tfLogin.getText().length() > 0 && tfSenha.getText().length() > 0) {
+            switch (abas.getSelectedIndex()) {
+                case 0:
+                    return tfMatrAluno.getText().length() > 0 && tfDataIngresso.getText().length() > 0 &&
+                           tfDataConclusao.getText().length() > 0;
+                case 1:
+                    return tfMatSiape.getText().length() > 0 && tfDataContratacao.getText().length() > 0 &&
+                           tfTelCelular.getText().length() > 0;
+                default:
+                    return tfMatrFunc.getText().length() > 0;
+            }
+        } else
+            return false;
     }
     
     @SuppressWarnings("unchecked")
@@ -82,6 +103,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jtTelefonesAlunos = new javax.swing.JTable();
         btnMenosAluno = new javax.swing.JButton();
+        tfTelefoneAluno = new javax.swing.JTextField();
         tfDataIngresso = new javax.swing.JFormattedTextField();
         tfDataConclusao = new javax.swing.JFormattedTextField();
         cbCursoAluno = new javax.swing.JComboBox<>();
@@ -98,10 +120,12 @@ public class CadastroUsuario extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtTelefonesFunc = new javax.swing.JTable();
         btnMenosTelFunc = new javax.swing.JButton();
+        tfTelefoneFunc = new javax.swing.JTextField();
         btnApagar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Usuário");
+        setResizable(false);
 
         painel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -172,30 +196,43 @@ public class CadastroUsuario extends javax.swing.JFrame {
             }
         });
 
+        tfTelefoneAluno.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        tfTelefoneAluno.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Telefone", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnMaisTelAluno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnMenosAluno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(tfTelefoneAluno)
+                    .addComponent(jScrollPane2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnMaisTelAluno, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnMenosAluno, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
+
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnMaisTelAluno, btnMenosAluno});
+
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnMaisTelAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfTelefoneAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnMaisTelAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnMenosAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(24, 24, 24))
+                        .addComponent(btnMenosAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 71, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
         );
+
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnMaisTelAluno, btnMenosAluno});
 
         tfDataIngresso.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Data de Ingresso", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
         tfDataIngresso.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
@@ -239,7 +276,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
                     .addComponent(tfDataConclusao)
                     .addComponent(cbCursoAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -295,7 +332,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
                 .addGroup(painelProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(cbRegime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfTelCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(112, Short.MAX_VALUE))
+                .addContainerGap(142, Short.MAX_VALUE))
         );
 
         abas.addTab("Professor", painelProfessor);
@@ -346,13 +383,18 @@ public class CadastroUsuario extends javax.swing.JFrame {
             }
         });
 
+        tfTelefoneFunc.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        tfTelefoneFunc.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Telefone", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tfTelefoneFunc)
+                    .addComponent(jScrollPane1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnMaisTelFunc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -365,13 +407,15 @@ public class CadastroUsuario extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfTelefoneFunc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnMaisTelFunc, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnMaisTelFunc, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnMenosTelFunc, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnMenosTelFunc, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 79, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -394,8 +438,8 @@ public class CadastroUsuario extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(tfMatrFunc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         abas.addTab("Funcionário", painelFunc);
@@ -445,8 +489,8 @@ public class CadastroUsuario extends javax.swing.JFrame {
                     .addGroup(painelLayout.createSequentialGroup()
                         .addComponent(tfSenha)
                         .addGap(1, 1, 1)))
-                .addComponent(abas, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addComponent(abas)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn)
                     .addComponent(btnApagar))
@@ -468,30 +512,77 @@ public class CadastroUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActionPerformed
-        /*if(camposPreenchidos()){
-            if(btn.getText().equals("Alterar")){
-                autores.altera(tfNome.getText(), tfCPF.getText(), tfNacionalidade.getText());
-                dispose();
-            }else
-            autores.cadastra(tfNome.getText(), tfCPF.getText(), tfNacionalidade.getText());
-            limpar();
-        }*/
+        if(camposPreenchidos()){
+            if (btn.getText().equals("Alterar")) {
+                if(u.alteraUsuario(usuario_id, tfNome.getText(), tfEndereco.getText(), tfSenha.getText())) {
+                    switch (abas.getSelectedIndex()) {
+                        case 0:
+                            u.alteraTelefonesAluno(usuario_id, jtTelefonesAlunos);
+                            break;
+                        case 1:
+                            u.alteraProfessor(usuario_id, tfTelCelular.getText());
+                            break;
+                        case 2:
+                            u.alteraTelefonesFuncionario(usuario_id, jtTelefonesFunc);
+                            break;
+                    }
+                }   
+            } else {
+                String tipoUser = (abas.getSelectedIndex() == 0 ? "alunos" : abas.getSelectedIndex() == 1 ? "professores" : "funcionarios");
+                usuario_id = u.cadastraUsuario(tfLogin.getText(), tfSenha.getText(), tfNome.getText(), tfEndereco.getText(), tipoUser);
+                switch (abas.getSelectedIndex()) {
+                    case 0:
+                        u.cadatraAluno(usuario_id, tfMatrAluno.getText(), tfDataIngresso.getText(), tfDataConclusao.getText(), cods.get(cbCursoAluno.getSelectedIndex()), jtTelefonesAlunos);
+                        break;
+                    case 1:
+                        u.cadatraProfessor(usuario_id, tfMatSiape.getText(), tfTelCelular.getText(), cbRegime.getSelectedItem()+"", tfDataContratacao.getText(), cods.get(cbCursoProf.getSelectedIndex()));
+                        break;
+                    case 2:
+                        u.cadatraFuncionario(usuario_id, tfMatrFunc.getText(), jtTelefonesFunc);
+                        break;
+                }
+            }
+            dispose();
+        } else
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos corretamente!", "Campos obrigatórios", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_btnActionPerformed
 
     private void btnMaisTelFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMaisTelFuncActionPerformed
-        //new ConsultaAutores(serv, this).setVisible(true);
+        if (tfTelefoneFunc.getText().length() >= 8) {
+            mod = (DefaultTableModel) jtTelefonesFunc.getModel();
+            mod.addRow(new Object[]{tfTelefoneFunc.getText()});
+            tfTelefoneFunc.setText("");
+        }
     }//GEN-LAST:event_btnMaisTelFuncActionPerformed
 
     private void btnMenosTelFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenosTelFuncActionPerformed
-        //apagaLinhaAutor();
+        if (jtTelefonesFunc.getRowCount() > 0){
+            mod = (DefaultTableModel) jtTelefonesFunc.getModel();
+            int row = jtTelefonesFunc.getSelectedRow();
+            if (row == -1)
+                mod.removeRow(mod.getRowCount() - 1);
+            else
+                mod.removeRow(row);
+        }
     }//GEN-LAST:event_btnMenosTelFuncActionPerformed
 
     private void btnMaisTelAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMaisTelAlunoActionPerformed
-        // TODO add your handling code here:
+        if (tfTelefoneAluno.getText().length() >= 8) {
+            mod = (DefaultTableModel) jtTelefonesAlunos.getModel();
+            mod.addRow(new Object[]{tfTelefoneAluno.getText()});
+            tfTelefoneAluno.setText("");
+        }
     }//GEN-LAST:event_btnMaisTelAlunoActionPerformed
 
     private void btnMenosAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenosAlunoActionPerformed
-        // TODO add your handling code here:
+        if (jtTelefonesAlunos.getRowCount() > 0){
+            mod = (DefaultTableModel) jtTelefonesAlunos.getModel();
+            int row = jtTelefonesAlunos.getSelectedRow();
+            if (row == -1)
+                mod.removeRow(mod.getRowCount() - 1);
+            else
+                mod.removeRow(row);
+        }
     }//GEN-LAST:event_btnMenosAlunoActionPerformed
 
     private void btnApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarActionPerformed
@@ -525,7 +616,6 @@ public class CadastroUsuario extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(CadastroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -567,5 +657,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
     private javax.swing.JTextField tfNome;
     private javax.swing.JPasswordField tfSenha;
     private javax.swing.JTextField tfTelCelular;
+    private javax.swing.JTextField tfTelefoneAluno;
+    private javax.swing.JTextField tfTelefoneFunc;
     // End of variables declaration//GEN-END:variables
 }
