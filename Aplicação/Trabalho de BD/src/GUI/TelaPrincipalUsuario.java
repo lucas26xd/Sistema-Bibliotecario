@@ -67,6 +67,8 @@ public class TelaPrincipalUsuario extends javax.swing.JFrame {
         barra_menu = new javax.swing.JMenuBar();
         biblioteca = new javax.swing.JMenu();
         reserva = new javax.swing.JMenuItem();
+        professores = new javax.swing.JMenuItem();
+        livros = new javax.swing.JMenuItem();
         configuracao = new javax.swing.JMenu();
         configUser = new javax.swing.JMenuItem();
 
@@ -107,8 +109,8 @@ public class TelaPrincipalUsuario extends javax.swing.JFrame {
             painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(img, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addComponent(img, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnLogout)
                     .addComponent(boasVindas, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -126,6 +128,24 @@ public class TelaPrincipalUsuario extends javax.swing.JFrame {
             }
         });
         biblioteca.add(reserva);
+
+        professores.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
+        professores.setText("Consulta Professores");
+        professores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                professoresActionPerformed(evt);
+            }
+        });
+        biblioteca.add(professores);
+
+        livros.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
+        livros.setText("Consulta Livros");
+        livros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                livrosActionPerformed(evt);
+            }
+        });
+        biblioteca.add(livros);
 
         barra_menu.add(biblioteca);
 
@@ -174,6 +194,14 @@ public class TelaPrincipalUsuario extends javax.swing.JFrame {
         new CadastroUsuario(serv, usuario_id).setVisible(true);
     }//GEN-LAST:event_configUserActionPerformed
 
+    private void professoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_professoresActionPerformed
+        new ConsultaProfbyCurso(serv).setVisible(true);
+    }//GEN-LAST:event_professoresActionPerformed
+
+    private void livrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_livrosActionPerformed
+        new ConsultaViewLivros(serv).setVisible(true);
+    }//GEN-LAST:event_livrosActionPerformed
+
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -213,7 +241,9 @@ public class TelaPrincipalUsuario extends javax.swing.JFrame {
     private javax.swing.JMenuItem configUser;
     private javax.swing.JMenu configuracao;
     private javax.swing.JLabel img;
+    private javax.swing.JMenuItem livros;
     private javax.swing.JPanel painel;
+    private javax.swing.JMenuItem professores;
     private javax.swing.JMenuItem reserva;
     // End of variables declaration//GEN-END:variables
 }
