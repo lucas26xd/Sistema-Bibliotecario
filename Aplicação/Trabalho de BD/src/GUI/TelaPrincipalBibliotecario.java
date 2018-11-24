@@ -202,7 +202,7 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void reservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reservaActionPerformed
-        //new ConsultaLivros(serv, true, usuario_id).setVisible(true);
+        new Reserva(serv).setVisible(true);
     }//GEN-LAST:event_reservaActionPerformed
 
     private void configUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configUserActionPerformed

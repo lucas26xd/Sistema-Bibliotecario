@@ -7,42 +7,22 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author lucas, arquivo criado dia 15/11/2018 às 17:44:16
+ * @author lucas, arquivo criado dia 24/11/2018 às 17:50:28
  */
-public class Emprestimo extends javax.swing.JFrame {
+public class Reserva extends javax.swing.JFrame {
 
     private Servicos serv;
     private emprestimo emp;
     private String usuario_id;
-    
-    public Emprestimo(Servicos serv) {
+    public Reserva(Servicos serv) {
         this.serv = serv;
         emp = new emprestimo(serv);
         
         initComponents();
         setLocationRelativeTo(null);
-        
-        tfData.setText(new funcoes().pegaDataAtual());
     }
 
-    private Emprestimo(){}
-    
-    public void setaValoresUsuario(String user_id, String nome, String tipo){
-        tfNome.setText(nome);
-        tfTipo.setText(tipo);
-        usuario_id = user_id;
-        tfDataEntrega.setText(emp.calculaDataEntrega(usuario_id, tfData.getText()));
-        
-        if(emp.qtdLivrosDisponiveis(tfISBN.getText()) <= emp.qtdReserva(tfISBN.getText())){
-            if(!emp.noRanking(usuario_id, tfISBN.getText(), tfQtdDisponiveis.getText())){
-                JOptionPane.showMessageDialog(null, "Este livro não pode ser emprestado para este usuário, pois o mesmo já foi reservado por outros alunos primeiro!", "Livro já foi reservado", JOptionPane.ERROR_MESSAGE);
-                if(!emp.usuarioReservou(usuario_id, tfISBN.getText())){
-                    if(JOptionPane.showConfirmDialog(null, "Deseja realizar a reservar este livro "+tfNome.getText()+"?") == JOptionPane.OK_OPTION)
-                        emp.cadastraReserva(usuario_id, tfISBN.getText(), tfData.getText());
-                }
-            }
-        }
-    }
+    private Reserva(){}
     
     public void pesquisa(String isbn){
         tfISBN.setText(isbn);
@@ -56,18 +36,17 @@ public class Emprestimo extends javax.swing.JFrame {
         tfNome.setEnabled(true);
     }
     
-    private void limpar(){
-        tfDataEntrega.setText("");
-        tfISBN.setText("");
-        tfNome.setText("");
-        tfQtdDisponiveis.setText("");
-        tfQtdEmprestados.setText("");
-        tfQtdReservados.setText("");
-        tfQtdCopias.setText("");
-        tfTipo.setText("");
-        tfTitulo.setText("");
-        tfNome.setEnabled(false);
-        usuario_id = "";
+    public void setaValoresUsuario(String user_id, String nome, String tipo){
+        if (!emp.usuarioReservou(usuario_id, tfISBN.getText())){
+            tfNome.setText(nome);
+            tfTipo.setText(tipo);
+            usuario_id = user_id;
+        } else {
+            JOptionPane.showMessageDialog(null, "Usuário já reservou este livro!", "Livro já reservado!", JOptionPane.ERROR_MESSAGE);
+            usuario_id = "";
+            tfNome.setText("");
+            tfTipo.setText("");
+        }
     }
     
     @SuppressWarnings("unchecked")
@@ -80,15 +59,13 @@ public class Emprestimo extends javax.swing.JFrame {
         tfQtdDisponiveis = new javax.swing.JTextField();
         tfNome = new javax.swing.JTextField();
         tfTipo = new javax.swing.JTextField();
-        tfDataEntrega = new javax.swing.JTextField();
         btnCadastrar = new javax.swing.JButton();
-        tfData = new javax.swing.JTextField();
         tfQtdEmprestados = new javax.swing.JTextField();
         tfQtdReservados = new javax.swing.JTextField();
         tfQtdCopias = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Empréstimo de Livros");
+        setTitle("Cadastro de Reservas");
         setResizable(false);
 
         painel.setBackground(new java.awt.Color(255, 255, 255));
@@ -133,11 +110,6 @@ public class Emprestimo extends javax.swing.JFrame {
         tfTipo.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         tfTipo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tipo do Usuário", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
 
-        tfDataEntrega.setEditable(false);
-        tfDataEntrega.setBackground(new java.awt.Color(255, 255, 255));
-        tfDataEntrega.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        tfDataEntrega.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Data de Entrega", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
-
         btnCadastrar.setBackground(new java.awt.Color(255, 255, 255));
         btnCadastrar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/ok30.png"))); // NOI18N
@@ -148,11 +120,6 @@ public class Emprestimo extends javax.swing.JFrame {
                 btnCadastrarActionPerformed(evt);
             }
         });
-
-        tfData.setEditable(false);
-        tfData.setBackground(new java.awt.Color(255, 255, 255));
-        tfData.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        tfData.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Data", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
 
         tfQtdEmprestados.setEditable(false);
         tfQtdEmprestados.setBackground(new java.awt.Color(255, 255, 255));
@@ -178,10 +145,6 @@ public class Emprestimo extends javax.swing.JFrame {
                 .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnCadastrar)
                     .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(painelLayout.createSequentialGroup()
-                            .addComponent(tfData, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(tfDataEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, painelLayout.createSequentialGroup()
                             .addComponent(tfISBN, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
@@ -217,11 +180,7 @@ public class Emprestimo extends javax.swing.JFrame {
                 .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfDataEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
+                .addGap(30, 30, 30)
                 .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -242,44 +201,25 @@ public class Emprestimo extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        if(tfDataEntrega.getText().length() > 0)
-            if(!tfQtdDisponiveis.getText().equals("0")){
-                if(emp.qtdLivrosDisponiveis(tfISBN.getText())> emp.qtdReserva(tfISBN.getText())){
-                    emp.cadastra(usuario_id, tfISBN.getText(), tfData.getText(), tfDataEntrega.getText());
-                    if(emp.usuarioReservou(usuario_id, tfISBN.getText()))
-                        emp.atendeReserva(usuario_id, tfISBN.getText());
-                }else{
-                    if(emp.noRanking(usuario_id, tfISBN.getText(), tfQtdDisponiveis.getText())){
-                        emp.cadastra(usuario_id, tfISBN.getText(), tfData.getText(), tfDataEntrega.getText());
-                        emp.atendeReserva(usuario_id, tfISBN.getText());
-                    }else{
-                        JOptionPane.showMessageDialog(null, "Este livro não pode ser emprestado para este usuário, pois o mesmo já foi reservado por outros alunos primeiro!", "Livro já foi reservado", JOptionPane.ERROR_MESSAGE);
-                        if(!emp.usuarioReservou(usuario_id, tfISBN.getText())){
-                            if(JOptionPane.showConfirmDialog(null, "Deseja realizar a reservar este livro "+tfNome.getText()+"?") == JOptionPane.OK_OPTION)
-                                emp.cadastraReserva(usuario_id, tfISBN.getText(), tfData.getText());
-                        }
-                    }
-                }
-                limpar();
-            }else
-                JOptionPane.showMessageDialog(null, "Este livro não pode ser emprestado, pois não há nenhum exemplar disponível!", "Livro já foi reservado", JOptionPane.ERROR_MESSAGE);
-        else
-            JOptionPane.showMessageDialog(null, "Preencha todos os campos corretamente!", "Campos Obrigatórios", JOptionPane.WARNING_MESSAGE);
-    }//GEN-LAST:event_btnCadastrarActionPerformed
-
     private void tfISBNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfISBNActionPerformed
         pesquisa(tfISBN.getText());
     }//GEN-LAST:event_tfISBNActionPerformed
+
+    private void tfTituloMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfTituloMouseClicked
+        new ConsultaLivros(this, serv).setVisible(true);
+    }//GEN-LAST:event_tfTituloMouseClicked
 
     private void tfNomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfNomeMouseClicked
         if(tfNome.isEnabled())
             new ConsultaUsuario(this, serv).setVisible(true);
     }//GEN-LAST:event_tfNomeMouseClicked
 
-    private void tfTituloMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfTituloMouseClicked
-        new ConsultaLivros(this, serv).setVisible(true);
-    }//GEN-LAST:event_tfTituloMouseClicked
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        if (tfISBN.getText().length() > 0 && tfTipo.getText().length() > 0) {
+            emp.cadastraReserva(usuario_id, tfISBN.getText(), new funcoes().pegaDataAtual());
+        } else
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos corretamente!", "Campos Obrigatórios", JOptionPane.ERROR_MESSAGE);
+    }//GEN-LAST:event_btnCadastrarActionPerformed
 
     public static void main(String args[]) {
 
@@ -295,19 +235,19 @@ public class Emprestimo extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Emprestimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Reserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Emprestimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Reserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Emprestimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Reserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Emprestimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Reserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Emprestimo().setVisible(true);
+                new Reserva().setVisible(true);
             }
         });
     }
@@ -315,8 +255,6 @@ public class Emprestimo extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JPanel painel;
-    private javax.swing.JTextField tfData;
-    private javax.swing.JTextField tfDataEntrega;
     private javax.swing.JTextField tfISBN;
     private javax.swing.JTextField tfNome;
     private javax.swing.JTextField tfQtdCopias;

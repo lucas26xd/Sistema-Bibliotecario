@@ -16,6 +16,7 @@ public class ConsultaLivros extends javax.swing.JFrame {
     private Servicos serv;
     private livros livros;
     private Emprestimo emp;
+    private Reserva res;
     private ArrayList<String> codsCategoria;
     private int index;
     private boolean reserva = false;
@@ -30,8 +31,7 @@ public class ConsultaLivros extends javax.swing.JFrame {
 
         codsCategoria = livros.povoaCategorias(cbCategoria);
 
-        //index = cbCategoria.getSelectedIndex();
-        //livros.consulta(jtLivros, tfISBN.getText(), tfTitulo.getText(), tfAno.getText(), tfEditora.getText(), tfQntdCopias.getText(), (index == -1 ? "" : codsCategoria.get(index)), tfAutor.getText());
+        consulta();
     }
 
     public ConsultaLivros(Emprestimo emp, Servicos serv) {
@@ -43,6 +43,21 @@ public class ConsultaLivros extends javax.swing.JFrame {
         setLocationRelativeTo(null);
 
         codsCategoria = livros.povoaCategorias(cbCategoria);
+        
+        consulta();
+    }
+    
+    public ConsultaLivros(Reserva res, Servicos serv) {
+        this.serv = serv;
+        livros = new livros(serv);
+        this.res = res;
+
+        initComponents();
+        setLocationRelativeTo(null);
+
+        codsCategoria = livros.povoaCategorias(cbCategoria);
+        
+        consulta();
     }
     
     public ConsultaLivros(Servicos serv, boolean reserva, String usuario_id) {
@@ -55,15 +70,16 @@ public class ConsultaLivros extends javax.swing.JFrame {
         setLocationRelativeTo(null);
 
         codsCategoria = livros.povoaCategorias(cbCategoria);
+        
+        consulta();
     }
 
-    private ConsultaLivros() {
-    }
+    private ConsultaLivros() {}
 
     public void consulta() {
         try{
             index = cbCategoria.getSelectedIndex();
-            livros.consulta(jtLivros, tfISBN.getText(), tfTitulo.getText(), tfAno.getText(), tfEditora.getText(), tfQntdCopias.getText(), (index == -1 ? "" : codsCategoria.get(index)), tfAutor.getText());
+            livros.consultaView(jtLivros, tfISBN.getText(), tfTitulo.getText(), tfAno.getText(), tfEditora.getText(), tfQntdCopias.getText(), (index == -1 ? "" : codsCategoria.get(index)), tfAutor.getText());
         } catch (NullPointerException npe) {}
     }
 
@@ -107,11 +123,11 @@ public class ConsultaLivros extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ISBN", "Titulo", "Ano", "Editora", "Cópias", "Categoria"
+                "ISBN", "Titulo", "Ano", "Editora", "Cópias", "Emprestados", "Reservas", "Categoria"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -193,7 +209,7 @@ public class ConsultaLivros extends javax.swing.JFrame {
                     .addComponent(jScrollPane1)
                     .addGroup(painelLayout.createSequentialGroup()
                         .addComponent(tfAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 209, Short.MAX_VALUE)
                         .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(painelLayout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -201,12 +217,12 @@ public class ConsultaLivros extends javax.swing.JFrame {
                             .addComponent(cbCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(tfTitulo)
                     .addGroup(painelLayout.createSequentialGroup()
-                        .addComponent(tfISBN, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(tfAno, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(tfQntdCopias, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(tfISBN)
+                        .addGap(18, 18, 18)
+                        .addComponent(tfAno, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(tfQntdCopias, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(tfEditora, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(28, 28, 28))
         );
@@ -221,13 +237,13 @@ public class ConsultaLivros extends javax.swing.JFrame {
                     .addComponent(tfEditora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19)
                 .addComponent(tfTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addGap(0, 0, 0)
                 .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tfAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(13, 13, 13))
         );
@@ -247,24 +263,6 @@ public class ConsultaLivros extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jtLivrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtLivrosMouseClicked
-        if (evt.getClickCount() >= 2) {
-            int row = jtLivros.getSelectedRow();
-            if (emp != null) {
-                emp.pesquisa(jtLivros.getValueAt(row, 0) + "");
-                dispose();
-            } else if(reserva){
-                if(JOptionPane.showConfirmDialog(null, "Deseja realemnte raservar este livro?", "Confirmar reserva?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
-                    emprestimo emp = new emprestimo(serv);
-                    emp.cadastraReserva(usuario_id, jtLivros.getValueAt(row, 0) + "", new funcoes().pegaDataAtual());
-                    limpar();
-                    consulta();
-                }
-            }else
-                new CadastroLivros(this, serv, jtLivros.getValueAt(row, 0) + "", jtLivros.getValueAt(row, 1) + "", jtLivros.getValueAt(row, 2) + "", jtLivros.getValueAt(row, 3) + "", jtLivros.getValueAt(row, 4) + "", jtLivros.getValueAt(row, 5) + "").setVisible(true);
-        }
-    }//GEN-LAST:event_jtLivrosMouseClicked
 
     private void tfAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfAutorActionPerformed
         consulta();
@@ -289,6 +287,26 @@ public class ConsultaLivros extends javax.swing.JFrame {
     private void tfEditoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfEditoraActionPerformed
         consulta();
     }//GEN-LAST:event_tfEditoraActionPerformed
+
+    private void jtLivrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtLivrosMouseClicked
+        if (evt.getClickCount() >= 2) {
+            int row = jtLivros.getSelectedRow();
+            if (emp != null) {
+                emp.pesquisa(jtLivros.getValueAt(row, 0) + "");
+                dispose();
+            } else if (res != null) {
+                res.pesquisa(jtLivros.getValueAt(row, 0) + "");
+                dispose();
+            } else if(reserva){
+                if(JOptionPane.showConfirmDialog(null, "Deseja realmente reservar este livro?", "Confirmar reserva?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+                    new emprestimo(serv).cadastraReserva(usuario_id, jtLivros.getValueAt(row, 0) + "", new funcoes().pegaDataAtual());
+                    limpar();
+                    consulta();
+                }
+            }else
+                new CadastroLivros(this, serv, jtLivros.getValueAt(row, 0) + "", jtLivros.getValueAt(row, 1) + "", jtLivros.getValueAt(row, 2) + "", jtLivros.getValueAt(row, 3) + "", jtLivros.getValueAt(row, 4) + "", jtLivros.getValueAt(row, 7) + "").setVisible(true);
+        }
+    }//GEN-LAST:event_jtLivrosMouseClicked
 
     public static void main(String args[]) {
 

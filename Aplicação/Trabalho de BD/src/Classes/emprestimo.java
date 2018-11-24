@@ -132,6 +132,14 @@ public class emprestimo {
             JOptionPane.showMessageDialog(null, "Apagado com Sucesso!");
     }
 
+    public String qtdCopiasLivros(String isbn){
+        try{
+            return serv.Acao("SELECT qtd_copias FROM livros WHERE isbn = '" + isbn + "';").get(0);
+        }catch (IndexOutOfBoundsException ioob){
+            return "0";
+        }
+    }
+    
     public int qtdLivrosDisponiveis(String isbn) {
         try {
             return Integer.parseInt(serv.Acao("SELECT (SELECT qtd_copias FROM livros WHERE isbn = '" + isbn + "') - COUNT(*) FROM emprestimo WHERE entregue = 'Não' AND isbn_livro = '" + isbn + "';").get(0));
@@ -139,7 +147,15 @@ public class emprestimo {
             return 0;
         }
     }
-
+    
+    public String qtdLivrosEmprestados(String isbn){
+        try{
+            return serv.Acao("SELECT COUNT(*) FROM emprestimo WHERE entregue = 'Não' AND isbn_livro = '" + isbn + "';").get(0);
+        }catch (IndexOutOfBoundsException ioob){
+            return "0";
+        }            
+    }
+    
     public String tituloLivro(String isbn) {
         try {
             return serv.Acao("SELECT titulo FROM livros WHERE isbn = '" + isbn + "';").get(0);
