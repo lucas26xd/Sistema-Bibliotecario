@@ -147,7 +147,7 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
         biblioteca.add(reserva);
 
         consultaReserva.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        consultaReserva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/reserva30.png"))); // NOI18N
+        consultaReserva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/buscareserva30.png"))); // NOI18N
         consultaReserva.setText("Consulta de Reserva");
         consultaReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -189,7 +189,7 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
         biblioteca.add(emprestimos);
 
         consultaEmprestimos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        consultaEmprestimos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/emprestimo30.png"))); // NOI18N
+        consultaEmprestimos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/buscaemprestimo30.png"))); // NOI18N
         consultaEmprestimos.setText("Consultar Empréstimos");
         consultaEmprestimos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

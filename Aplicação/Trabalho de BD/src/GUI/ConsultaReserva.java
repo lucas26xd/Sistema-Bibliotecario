@@ -31,7 +31,7 @@ public class ConsultaReserva extends javax.swing.JFrame {
     }
 
     private void setIcon() {
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagens/emprestimo70.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagens/buscareserva70.png")));
     }
     
     private ConsultaReserva(){}
@@ -219,7 +219,7 @@ public class ConsultaReserva extends javax.swing.JFrame {
             }
         });
 
-        tfDataInicial.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Data Final", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
+        tfDataInicial.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Data Inicial", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
         tfDataInicial.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 tfDataInicialPropertyChange(evt);
