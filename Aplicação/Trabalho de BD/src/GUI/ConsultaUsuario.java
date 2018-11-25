@@ -23,7 +23,7 @@ public class ConsultaUsuario extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         
-        user.consulta(jtUsuario, tfNome.getText(), cbTipo.getSelectedItem()+"");
+        consulta();
         
         setIcon();
     }
@@ -36,7 +36,7 @@ public class ConsultaUsuario extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         
-        user.consulta(jtUsuario, tfNome.getText(), cbTipo.getSelectedItem()+"");
+        consulta();
         
         setIcon();
     }
@@ -48,7 +48,7 @@ public class ConsultaUsuario extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         
-        user.consulta(jtUsuario, tfNome.getText(), cbTipo.getSelectedItem()+"");
+        consulta();
         
         setIcon();
     }
@@ -58,6 +58,22 @@ public class ConsultaUsuario extends javax.swing.JFrame {
     }
     
     private ConsultaUsuario(){}
+    
+    private void consulta () {
+        String tipo = "";
+        switch (cbTipo.getSelectedIndex()) {
+            case 0:
+                tipo = "alunos";
+                break;
+            case 1:
+                tipo = "professores";
+                break;
+            case 2:
+                tipo = "funcionarios";
+                break;
+        }
+        user.consulta(jtUsuario, tfNome.getText(), tipo);
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -116,11 +132,6 @@ public class ConsultaUsuario extends javax.swing.JFrame {
         cbTipo.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbTipoItemStateChanged(evt);
-            }
-        });
-        cbTipo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbTipoActionPerformed(evt);
             }
         });
 
@@ -184,11 +195,11 @@ public class ConsultaUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbTipoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbTipoItemStateChanged
-        user.consulta(jtUsuario, tfNome.getText(), cbTipo.getSelectedItem()+"");
+        consulta();
     }//GEN-LAST:event_cbTipoItemStateChanged
 
     private void tfNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNomeActionPerformed
-        user.consulta(jtUsuario, tfNome.getText(), cbTipo.getSelectedItem()+"");
+        consulta();
     }//GEN-LAST:event_tfNomeActionPerformed
 
     private void jtUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtUsuarioMouseClicked
@@ -205,10 +216,6 @@ public class ConsultaUsuario extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jtUsuarioMouseClicked
-
-    private void cbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbTipoActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         dispose();

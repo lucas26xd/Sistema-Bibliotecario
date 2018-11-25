@@ -132,7 +132,7 @@ public class TelaLogin extends javax.swing.JFrame {
         if(user.autentica(tfLogin.getText(), tfSenha.getText())){
             if (user.pegaTipo(user.pegaID(tfLogin.getText())).matches("alunos|professores|funcionarios"))
                 new TelaPrincipalUsuario(serv, user.pegaID(tfLogin.getText())).setVisible(true);
-            if (user.pegaTipo(user.pegaID(tfLogin.getText())).matches("bibliotecario"))
+            else if (user.pegaTipo(user.pegaID(tfLogin.getText())).matches("bibliotecario"))
                 new TelaPrincipalBibliotecario(serv, user.pegaID(tfLogin.getText())).setVisible(true);
             else
                 new TelaPrincipal(serv, user.pegaID(tfLogin.getText())).setVisible(true);

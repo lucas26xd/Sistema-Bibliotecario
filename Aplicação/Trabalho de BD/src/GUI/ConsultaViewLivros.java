@@ -19,6 +19,7 @@ public class ConsultaViewLivros extends javax.swing.JFrame {
         views = new buscarbyViews(serv);
         
         initComponents();
+        setLocationRelativeTo(null);
         
         views.povoaCombo(cbCategoria, "SELECT descricao FROM categorias;");
         cbCategoria.setSelectedIndex(-1);

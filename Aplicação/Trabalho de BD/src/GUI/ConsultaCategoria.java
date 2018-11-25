@@ -21,7 +21,7 @@ public class ConsultaCategoria extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         
-        categorias.consulta(jtCategorias, tfCodigo.getText(), tfDescricao.getText());
+        consulta();
         
         setIcon();
     }
@@ -32,6 +32,10 @@ public class ConsultaCategoria extends javax.swing.JFrame {
     
     private ConsultaCategoria(){}
 
+    public void consulta(){
+        categorias.consulta(jtCategorias, tfCodigo.getText(), tfDescricao.getText());
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -43,8 +47,10 @@ public class ConsultaCategoria extends javax.swing.JFrame {
         jtCategorias = new javax.swing.JTable();
         btnVoltar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Consulta de Categoria");
         setBackground(new java.awt.Color(255, 255, 255));
+        setResizable(false);
 
         painel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -78,6 +84,11 @@ public class ConsultaCategoria extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        jtCategorias.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtCategoriasMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(jtCategorias);
@@ -144,25 +155,25 @@ public class ConsultaCategoria extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jtCategoriasMouseClicked(java.awt.event.MouseEvent evt) {
-        if (evt.getClickCount() >= 2) {
-            int row = jtCategorias.getSelectedRow(); //Parei AQUI
-            new CadastroCategorias(serv, jtCategorias.getValueAt(row, 0) + "", jtCategorias.getValueAt(row, 1) + "").setVisible(true);
-        }
-    }   
     
     private void tfCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCodigoActionPerformed
-       categorias.consulta(jtCategorias, tfCodigo.getText(), tfDescricao.getText());
+       consulta();
     }//GEN-LAST:event_tfCodigoActionPerformed
 
     private void tfDescricaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfDescricaoActionPerformed
-       categorias.consulta(jtCategorias, tfCodigo.getText(), tfDescricao.getText());
+       consulta();
     }//GEN-LAST:event_tfDescricaoActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void jtCategoriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtCategoriasMouseClicked
+        if (evt.getClickCount() >= 2) {
+            int row = jtCategorias.getSelectedRow(); //Parei AQUI
+            new CadastroCategorias(serv, this, jtCategorias.getValueAt(row, 0) + "", jtCategorias.getValueAt(row, 1) + "").setVisible(true);
+        }
+    }//GEN-LAST:event_jtCategoriasMouseClicked
 
    
     public static void main(String args[]) {

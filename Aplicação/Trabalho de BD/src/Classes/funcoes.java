@@ -46,4 +46,17 @@ public class funcoes {
         int y = Integer.parseInt(data.substring(0, 4)) - 1900, m = Integer.parseInt(data.substring(data.indexOf("-") + 1, data.lastIndexOf("-"))) - 1, d = Integer.parseInt(data.substring(data.lastIndexOf("-") + 1));
         return new SimpleDateFormat("dd/MM/yyyy").format(new Date(y, m, d));
     }
+    
+    public String mascaraCPF(String cpf1) {
+        String cpf2 = "";
+        for (int i = 0; i < cpf1.length(); i++) {
+            if (i == 3 || i == 6) {
+                cpf2 += ".";
+            } else if (i == 9) {
+                cpf2 += "-";
+            }
+            cpf2 += cpf1.charAt(i);
+        }
+        return cpf2;
+    }
 }

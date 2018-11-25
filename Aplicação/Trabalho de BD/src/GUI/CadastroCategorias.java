@@ -14,6 +14,7 @@ public class CadastroCategorias extends javax.swing.JFrame {
     private Servicos serv;
     private categorias categorias;
     private CadastroLivros cadastraLivros;
+    private ConsultaCategoria cc;
     
     public CadastroCategorias(Servicos serv) {
         this.serv = serv;
@@ -36,8 +37,9 @@ public class CadastroCategorias extends javax.swing.JFrame {
         setIcon();
     }
     
-    public CadastroCategorias(Servicos serv, String codigo, String descricao) {
+    public CadastroCategorias(Servicos serv, ConsultaCategoria cc, String codigo, String descricao) {
         this.serv = serv;
+        this.cc = cc;
         categorias = new categorias(serv);
         
         initComponents();
@@ -164,8 +166,13 @@ public class CadastroCategorias extends javax.swing.JFrame {
             if(cadastraLivros != null){
                 dispose();
                 cadastraLivros.povoaCombo();
+            } else if (cc != null) {
+                dispose();
+                cc.consulta();
             }
         }
+        tfCod.setText("");
+        tfNome.setText("");
     }//GEN-LAST:event_btnActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed

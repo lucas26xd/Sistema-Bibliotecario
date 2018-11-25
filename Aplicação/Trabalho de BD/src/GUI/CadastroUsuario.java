@@ -45,6 +45,8 @@ public class CadastroUsuario extends javax.swing.JFrame {
         btn.setText("Alterar");
         btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/editar.png")));
         
+        desabilitaCampos();
+        
         povoaCombos();
         
         String tipo = u.consultaUsuario(usuario_id, tfNome, tfEndereco, tfLogin);
@@ -93,6 +95,19 @@ public class CadastroUsuario extends javax.swing.JFrame {
             }
         } else
             return false;
+    }
+    
+    private void desabilitaCampos(){
+        tfLogin.setEditable(false);
+        tfMatrAluno.setEditable(false);
+        tfMatrFunc.setEditable(false);
+        tfMatSiape.setEditable(false);
+        tfDataIngresso.setEditable(false);
+        tfDataConclusao.setEditable(false);
+        tfDataContratacao.setEditable(false);
+        cbCursoAluno.setEnabled(false);
+        cbCursoProf.setEnabled(false);
+        cbRegime.setEnabled(false);
     }
     
     @SuppressWarnings("unchecked")
@@ -538,6 +553,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActionPerformed
+        boolean b = true;
         if(camposPreenchidos()){
             if (btn.getText().equals("Alterar")) {
                 if(u.alteraUsuario(usuario_id, tfNome.getText(), tfEndereco.getText(), tfSenha.getText())) {
@@ -558,7 +574,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
                 usuario_id = u.cadastraUsuario(tfLogin.getText(), tfSenha.getText(), tfNome.getText(), tfEndereco.getText(), tipoUser);
                 switch (abas.getSelectedIndex()) {
                     case 0:
-                        u.cadatraAluno(usuario_id, tfMatrAluno.getText(), tfDataIngresso.getText(), tfDataConclusao.getText(), cods.get(cbCursoAluno.getSelectedIndex()), jtTelefonesAlunos);
+                        b = u.cadatraAluno(usuario_id, tfMatrAluno.getText(), tfDataIngresso.getText(), tfDataConclusao.getText(), cods.get(cbCursoAluno.getSelectedIndex()), jtTelefonesAlunos);
                         break;
                     case 1:
                         u.cadatraProfessor(usuario_id, tfMatSiape.getText(), tfTelCelular.getText(), cbRegime.getSelectedItem()+"", tfDataContratacao.getText(), cods.get(cbCursoProf.getSelectedIndex()));

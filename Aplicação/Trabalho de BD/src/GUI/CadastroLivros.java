@@ -70,7 +70,15 @@ public class CadastroLivros extends javax.swing.JFrame {
     }
     
     public void adicionaAutor(String nome, String cpf, String nacionalidade){
-        mod.addRow(new Object[]{nome, cpf, nacionalidade});
+        boolean b = true;
+        for (int i = 0; i < jtAutores.getRowCount(); i++) {
+            if (jtAutores.getValueAt(i, 1).equals(cpf))
+                b = false;
+        }
+        if (b)
+            mod.addRow(new Object[]{nome, cpf, nacionalidade});
+        else
+            JOptionPane.showMessageDialog(null, "Autor já está na lista de autores cadastrados!", "Autor já na lista!", JOptionPane.WARNING_MESSAGE);
     }
    
     private void apagaLinhaAutor(){
@@ -135,10 +143,15 @@ public class CadastroLivros extends javax.swing.JFrame {
         tfEditora.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Editora", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
 
         tfQntdCopias.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        tfQntdCopias.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Qtd. de Cópias no Acervo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
+        tfQntdCopias.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cópias no Acervo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
 
         tfISBN.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         tfISBN.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "ISBN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
+        tfISBN.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfISBNKeyReleased(evt);
+            }
+        });
 
         tfAno.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         tfAno.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ano Lançamento", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
@@ -265,9 +278,9 @@ public class CadastroLivros extends javax.swing.JFrame {
                     .addGroup(painelLayout.createSequentialGroup()
                         .addComponent(tfISBN)
                         .addGap(18, 18, 18)
-                        .addComponent(tfQntdCopias, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(13, 13, 13)
-                        .addComponent(tfAno, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(tfQntdCopias, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(tfAno, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(tfTitulo)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, painelLayout.createSequentialGroup()
                         .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -353,6 +366,11 @@ public class CadastroLivros extends javax.swing.JFrame {
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void tfISBNKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfISBNKeyReleased
+        if (tfISBN.getText().length() > 13)
+            tfISBN.setText(tfISBN.getText().substring(0, 13));
+    }//GEN-LAST:event_tfISBNKeyReleased
 
    
     public static void main(String args[]) {

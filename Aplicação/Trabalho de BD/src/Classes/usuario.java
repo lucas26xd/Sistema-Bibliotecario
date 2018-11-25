@@ -105,7 +105,7 @@ public class usuario {
         try {
             ArrayList<String> a = serv.Acao("SELECT nome, login, endereco, tipo_usuario FROM usuarios "
                     + "WHERE nome LIKE '%" + nome + "%' AND tipo_usuario"
-                    + (tipo != null ? " <> 'administrador' AND tipo_usuario <> 'bibliotecario'" : " = '" + tipo + "'") + " GROUP BY tipo_usuario, nome, login, endereco;");
+                    + (tipo.equals("") ? " <> 'administrador' AND tipo_usuario <> 'bibliotecario'" : " = '" + tipo + "'") + " GROUP BY tipo_usuario, nome, login, endereco;");
             if (a != null) {
                 DefaultTableModel mod = (DefaultTableModel) jt.getModel();
                 mod.setNumRows(0);
@@ -129,10 +129,15 @@ public class usuario {
         }
     }
     
-    public void cadatraAluno(String usuario_id, String matricula, String data_ingresso, String data_conclusao, String cod_curso, JTable jtAlunos){
-        if (serv.Acao("INSERT INTO alunos VALUES ('"+matricula+"', '"+f.converteDataJ2BD(data_ingresso)+"', '"+f.converteDataJ2BD(data_conclusao)+"', '"+cod_curso+"', '"+usuario_id+"');") != null)
-            if (cadastraTelefonesAluno(usuario_id, jtAlunos))
+    public boolean cadatraAluno(String usuario_id, String matricula, String data_ingresso, String data_conclusao, String cod_curso, JTable jtAlunos){
+        if (serv.Acao("INSERT INTO alunos VALUES ('"+matricula+"', '"+f.converteDataJ2BD(data_ingresso)+"', '"+f.converteDataJ2BD(data_conclusao)+"', '"+cod_curso+"', '"+usuario_id+"');") != null){
+            if (cadastraTelefonesAluno(usuario_id, jtAlunos)){
                 JOptionPane.showMessageDialog(null, "Cadastrado com Sucesso!");
+                return true;
+            } else
+                return false;
+        } else
+            return false;
     }
     
     private boolean cadastraTelefonesAluno(String usuario_id, JTable jt){

@@ -40,24 +40,11 @@ public class autores {
             ArrayList<String> result = serv.Acao("SELECT * FROM autores WHERE nome LIKE '%" + nome + "%' AND CPF LIKE '" + cpf + "%' AND nacionalidade LIKE '%" + nacionalidade + "%' ORDER BY nome;");
             if (result != null) {
                 for (int i = 0; i < result.size(); i++) {
-                    mod.addRow(new Object[]{result.get(i), mascaraCPF(result.get(++i)), result.get(++i)});
+                    mod.addRow(new Object[]{result.get(i), new funcoes().mascaraCPF(result.get(++i)), result.get(++i)});
                 }
             }
         } catch (IndexOutOfBoundsException ioob) {
             JOptionPane.showMessageDialog(null, "Erro na consulta!", "Erro", JOptionPane.ERROR_MESSAGE);
         }
-    }
-
-    private String mascaraCPF(String cpf1) {
-        String cpf2 = "";
-        for (int i = 0; i < cpf1.length(); i++) {
-            if (i == 3 || i == 6) {
-                cpf2 += ".";
-            } else if (i == 9) {
-                cpf2 += "-";
-            }
-            cpf2 += cpf1.charAt(i);
-        }
-        return cpf2;
     }
 }

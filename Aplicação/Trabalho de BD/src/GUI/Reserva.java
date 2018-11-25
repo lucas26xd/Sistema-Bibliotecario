@@ -240,6 +240,7 @@ public class Reserva extends javax.swing.JFrame {
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         if (tfISBN.getText().length() > 0 && tfTipo.getText().length() > 0) {
             emp.cadastraReserva(usuario_id, tfISBN.getText(), new funcoes().pegaDataAtual());
+            dispose();
         } else
             JOptionPane.showMessageDialog(null, "Preencha todos os campos corretamente!", "Campos Obrigatórios", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_btnCadastrarActionPerformed

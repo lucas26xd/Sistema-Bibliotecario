@@ -110,7 +110,7 @@ public class livros {
                                                 + "WHERE lta.isbn_livro = '" + isbn + "' ORDER BY a.nome;");
             if (result != null) {
                 for (int i = 0; i < result.size(); i++) {
-                    mod.addRow(new Object[]{result.get(i), result.get(++i), result.get(++i)});
+                    mod.addRow(new Object[]{result.get(i), new funcoes().mascaraCPF(result.get(++i)), result.get(++i)});
                 }
             }
         } catch (IndexOutOfBoundsException ioob) {
