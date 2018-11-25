@@ -83,13 +83,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btnCadastroUsuario = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
         boasVindas = new javax.swing.JLabel();
+        btnConsultaReserva = new javax.swing.JButton();
+        btnConsultaEmprestimo = new javax.swing.JButton();
         BarraDeMenu = new javax.swing.JMenuBar();
         menuBiblioteca = new javax.swing.JMenu();
         itemEmprestimo = new javax.swing.JMenuItem();
         itemConsultaEmprestimo = new javax.swing.JMenuItem();
         jSeparator12 = new javax.swing.JPopupMenu.Separator();
         itemReserva = new javax.swing.JMenuItem();
-        jSeparator13 = new javax.swing.JPopupMenu.Separator();
+        itemConsultaReserva = new javax.swing.JMenuItem();
         menuCadastros = new javax.swing.JMenu();
         itemAutor = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
@@ -114,7 +116,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         itemCBibliotec = new javax.swing.JMenuItem();
         jSeparator10 = new javax.swing.JPopupMenu.Separator();
         itemCUsuario = new javax.swing.JMenuItem();
-        jSeparator11 = new javax.swing.JPopupMenu.Separator();
         config = new javax.swing.JMenu();
         configUser = new javax.swing.JMenuItem();
 
@@ -278,20 +279,44 @@ public class TelaPrincipal extends javax.swing.JFrame {
         boasVindas.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         boasVindas.setText("Seja Bem Vindo abcdef ghijk! Hoje é dia 22 de Novembro de 2018, 14:05:13");
 
+        btnConsultaReserva.setBackground(new java.awt.Color(255, 255, 255));
+        btnConsultaReserva.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnConsultaReserva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/reserva70.png"))); // NOI18N
+        btnConsultaReserva.setText("Consultar Reserva");
+        btnConsultaReserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultaReservaActionPerformed(evt);
+            }
+        });
+
+        btnConsultaEmprestimo.setBackground(new java.awt.Color(255, 255, 255));
+        btnConsultaEmprestimo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnConsultaEmprestimo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/emprestimo70.png"))); // NOI18N
+        btnConsultaEmprestimo.setText("Consultar Empréstimo");
+        btnConsultaEmprestimo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultaEmprestimoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout painelLayout = new javax.swing.GroupLayout(painel);
         painel.setLayout(painelLayout);
         painelLayout.setHorizontalGroup(
             painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelLayout.createSequentialGroup()
-                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, painelLayout.createSequentialGroup()
-                        .addGap(189, 189, 189)
-                        .addComponent(btnReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(61, 61, 61)
-                        .addComponent(btnEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 189, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE)
+                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(painelLayout.createSequentialGroup()
-                        .addContainerGap(45, Short.MAX_VALUE)
+                        .addGap(160, 160, 160)
+                        .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnConsultaReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(60, 60, 60)
+                        .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnConsultaEmprestimo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelLayout.createSequentialGroup()
                         .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(btnCadastraAutores, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
@@ -309,8 +334,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                             .addComponent(btnConsultaCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnCadastraCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnConsultaUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCadastroUsuario))))
-                .addGap(30, 30, 30))
+                            .addComponent(btnCadastroUsuario))
+                        .addGap(30, 30, 30))))
             .addGroup(painelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(boasVindas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -319,7 +344,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        painelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnCadastraAutores, btnCadastraBibliotecario, btnCadastraCategoria, btnCadastraCurso, btnCadastraLivros, btnCadastroUsuario, btnConsultaAutor, btnConsultaBibliotec, btnConsultaCategoria, btnConsultaCurso, btnConsultaLivros, btnConsultaUsuarios, btnEmprestimo, btnReserva});
+        painelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnCadastraAutores, btnCadastraBibliotecario, btnCadastraCategoria, btnCadastraCurso, btnCadastraLivros, btnCadastroUsuario, btnConsultaAutor, btnConsultaBibliotec, btnConsultaCategoria, btnConsultaCurso, btnConsultaEmprestimo, btnConsultaLivros, btnConsultaReserva, btnConsultaUsuarios, btnEmprestimo, btnReserva});
 
         painelLayout.setVerticalGroup(
             painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -348,10 +373,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addComponent(btnConsultaBibliotec)))
                 .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(painelLayout.createSequentialGroup()
-                        .addGap(56, 56, 56)
+                        .addGap(18, 18, 18)
                         .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnConsultaReserva, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnConsultaEmprestimo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, Short.MAX_VALUE)
                         .addComponent(boasVindas, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(painelLayout.createSequentialGroup()
@@ -360,7 +389,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        painelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnCadastraAutores, btnCadastraBibliotecario, btnCadastraCategoria, btnCadastraCurso, btnCadastraLivros, btnCadastroUsuario, btnConsultaAutor, btnConsultaBibliotec, btnConsultaCategoria, btnConsultaCurso, btnConsultaLivros, btnConsultaUsuarios, btnEmprestimo, btnReserva});
+        painelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnCadastraAutores, btnCadastraBibliotecario, btnCadastraCategoria, btnCadastraCurso, btnCadastraLivros, btnCadastroUsuario, btnConsultaAutor, btnConsultaBibliotec, btnConsultaCategoria, btnConsultaCurso, btnConsultaEmprestimo, btnConsultaLivros, btnConsultaReserva, btnConsultaUsuarios, btnEmprestimo, btnReserva});
 
         BarraDeMenu.setForeground(new java.awt.Color(255, 255, 255));
         BarraDeMenu.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -403,7 +432,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         menuBiblioteca.add(itemReserva);
-        menuBiblioteca.add(jSeparator13);
+
+        itemConsultaReserva.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        itemConsultaReserva.setFont(new java.awt.Font("Ubuntu", 0, 15)); // NOI18N
+        itemConsultaReserva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/reserva30.png"))); // NOI18N
+        itemConsultaReserva.setText("Consultar Reserva");
+        itemConsultaReserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemConsultaReservaActionPerformed(evt);
+            }
+        });
+        menuBiblioteca.add(itemConsultaReserva);
 
         BarraDeMenu.add(menuBiblioteca);
 
@@ -550,7 +589,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         menuConsultas.add(itemCUsuario);
-        menuConsultas.add(jSeparator11);
 
         BarraDeMenu.add(menuConsultas);
 
@@ -688,7 +726,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     private void itemConsultaEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemConsultaEmprestimoActionPerformed
-        new ConsultaEmprestimo(serv).setVisible(true);
+        btnConsultaEmprestimoActionPerformed(evt);
     }//GEN-LAST:event_itemConsultaEmprestimoActionPerformed
 
     private void itemAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAutorActionPerformed
@@ -698,6 +736,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void btnConsultaBibliotecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaBibliotecActionPerformed
         new ConsultaBibliotecario(serv).setVisible(true);
     }//GEN-LAST:event_btnConsultaBibliotecActionPerformed
+
+    private void btnConsultaReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaReservaActionPerformed
+        new ConsultaReserva(serv).setVisible(true);
+    }//GEN-LAST:event_btnConsultaReservaActionPerformed
+
+    private void btnConsultaEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaEmprestimoActionPerformed
+        new ConsultaEmprestimo(serv).setVisible(true);
+    }//GEN-LAST:event_btnConsultaEmprestimoActionPerformed
+
+    private void itemConsultaReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemConsultaReservaActionPerformed
+        btnConsultaReservaActionPerformed(evt);
+    }//GEN-LAST:event_itemConsultaReservaActionPerformed
 
    
     public static void main(String args[]) {
@@ -744,7 +794,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnConsultaBibliotec;
     private javax.swing.JButton btnConsultaCategoria;
     private javax.swing.JButton btnConsultaCurso;
+    private javax.swing.JButton btnConsultaEmprestimo;
     private javax.swing.JButton btnConsultaLivros;
+    private javax.swing.JButton btnConsultaReserva;
     private javax.swing.JButton btnConsultaUsuarios;
     private javax.swing.JButton btnEmprestimo;
     private javax.swing.JButton btnLogout;
@@ -761,6 +813,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemCUsuario;
     private javax.swing.JMenuItem itemCategoria;
     private javax.swing.JMenuItem itemConsultaEmprestimo;
+    private javax.swing.JMenuItem itemConsultaReserva;
     private javax.swing.JMenuItem itemCurso;
     private javax.swing.JMenuItem itemEmprestimo;
     private javax.swing.JMenuItem itemLivro;
@@ -768,9 +821,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemUsuario;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator10;
-    private javax.swing.JPopupMenu.Separator jSeparator11;
     private javax.swing.JPopupMenu.Separator jSeparator12;
-    private javax.swing.JPopupMenu.Separator jSeparator13;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;

@@ -147,6 +147,7 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
         biblioteca.add(reserva);
 
         consultaReserva.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        consultaReserva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/reserva30.png"))); // NOI18N
         consultaReserva.setText("Consulta de Reserva");
         consultaReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -260,7 +261,7 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
     }//GEN-LAST:event_emprestimosActionPerformed
 
     private void consultaReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaReservaActionPerformed
-        // TODO add your handling code here:
+        new ConsultaReserva(serv).setVisible(true);
     }//GEN-LAST:event_consultaReservaActionPerformed
 
     private void consultaEmprestimosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaEmprestimosActionPerformed

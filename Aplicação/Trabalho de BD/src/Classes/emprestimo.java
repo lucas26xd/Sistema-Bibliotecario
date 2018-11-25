@@ -217,4 +217,19 @@ public class emprestimo {
             JOptionPane.showMessageDialog(null, "Erro na consulta!", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
+    
+    public void consultarReserva(JTable jt, String sql) {
+        try {
+            ArrayList<String> a = serv.Acao(sql);
+            if (a != null) {
+                DefaultTableModel mod = (DefaultTableModel) jt.getModel();
+                mod.setNumRows(0);
+                for (int i = 0; i < a.size(); i++) {
+                    mod.addRow(new Object[]{a.get(i), a.get(++i), a.get(++i), f.converteDataBD2J(a.get(++i)), a.get(++i)});
+                }
+            }
+        } catch (IndexOutOfBoundsException ioob) {
+            JOptionPane.showMessageDialog(null, "Erro na consulta!", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 }
