@@ -86,6 +86,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         BarraDeMenu = new javax.swing.JMenuBar();
         menuBiblioteca = new javax.swing.JMenu();
         itemEmprestimo = new javax.swing.JMenuItem();
+        itemConsultaEmprestimo = new javax.swing.JMenuItem();
         jSeparator12 = new javax.swing.JPopupMenu.Separator();
         itemReserva = new javax.swing.JMenuItem();
         jSeparator13 = new javax.swing.JPopupMenu.Separator();
@@ -248,6 +249,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btnConsultaBibliotec.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnConsultaBibliotec.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/buscabibliotecario70.png"))); // NOI18N
         btnConsultaBibliotec.setText("Consultar Bibilotecário");
+        btnConsultaBibliotec.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultaBibliotecActionPerformed(evt);
+            }
+        });
 
         btnCadastroUsuario.setBackground(new java.awt.Color(255, 255, 255));
         btnCadastroUsuario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -374,6 +380,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         menuBiblioteca.add(itemEmprestimo);
+
+        itemConsultaEmprestimo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        itemConsultaEmprestimo.setFont(new java.awt.Font("Ubuntu", 0, 15)); // NOI18N
+        itemConsultaEmprestimo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/emprestimo30.png"))); // NOI18N
+        itemConsultaEmprestimo.setText("Consultar Empréstimo");
+        itemConsultaEmprestimo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemConsultaEmprestimoActionPerformed(evt);
+            }
+        });
+        menuBiblioteca.add(itemConsultaEmprestimo);
         menuBiblioteca.add(jSeparator12);
 
         itemReserva.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
@@ -399,6 +416,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         itemAutor.setFont(new java.awt.Font("Ubuntu", 0, 15)); // NOI18N
         itemAutor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/autor30.png"))); // NOI18N
         itemAutor.setText("Cadastro de Autor");
+        itemAutor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemAutorActionPerformed(evt);
+            }
+        });
         menuCadastros.add(itemAutor);
         menuCadastros.add(jSeparator1);
 
@@ -609,19 +631,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConsultaUsuariosActionPerformed
 
     private void btnConsultaCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaCursoActionPerformed
-        // TODO add your handling code here:
+        btnConsultaCursoActionPerformed(evt);
     }//GEN-LAST:event_btnConsultaCursoActionPerformed
 
     private void itemCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCursoActionPerformed
-        // TODO add your handling code here:
+        btnCadastraCursoActionPerformed(evt);
     }//GEN-LAST:event_itemCursoActionPerformed
 
     private void itemBibliotecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemBibliotecActionPerformed
-        // TODO add your handling code here:
+        btnCadastraBibliotecarioActionPerformed(evt);
     }//GEN-LAST:event_itemBibliotecActionPerformed
 
     private void itemUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemUsuarioActionPerformed
-        // TODO add your handling code here:
+        btnCadastroUsuarioActionPerformed(evt);
     }//GEN-LAST:event_itemUsuarioActionPerformed
 
     private void btnCadastroUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroUsuarioActionPerformed
@@ -629,41 +651,53 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCadastroUsuarioActionPerformed
 
     private void itemCAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCAutorActionPerformed
-        // TODO add your handling code here:
+        btnConsultaAutorActionPerformed(evt);
     }//GEN-LAST:event_itemCAutorActionPerformed
 
     private void itemCLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCLivroActionPerformed
-        // TODO add your handling code here:
+        btnConsultaLivrosActionPerformed(evt);
     }//GEN-LAST:event_itemCLivroActionPerformed
 
     private void itemCCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCCategoriaActionPerformed
-        // TODO add your handling code here:
+        btnConsultaCategoriaActionPerformed(evt);
     }//GEN-LAST:event_itemCCategoriaActionPerformed
 
     private void itemCCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCCursoActionPerformed
-        // TODO add your handling code here:
+        btnConsultaCursoActionPerformed(evt);
     }//GEN-LAST:event_itemCCursoActionPerformed
 
     private void itemCBibliotecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCBibliotecActionPerformed
-        // TODO add your handling code here:
+        btnConsultaBibliotecActionPerformed(evt);
     }//GEN-LAST:event_itemCBibliotecActionPerformed
 
     private void itemCUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCUsuarioActionPerformed
-        // TODO add your handling code here:
+        btnConsultaUsuariosActionPerformed(evt);
     }//GEN-LAST:event_itemCUsuarioActionPerformed
 
     private void itemEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemEmprestimoActionPerformed
-        // TODO add your handling code here:
+        btnEmprestimoActionPerformed(evt);
     }//GEN-LAST:event_itemEmprestimoActionPerformed
 
     private void itemReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemReservaActionPerformed
-        // TODO add your handling code here:
+        btnReservaActionPerformed(evt);
     }//GEN-LAST:event_itemReservaActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         new TelaLogin(serv).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void itemConsultaEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemConsultaEmprestimoActionPerformed
+        new ConsultaEmprestimo(serv).setVisible(true);
+    }//GEN-LAST:event_itemConsultaEmprestimoActionPerformed
+
+    private void itemAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAutorActionPerformed
+        btnCadastraAutoresActionPerformed(evt);
+    }//GEN-LAST:event_itemAutorActionPerformed
+
+    private void btnConsultaBibliotecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaBibliotecActionPerformed
+        new ConsultaBibliotecario(serv).setVisible(true);
+    }//GEN-LAST:event_btnConsultaBibliotecActionPerformed
 
    
     public static void main(String args[]) {
@@ -726,6 +760,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemCLivro;
     private javax.swing.JMenuItem itemCUsuario;
     private javax.swing.JMenuItem itemCategoria;
+    private javax.swing.JMenuItem itemConsultaEmprestimo;
     private javax.swing.JMenuItem itemCurso;
     private javax.swing.JMenuItem itemEmprestimo;
     private javax.swing.JMenuItem itemLivro;
