@@ -1,6 +1,8 @@
 package GUI;
 
 import BD.Servicos;
+import Classes.funcoes;
+import Classes.usuario;
 import java.awt.Toolkit;
 
 /**
@@ -9,16 +11,47 @@ import java.awt.Toolkit;
  */
 public class TelaPrincipal extends javax.swing.JFrame {
 
-    private Servicos serv;
-    private String usuario_id;
+    private Servicos serv;    
+    private String nome = "", usuario_id;
+    private usuario u;
+    
+    private Thread t = new Thread(){
+        funcoes f = new funcoes();
+        public void run(){
+            while (true){
+                String data = f.pegaDataAtual();
+                String hora = f.pegaHoraAtual();
+                String mes = data.substring(data.indexOf("/") + 1, data.length() - 5);
+                switch(mes){
+                    case "01": mes = "Janeiro de "; break;
+                    case "02": mes = "Fevereiro de "; break;
+                    case "03": mes = "Março de "; break;
+                    case "04": mes = "Abril de "; break;
+                    case "05": mes = "Maio de "; break;
+                    case "06": mes = "Junho de "; break;
+                    case "07": mes = "Julho de "; break;
+                    case "08": mes = "Agosto de "; break;
+                    case "09": mes = "Setembro de "; break;
+                    case "10": mes = "Outubro de "; break;
+                    case "11": mes = "Novembro de "; break;
+                    case "12": mes = "Dezembro de "; break;
+                }
+                boasVindas.setText("Seja Bem Vindo " + nome + "! Hoje é dia " + data.substring(0, data.indexOf("/")) + " de " + mes + data.substring(data.length() - 4) + ", " + hora);
+            }
+        }
+    };
     
     public TelaPrincipal(Servicos serv, String usuario_id) {
         this.usuario_id = usuario_id;
         this.serv = serv;
         
-        initComponents();
+        u = new usuario(serv);
+        nome = u.pegaNome(usuario_id);
         
+        initComponents();
         setLocationRelativeTo(null);
+        
+        t.start();
         
         setIcon();
     }
@@ -49,6 +82,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btnConsultaBibliotec = new javax.swing.JButton();
         btnCadastroUsuario = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
+        boasVindas = new javax.swing.JLabel();
         BarraDeMenu = new javax.swing.JMenuBar();
         menuBiblioteca = new javax.swing.JMenu();
         itemEmprestimo = new javax.swing.JMenuItem();
@@ -80,6 +114,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jSeparator10 = new javax.swing.JPopupMenu.Separator();
         itemCUsuario = new javax.swing.JMenuItem();
         jSeparator11 = new javax.swing.JPopupMenu.Separator();
+        config = new javax.swing.JMenu();
+        configUser = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela Principal");
@@ -90,7 +126,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         btnCadastraAutores.setBackground(new java.awt.Color(255, 255, 255));
         btnCadastraAutores.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnCadastraAutores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/autor2-70.png"))); // NOI18N
+        btnCadastraAutores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/autor70.png"))); // NOI18N
         btnCadastraAutores.setText("Cadastrar Autor");
         btnCadastraAutores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,7 +156,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         btnCadastraLivros.setBackground(new java.awt.Color(255, 255, 255));
         btnCadastraLivros.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnCadastraLivros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/livros4-70.png"))); // NOI18N
+        btnCadastraLivros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/livros70.png"))); // NOI18N
         btnCadastraLivros.setText("Cadastrar Livro");
         btnCadastraLivros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -180,7 +216,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         btnReserva.setBackground(new java.awt.Color(255, 255, 255));
         btnReserva.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnReserva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/reserva1-70.png"))); // NOI18N
+        btnReserva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/reserva70.png"))); // NOI18N
         btnReserva.setText("Fazer Reserva");
         btnReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -233,19 +269,21 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        boasVindas.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
+        boasVindas.setText("Seja Bem Vindo abcdef ghijk! Hoje é dia 22 de Novembro de 2018, 14:05:13");
+
         javax.swing.GroupLayout painelLayout = new javax.swing.GroupLayout(painel);
         painel.setLayout(painelLayout);
         painelLayout.setHorizontalGroup(
             painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelLayout.createSequentialGroup()
                 .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(painelLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, painelLayout.createSequentialGroup()
                         .addGap(189, 189, 189)
                         .addComponent(btnReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(61, 61, 61)
                         .addComponent(btnEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnLogout))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 189, Short.MAX_VALUE))
                     .addGroup(painelLayout.createSequentialGroup()
                         .addContainerGap(45, Short.MAX_VALUE)
                         .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -267,6 +305,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
                             .addComponent(btnConsultaUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnCadastroUsuario))))
                 .addGap(30, 30, 30))
+            .addGroup(painelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(boasVindas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(30, 30, 30)
+                .addComponent(btnLogout)
+                .addContainerGap())
         );
 
         painelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnCadastraAutores, btnCadastraBibliotecario, btnCadastraCategoria, btnCadastraCurso, btnCadastraLivros, btnCadastroUsuario, btnConsultaAutor, btnConsultaBibliotec, btnConsultaCategoria, btnConsultaCurso, btnConsultaLivros, btnConsultaUsuarios, btnEmprestimo, btnReserva});
@@ -302,21 +346,26 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(25, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelLayout.createSequentialGroup()
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addComponent(boasVindas, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(painelLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnLogout)
-                        .addGap(25, 25, 25))))
+                        .addComponent(btnLogout)))
+                .addContainerGap())
         );
 
         painelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnCadastraAutores, btnCadastraBibliotecario, btnCadastraCategoria, btnCadastraCurso, btnCadastraLivros, btnCadastroUsuario, btnConsultaAutor, btnConsultaBibliotec, btnConsultaCategoria, btnConsultaCurso, btnConsultaLivros, btnConsultaUsuarios, btnEmprestimo, btnReserva});
 
+        BarraDeMenu.setForeground(new java.awt.Color(255, 255, 255));
         BarraDeMenu.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
+        menuBiblioteca.setForeground(new java.awt.Color(255, 255, 255));
+        menuBiblioteca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/livros.png"))); // NOI18N
         menuBiblioteca.setText("Biblioteca");
         menuBiblioteca.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         itemEmprestimo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
+        itemEmprestimo.setFont(new java.awt.Font("Ubuntu", 0, 15)); // NOI18N
         itemEmprestimo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/emprestimo30.png"))); // NOI18N
         itemEmprestimo.setText("Fazer Empréstimo");
         itemEmprestimo.addActionListener(new java.awt.event.ActionListener() {
@@ -328,7 +377,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuBiblioteca.add(jSeparator12);
 
         itemReserva.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
-        itemReserva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/reserva1-30.png"))); // NOI18N
+        itemReserva.setFont(new java.awt.Font("Ubuntu", 0, 15)); // NOI18N
+        itemReserva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/reserva30.png"))); // NOI18N
         itemReserva.setText("Fazer Reserva");
         itemReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -340,32 +390,34 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         BarraDeMenu.add(menuBiblioteca);
 
+        menuCadastros.setForeground(new java.awt.Color(255, 255, 255));
+        menuCadastros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/adcionar30.png"))); // NOI18N
         menuCadastros.setText("Cadastros");
         menuCadastros.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         itemAutor.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
-        itemAutor.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        itemAutor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/autor2-30.png"))); // NOI18N
+        itemAutor.setFont(new java.awt.Font("Ubuntu", 0, 15)); // NOI18N
+        itemAutor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/autor30.png"))); // NOI18N
         itemAutor.setText("Cadastro de Autor");
         menuCadastros.add(itemAutor);
         menuCadastros.add(jSeparator1);
 
         itemLivro.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
-        itemLivro.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        itemLivro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/livros4-30.png"))); // NOI18N
+        itemLivro.setFont(new java.awt.Font("Ubuntu", 0, 15)); // NOI18N
+        itemLivro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/livros30.png"))); // NOI18N
         itemLivro.setText("Cadastro de Livro");
         menuCadastros.add(itemLivro);
         menuCadastros.add(jSeparator2);
 
         itemCategoria.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_MASK));
-        itemCategoria.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        itemCategoria.setFont(new java.awt.Font("Ubuntu", 0, 15)); // NOI18N
         itemCategoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/categoria30.png"))); // NOI18N
         itemCategoria.setText("Cadastro de Categoria");
         menuCadastros.add(itemCategoria);
         menuCadastros.add(jSeparator3);
 
         itemCurso.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
-        itemCurso.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        itemCurso.setFont(new java.awt.Font("Ubuntu", 0, 15)); // NOI18N
         itemCurso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/curso30.png"))); // NOI18N
         itemCurso.setText("Cadastro de Curso");
         itemCurso.addActionListener(new java.awt.event.ActionListener() {
@@ -377,7 +429,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuCadastros.add(jSeparator4);
 
         itemBibliotec.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_MASK));
-        itemBibliotec.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        itemBibliotec.setFont(new java.awt.Font("Ubuntu", 0, 15)); // NOI18N
         itemBibliotec.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/bibliotecario30.png"))); // NOI18N
         itemBibliotec.setText("Cadastro de Bibliotecário");
         itemBibliotec.addActionListener(new java.awt.event.ActionListener() {
@@ -389,7 +441,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuCadastros.add(jSeparator5);
 
         itemUsuario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.CTRL_MASK));
-        itemUsuario.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        itemUsuario.setFont(new java.awt.Font("Ubuntu", 0, 15)); // NOI18N
         itemUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/usuario30.png"))); // NOI18N
         itemUsuario.setText("Cadastro de Usuário");
         itemUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -401,10 +453,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         BarraDeMenu.add(menuCadastros);
 
+        menuConsultas.setForeground(new java.awt.Color(255, 255, 255));
+        menuConsultas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/search.png"))); // NOI18N
         menuConsultas.setText("Consultas");
         menuConsultas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         itemCAutor.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        itemCAutor.setFont(new java.awt.Font("Ubuntu", 0, 15)); // NOI18N
         itemCAutor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/buscaautor30.png"))); // NOI18N
         itemCAutor.setText("Consulta de Autor");
         itemCAutor.addActionListener(new java.awt.event.ActionListener() {
@@ -416,6 +471,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuConsultas.add(jSeparator6);
 
         itemCLivro.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        itemCLivro.setFont(new java.awt.Font("Ubuntu", 0, 15)); // NOI18N
         itemCLivro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/buscalivros30.png"))); // NOI18N
         itemCLivro.setText("Consulta de Livro");
         itemCLivro.addActionListener(new java.awt.event.ActionListener() {
@@ -427,6 +483,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuConsultas.add(jSeparator7);
 
         itemCCategoria.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        itemCCategoria.setFont(new java.awt.Font("Ubuntu", 0, 15)); // NOI18N
         itemCCategoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/buscacategoria30.png"))); // NOI18N
         itemCCategoria.setText("Consulta de Categoria");
         itemCCategoria.addActionListener(new java.awt.event.ActionListener() {
@@ -438,6 +495,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuConsultas.add(jSeparator8);
 
         itemCCurso.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        itemCCurso.setFont(new java.awt.Font("Ubuntu", 0, 15)); // NOI18N
         itemCCurso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/buscacurso30.png"))); // NOI18N
         itemCCurso.setText("Consulta de Curso");
         itemCCurso.addActionListener(new java.awt.event.ActionListener() {
@@ -449,6 +507,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuConsultas.add(jSeparator9);
 
         itemCBibliotec.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        itemCBibliotec.setFont(new java.awt.Font("Ubuntu", 0, 15)); // NOI18N
         itemCBibliotec.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/buscabibliotecario30.png"))); // NOI18N
         itemCBibliotec.setText("Consulta de Bibliotecário");
         itemCBibliotec.addActionListener(new java.awt.event.ActionListener() {
@@ -460,6 +519,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuConsultas.add(jSeparator10);
 
         itemCUsuario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        itemCUsuario.setFont(new java.awt.Font("Ubuntu", 0, 15)); // NOI18N
         itemCUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/buscausuario30.png"))); // NOI18N
         itemCUsuario.setText("Consulta de Usuário");
         itemCUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -472,22 +532,31 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         BarraDeMenu.add(menuConsultas);
 
+        config.setForeground(new java.awt.Color(255, 255, 255));
+        config.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/config.png"))); // NOI18N
+        config.setText("Configurações");
+
+        configUser.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_K, java.awt.event.InputEvent.CTRL_MASK));
+        configUser.setFont(new java.awt.Font("Ubuntu", 0, 15)); // NOI18N
+        configUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/user.jpg"))); // NOI18N
+        configUser.setText("Configurações de Usuário");
+        config.add(configUser);
+
+        BarraDeMenu.add(config);
+
         setJMenuBar(BarraDeMenu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
                 .addComponent(painel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(painel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(painel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         painel.getAccessibleContext().setAccessibleName("");
@@ -630,6 +699,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar BarraDeMenu;
+    private javax.swing.JLabel boasVindas;
     private javax.swing.JButton btnCadastraAutores;
     private javax.swing.JButton btnCadastraBibliotecario;
     private javax.swing.JButton btnCadastraCategoria;
@@ -645,6 +715,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnEmprestimo;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnReserva;
+    private javax.swing.JMenu config;
+    private javax.swing.JMenuItem configUser;
     private javax.swing.JMenuItem itemAutor;
     private javax.swing.JMenuItem itemBibliotec;
     private javax.swing.JMenuItem itemCAutor;

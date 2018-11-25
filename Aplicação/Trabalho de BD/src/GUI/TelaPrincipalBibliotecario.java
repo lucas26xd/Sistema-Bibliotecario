@@ -82,7 +82,9 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
 
         painel.setBackground(new java.awt.Color(255, 255, 255));
 
+        btnLogout.setBackground(new java.awt.Color(255, 255, 255));
         btnLogout.setFont(new java.awt.Font("Ubuntu", 1, 16)); // NOI18N
+        btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/logout30.png"))); // NOI18N
         btnLogout.setText("Logout");
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,6 +95,8 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
         boasVindas.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         boasVindas.setText("Seja Bem Vindo abcdef ghijk! Hoje é dia 22 de Novembro de 2018, 14:05:13");
 
+        img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/telaprincipal.jpg"))); // NOI18N
+
         javax.swing.GroupLayout painelLayout = new javax.swing.GroupLayout(painel);
         painel.setLayout(painelLayout);
         painelLayout.setHorizontalGroup(
@@ -102,7 +106,7 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
                 .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(img, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(painelLayout.createSequentialGroup()
-                        .addComponent(boasVindas, javax.swing.GroupLayout.DEFAULT_SIZE, 798, Short.MAX_VALUE)
+                        .addComponent(boasVindas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnLogout)))
                 .addContainerGap())
@@ -119,10 +123,13 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        biblioteca.setForeground(new java.awt.Color(255, 255, 255));
+        biblioteca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/livros.png"))); // NOI18N
         biblioteca.setText("Biblioteca");
         biblioteca.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
 
         reserva.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
+        reserva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/reserva30.png"))); // NOI18N
         reserva.setText("Realizar Reserva");
         reserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -142,6 +149,7 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
         biblioteca.add(separador1);
 
         livros.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
+        livros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/buscalivros30.png"))); // NOI18N
         livros.setText("Consultar Livros");
         livros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -151,6 +159,7 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
         biblioteca.add(livros);
 
         usuario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.CTRL_MASK));
+        usuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/usuario30.png"))); // NOI18N
         usuario.setText("Cadastro de Usuário");
         usuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,6 +170,7 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
         biblioteca.add(separador2);
 
         emprestimos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
+        emprestimos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/emprestimo30.png"))); // NOI18N
         emprestimos.setText("Fazer Empréstimos");
         emprestimos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -171,10 +181,13 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
 
         barra_menu.add(biblioteca);
 
+        configuracao.setForeground(new java.awt.Color(255, 255, 255));
+        configuracao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/config.png"))); // NOI18N
         configuracao.setText("Configurações");
         configuracao.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
 
         configUser.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_K, java.awt.event.InputEvent.CTRL_MASK));
+        configUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/user.jpg"))); // NOI18N
         configUser.setText("Configurações de Usuário");
         configUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

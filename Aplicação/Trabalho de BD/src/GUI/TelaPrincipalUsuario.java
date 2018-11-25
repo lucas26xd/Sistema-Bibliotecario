@@ -78,7 +78,9 @@ public class TelaPrincipalUsuario extends javax.swing.JFrame {
 
         painel.setBackground(new java.awt.Color(255, 255, 255));
 
+        btnLogout.setBackground(new java.awt.Color(255, 255, 255));
         btnLogout.setFont(new java.awt.Font("Ubuntu", 1, 16)); // NOI18N
+        btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/logout30.png"))); // NOI18N
         btnLogout.setText("Logout");
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,7 +91,7 @@ public class TelaPrincipalUsuario extends javax.swing.JFrame {
         boasVindas.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         boasVindas.setText("Seja Bem Vindo abcdef ghijk! Hoje é dia 22 de Novembro de 2018, 14:05:13");
 
-        img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/principal.jpg"))); // NOI18N
+        img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/telaprincipal.jpg"))); // NOI18N
 
         javax.swing.GroupLayout painelLayout = new javax.swing.GroupLayout(painel);
         painel.setLayout(painelLayout);
@@ -117,6 +119,8 @@ public class TelaPrincipalUsuario extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        biblioteca.setForeground(new java.awt.Color(255, 255, 255));
+        biblioteca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/livros.png"))); // NOI18N
         biblioteca.setText("Biblioteca");
         biblioteca.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
 
@@ -149,10 +153,13 @@ public class TelaPrincipalUsuario extends javax.swing.JFrame {
 
         barra_menu.add(biblioteca);
 
+        configuracao.setForeground(new java.awt.Color(255, 255, 255));
+        configuracao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/config.png"))); // NOI18N
         configuracao.setText("Configurações");
         configuracao.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
 
         configUser.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.CTRL_MASK));
+        configUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/user.jpg"))); // NOI18N
         configUser.setText("Configurações de Usuário");
         configUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
