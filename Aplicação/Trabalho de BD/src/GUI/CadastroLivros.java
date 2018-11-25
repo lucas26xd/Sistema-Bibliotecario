@@ -2,6 +2,7 @@ package GUI;
 
 import BD.Servicos;
 import Classes.livros;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -27,6 +28,8 @@ public class CadastroLivros extends javax.swing.JFrame {
         
         codCategorias = livro.povoaCategorias(cbCategoria);
         mod = (DefaultTableModel) jtAutores.getModel();
+        
+        setIcon();
     }
     
     public CadastroLivros(ConsultaLivros consultaLivros, Servicos serv, String isbn, String titulo, String ano, String editora, String qtd, String categoria) {
@@ -39,6 +42,7 @@ public class CadastroLivros extends javax.swing.JFrame {
         
         setTitle("Alterar Livro");
         btnCadastrar.setText("Alterar");
+        btnCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/editar.png")));
         tfISBN.setText(isbn);
         tfISBN.setEditable(false);
         tfEditora.setText(editora);
@@ -51,8 +55,14 @@ public class CadastroLivros extends javax.swing.JFrame {
         
         cbCategoria.setSelectedItem(categoria);
         livro.consultaAutoresdosLivros(jtAutores, isbn);
+        
+        setIcon();
     }
 
+    private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagens/livros70.png")));
+    }
+    
     private CadastroLivros(){}
 
     public void povoaCombo(){
@@ -109,6 +119,7 @@ public class CadastroLivros extends javax.swing.JFrame {
         btnMaisCategoria = new javax.swing.JButton();
         cbCategoria = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
+        btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Livros");
@@ -229,31 +240,43 @@ public class CadastroLivros extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         jLabel1.setText("Categoria");
 
+        btnVoltar.setBackground(new java.awt.Color(255, 255, 255));
+        btnVoltar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/voltar.png"))); // NOI18N
+        btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout painelLayout = new javax.swing.GroupLayout(painel);
         painel.setLayout(painelLayout);
         painelLayout.setHorizontalGroup(
             painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnCadastrar)
-                    .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelLayout.createSequentialGroup()
-                            .addComponent(tfISBN)
-                            .addGap(18, 18, 18)
-                            .addComponent(tfQntdCopias, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(13, 13, 13)
-                            .addComponent(tfAno, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(tfTitulo, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(painelLayout.createSequentialGroup()
-                            .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel1)
-                                .addComponent(cbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnMaisCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(tfEditora, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(painelLayout.createSequentialGroup()
+                        .addComponent(btnVoltar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCadastrar))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(painelLayout.createSequentialGroup()
+                        .addComponent(tfISBN)
+                        .addGap(18, 18, 18)
+                        .addComponent(tfQntdCopias, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(13, 13, 13)
+                        .addComponent(tfAno, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfTitulo)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, painelLayout.createSequentialGroup()
+                        .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(cbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnMaisCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(tfEditora, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
         painelLayout.setVerticalGroup(
@@ -277,7 +300,9 @@ public class CadastroLivros extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVoltar))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
@@ -325,6 +350,10 @@ public class CadastroLivros extends javax.swing.JFrame {
         new CadastroCategorias(this, serv).setVisible(true);
     }//GEN-LAST:event_btnMaisCategoriaActionPerformed
 
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnVoltarActionPerformed
+
    
     public static void main(String args[]) {
        
@@ -362,6 +391,7 @@ public class CadastroLivros extends javax.swing.JFrame {
     private javax.swing.JButton btnMais;
     private javax.swing.JButton btnMaisCategoria;
     private javax.swing.JButton btnMenos;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JComboBox<String> cbCategoria;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

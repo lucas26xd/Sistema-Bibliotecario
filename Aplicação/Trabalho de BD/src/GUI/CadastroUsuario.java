@@ -2,6 +2,7 @@ package GUI;
 
 import BD.Servicos;
 import Classes.usuario;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -27,6 +28,8 @@ public class CadastroUsuario extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         
         povoaCombos();
+        
+        setIcon();
     }
     
     public CadastroUsuario(Servicos serv, String usuario_id) {
@@ -40,6 +43,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
         
         setTitle("Alterar Usuário");
         btn.setText("Alterar");
+        btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/editar.png")));
         
         povoaCombos();
         
@@ -57,8 +61,14 @@ public class CadastroUsuario extends javax.swing.JFrame {
             abas.setSelectedIndex(2);
             u.consultaFuncionario(usuario_id, tfMatrFunc, jtTelefonesFunc);
         }
+        
+        setIcon();
     }
 
+    private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagens/usuario70.png")));
+    }
+    
     private CadastroUsuario(){}
     
     private void povoaCombos(){
@@ -122,6 +132,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
         btnMenosTelFunc = new javax.swing.JButton();
         tfTelefoneFunc = new javax.swing.JTextField();
         btnApagar = new javax.swing.JButton();
+        btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Usuário");
@@ -335,7 +346,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
                 .addGroup(painelProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(cbRegime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfTelCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(151, Short.MAX_VALUE))
+                .addContainerGap(150, Short.MAX_VALUE))
         );
 
         abas.addTab("Professor", painelProfessor);
@@ -400,7 +411,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
                     .addComponent(jScrollPane1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnMaisTelFunc, javax.swing.GroupLayout.PREFERRED_SIZE, 42, Short.MAX_VALUE)
+                    .addComponent(btnMaisTelFunc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnMenosTelFunc, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
@@ -412,7 +423,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
                     .addComponent(btnMaisTelFunc))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnMenosTelFunc)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -453,6 +464,16 @@ public class CadastroUsuario extends javax.swing.JFrame {
             }
         });
 
+        btnVoltar.setBackground(new java.awt.Color(255, 255, 255));
+        btnVoltar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/voltar.png"))); // NOI18N
+        btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout painelLayout = new javax.swing.GroupLayout(painel);
         painel.setLayout(painelLayout);
         painelLayout.setHorizontalGroup(
@@ -471,7 +492,9 @@ public class CadastroUsuario extends javax.swing.JFrame {
                     .addGroup(painelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelLayout.createSequentialGroup()
+                            .addGroup(painelLayout.createSequentialGroup()
+                                .addComponent(btnVoltar)
+                                .addGap(30, 30, 30)
                                 .addComponent(btnApagar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btn))
@@ -495,8 +518,9 @@ public class CadastroUsuario extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnApagar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38))
+                    .addComponent(btnApagar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVoltar))
+                .addGap(37, 37, 37))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -600,6 +624,10 @@ public class CadastroUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbCursoAlunoActionPerformed
 
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnVoltarActionPerformed
+
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -639,6 +667,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
     private javax.swing.JButton btnMaisTelFunc;
     private javax.swing.JButton btnMenosAluno;
     private javax.swing.JButton btnMenosTelFunc;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JComboBox<String> cbCursoAluno;
     private javax.swing.JComboBox<String> cbCursoProf;
     private javax.swing.JComboBox<String> cbRegime;

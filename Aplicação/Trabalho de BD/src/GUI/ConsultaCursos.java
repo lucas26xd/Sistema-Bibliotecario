@@ -2,6 +2,7 @@ package GUI;
 
 import BD.Servicos;
 import Classes.cursos;
+import java.awt.Toolkit;
 
 /**
  *
@@ -21,8 +22,14 @@ public class ConsultaCursos extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         
         c.consulta(jtCursos, tfCod.getText(), tfNome.getText());
+        
+        setIcon();
     }
 
+    private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagens/buscacurso70.png")));
+    }
+    
     private ConsultaCursos(){}
     
     @SuppressWarnings("unchecked")
@@ -34,6 +41,7 @@ public class ConsultaCursos extends javax.swing.JFrame {
         tfCod = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtCursos = new javax.swing.JTable();
+        btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -73,6 +81,16 @@ public class ConsultaCursos extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jtCursos);
 
+        btnVoltar.setBackground(new java.awt.Color(255, 255, 255));
+        btnVoltar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/voltar.png"))); // NOI18N
+        btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout painelLayout = new javax.swing.GroupLayout(painel);
         painel.setLayout(painelLayout);
         painelLayout.setHorizontalGroup(
@@ -84,7 +102,10 @@ public class ConsultaCursos extends javax.swing.JFrame {
                     .addGroup(painelLayout.createSequentialGroup()
                         .addComponent(tfCod, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(tfNome)))
+                        .addComponent(tfNome))
+                    .addGroup(painelLayout.createSequentialGroup()
+                        .addComponent(btnVoltar)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         painelLayout.setVerticalGroup(
@@ -96,7 +117,9 @@ public class ConsultaCursos extends javax.swing.JFrame {
                     .addComponent(tfCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnVoltar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -124,6 +147,10 @@ public class ConsultaCursos extends javax.swing.JFrame {
     private void tfNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNomeActionPerformed
         c.consulta(jtCursos, tfCod.getText(), tfNome.getText());
     }//GEN-LAST:event_tfNomeActionPerformed
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnVoltarActionPerformed
 
     public static void main(String args[]) {
 
@@ -157,6 +184,7 @@ public class ConsultaCursos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jtCursos;
     private javax.swing.JPanel painel;

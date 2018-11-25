@@ -2,6 +2,7 @@ package GUI;
 
 import BD.Servicos;
 import Classes.autores;
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,6 +22,8 @@ public class CadastroAutores extends javax.swing.JFrame {
         
         initComponents();
         setLocationRelativeTo(null);
+        
+        setIcon();
     }
     
     public CadastroAutores(Servicos serv, ConsultaAutores ca) {
@@ -31,6 +34,8 @@ public class CadastroAutores extends javax.swing.JFrame {
         
         initComponents();
         setLocationRelativeTo(null);
+        
+        setIcon();
     }
     
     public CadastroAutores(Servicos serv, String nome, String cpf, String nacionalidade) {
@@ -43,12 +48,19 @@ public class CadastroAutores extends javax.swing.JFrame {
         
         setTitle("Alterar Autor");
         btn.setText("Alterar");
+        btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/editar.png")));
         tfNome.setText(nome);
         tfCPF.setText(cpf);
         tfCPF.setEditable(false);
         tfNacionalidade.setText(nacionalidade);
+        
+        setIcon();
     }
 
+    private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagens/autor70.png")));
+    }
+    
     private CadastroAutores(){}
 
     private void limpar(){
@@ -75,6 +87,7 @@ public class CadastroAutores extends javax.swing.JFrame {
         btn = new javax.swing.JButton();
         tfNacionalidade = new javax.swing.JTextField();
         tfCPF = new javax.swing.JTextField();
+        btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Autores");
@@ -102,14 +115,27 @@ public class CadastroAutores extends javax.swing.JFrame {
         tfCPF.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         tfCPF.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "CPF", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
 
+        btnVoltar.setBackground(new java.awt.Color(255, 255, 255));
+        btnVoltar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/voltar.png"))); // NOI18N
+        btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout painelLayout = new javax.swing.GroupLayout(painel);
         painel.setLayout(painelLayout);
         painelLayout.setHorizontalGroup(
             painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btn)
+                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(painelLayout.createSequentialGroup()
+                        .addComponent(btnVoltar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn))
                     .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(tfNacionalidade, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -126,7 +152,9 @@ public class CadastroAutores extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(tfNacionalidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addComponent(btn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -157,6 +185,10 @@ public class CadastroAutores extends javax.swing.JFrame {
             dispose();
         }
     }//GEN-LAST:event_btnActionPerformed
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnVoltarActionPerformed
 
     public static void main(String args[]) {
 
@@ -191,6 +223,7 @@ public class CadastroAutores extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JPanel painel;
     private javax.swing.JTextField tfCPF;
     private javax.swing.JTextField tfNacionalidade;

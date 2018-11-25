@@ -3,6 +3,7 @@ package GUI;
 import BD.Servicos;
 import Classes.funcoes;
 import Classes.usuario;
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
 /**
@@ -52,8 +53,14 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         
         t.start();
+        
+        setIcon();
     }
 
+    private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagens/principal.png")));
+    }
+    
     private TelaPrincipalBibliotecario(){}
     
     @SuppressWarnings("unchecked")

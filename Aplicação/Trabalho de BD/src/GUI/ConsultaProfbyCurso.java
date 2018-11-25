@@ -2,6 +2,7 @@ package GUI;
 
 import BD.Servicos;
 import Classes.buscarbyViews;
+import java.awt.Toolkit;
 
 /**
  *
@@ -23,6 +24,12 @@ public class ConsultaProfbyCurso extends javax.swing.JFrame {
         cbCurso.setSelectedIndex(-1);
         
         consulta();
+        
+        setIcon();
+    }
+    
+    private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagens/buscacurso70.png")));
     }
     
     private ConsultaProfbyCurso(){}
@@ -42,6 +49,7 @@ public class ConsultaProfbyCurso extends javax.swing.JFrame {
         cbRegime = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtProfessores = new javax.swing.JTable();
+        btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Consulta de Professores por Curso");
@@ -94,6 +102,16 @@ public class ConsultaProfbyCurso extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jtProfessores);
 
+        btnVoltar.setBackground(new java.awt.Color(255, 255, 255));
+        btnVoltar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/voltar.png"))); // NOI18N
+        btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout painelLayout = new javax.swing.GroupLayout(painel);
         painel.setLayout(painelLayout);
         painelLayout.setHorizontalGroup(
@@ -107,7 +125,10 @@ public class ConsultaProfbyCurso extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbRegime, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cbCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(painelLayout.createSequentialGroup()
+                        .addComponent(btnVoltar)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         painelLayout.setVerticalGroup(
@@ -119,7 +140,9 @@ public class ConsultaProfbyCurso extends javax.swing.JFrame {
                     .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbRegime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addComponent(btnVoltar)
                 .addContainerGap())
         );
 
@@ -148,6 +171,10 @@ public class ConsultaProfbyCurso extends javax.swing.JFrame {
     private void cbCursoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbCursoItemStateChanged
         consulta();
     }//GEN-LAST:event_cbCursoItemStateChanged
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnVoltarActionPerformed
 
     public static void main(String args[]) {
 
@@ -181,6 +208,7 @@ public class ConsultaProfbyCurso extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JComboBox<String> cbCurso;
     private javax.swing.JComboBox<String> cbRegime;
     private javax.swing.JScrollPane jScrollPane1;

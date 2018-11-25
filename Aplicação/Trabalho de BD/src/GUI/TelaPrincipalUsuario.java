@@ -3,6 +3,7 @@ package GUI;
 import BD.Servicos;
 import Classes.funcoes;
 import Classes.usuario;
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
 /**
@@ -52,8 +53,14 @@ public class TelaPrincipalUsuario extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         
         t.start();
+        
+        setIcon();
     }
 
+    private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagens/principal.png")));
+    }
+    
     private TelaPrincipalUsuario(){}
     
     @SuppressWarnings("unchecked")
@@ -125,6 +132,7 @@ public class TelaPrincipalUsuario extends javax.swing.JFrame {
         biblioteca.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
 
         reserva.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
+        reserva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/reserva30.png"))); // NOI18N
         reserva.setText("Realizar Reserva");
         reserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,6 +142,7 @@ public class TelaPrincipalUsuario extends javax.swing.JFrame {
         biblioteca.add(reserva);
 
         professores.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
+        professores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/buscausuario30.png"))); // NOI18N
         professores.setText("Consulta Professores");
         professores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,6 +152,7 @@ public class TelaPrincipalUsuario extends javax.swing.JFrame {
         biblioteca.add(professores);
 
         livros.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
+        livros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/buscalivros30.png"))); // NOI18N
         livros.setText("Consulta Livros");
         livros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

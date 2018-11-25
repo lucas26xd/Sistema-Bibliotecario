@@ -2,6 +2,7 @@ package GUI;
 
 import BD.Servicos;
 import Classes.cursos;
+import java.awt.Toolkit;
 
 /**
  *
@@ -15,22 +16,34 @@ public class CadastroCurso extends javax.swing.JFrame {
     public CadastroCurso(Servicos serv) {
         this.serv = serv;
         cursos = new cursos(serv);
+        
         initComponents();
         setLocationRelativeTo(null);
+        
+        setIcon();
     }
     
     public CadastroCurso(Servicos serv, String cod_curso, String nome_curso) {
         this.serv = serv;
         cursos = new cursos(serv);
+        
         initComponents();
         setLocationRelativeTo(null);
         
+        setTitle("Alterar Curso");
         btn.setText("Alterar");
+        btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/editar.png")));
         tfCod.setText(cod_curso);
         tfCod.setEditable(false);
         tfNome.setText(nome_curso);
+        
+        setIcon();
     }
 
+    private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagens/curso70.png")));
+    }
+    
     private CadastroCurso(){}
 
     @SuppressWarnings("unchecked")
@@ -41,6 +54,7 @@ public class CadastroCurso extends javax.swing.JFrame {
         btn = new javax.swing.JButton();
         tfCod = new javax.swing.JTextField();
         tfNome = new javax.swing.JTextField();
+        btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastrar Curso");
@@ -65,14 +79,27 @@ public class CadastroCurso extends javax.swing.JFrame {
         tfNome.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         tfNome.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nome do Curso", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
 
+        btnVoltar.setBackground(new java.awt.Color(255, 255, 255));
+        btnVoltar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/voltar.png"))); // NOI18N
+        btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout painelLayout = new javax.swing.GroupLayout(painel);
         painel.setLayout(painelLayout);
         painelLayout.setHorizontalGroup(
             painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btn)
+                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(painelLayout.createSequentialGroup()
+                        .addComponent(btnVoltar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn))
                     .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(tfCod, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -81,12 +108,14 @@ public class CadastroCurso extends javax.swing.JFrame {
         painelLayout.setVerticalGroup(
             painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelLayout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addGap(31, 31, 31)
                 .addComponent(tfCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btn, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                .addGap(30, 30, 30)
+                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnVoltar))
                 .addContainerGap())
         );
 
@@ -111,6 +140,10 @@ public class CadastroCurso extends javax.swing.JFrame {
             cursos.cadastra(tfCod.getText(), tfNome.getText());
         }
     }//GEN-LAST:event_btnActionPerformed
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnVoltarActionPerformed
     
     public static void main(String args[]) {
 
@@ -145,6 +178,7 @@ public class CadastroCurso extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JPanel painel;
     private javax.swing.JTextField tfCod;
     private javax.swing.JTextField tfNome;

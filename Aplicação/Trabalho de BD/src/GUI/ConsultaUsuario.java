@@ -2,6 +2,7 @@ package GUI;
 
 import BD.Servicos;
 import Classes.usuario;
+import java.awt.Toolkit;
 
 /**
  *
@@ -23,6 +24,8 @@ public class ConsultaUsuario extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         
         user.consulta(jtUsuario, tfNome.getText(), cbTipo.getSelectedItem()+"");
+        
+        setIcon();
     }
     
     public ConsultaUsuario(Reserva res, Servicos serv) {
@@ -34,6 +37,8 @@ public class ConsultaUsuario extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         
         user.consulta(jtUsuario, tfNome.getText(), cbTipo.getSelectedItem()+"");
+        
+        setIcon();
     }
     
     public ConsultaUsuario(Servicos serv) {
@@ -44,8 +49,14 @@ public class ConsultaUsuario extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         
         user.consulta(jtUsuario, tfNome.getText(), cbTipo.getSelectedItem()+"");
+        
+        setIcon();
     }
 
+    private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagens/buscausuario70.png")));
+    }
+    
     private ConsultaUsuario(){}
     
     @SuppressWarnings("unchecked")
@@ -57,6 +68,7 @@ public class ConsultaUsuario extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtUsuario = new javax.swing.JTable();
         cbTipo = new javax.swing.JComboBox<>();
+        btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Consultar Usuário");
@@ -96,6 +108,7 @@ public class ConsultaUsuario extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jtUsuario);
 
+        cbTipo.setBackground(new java.awt.Color(255, 255, 255));
         cbTipo.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Aluno", "Professor", "Funcionários" }));
         cbTipo.setSelectedIndex(-1);
@@ -111,6 +124,16 @@ public class ConsultaUsuario extends javax.swing.JFrame {
             }
         });
 
+        btnVoltar.setBackground(new java.awt.Color(255, 255, 255));
+        btnVoltar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/voltar.png"))); // NOI18N
+        btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout painelLayout = new javax.swing.GroupLayout(painel);
         painel.setLayout(painelLayout);
         painelLayout.setHorizontalGroup(
@@ -122,7 +145,10 @@ public class ConsultaUsuario extends javax.swing.JFrame {
                     .addGroup(painelLayout.createSequentialGroup()
                         .addComponent(tfNome)
                         .addGap(18, 18, 18)
-                        .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(painelLayout.createSequentialGroup()
+                        .addComponent(btnVoltar)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         painelLayout.setVerticalGroup(
@@ -132,8 +158,10 @@ public class ConsultaUsuario extends javax.swing.JFrame {
                 .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(tfNome)
                     .addComponent(cbTipo))
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addComponent(btnVoltar)
                 .addContainerGap())
         );
 
@@ -182,6 +210,10 @@ public class ConsultaUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbTipoActionPerformed
 
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnVoltarActionPerformed
+
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -214,6 +246,7 @@ public class ConsultaUsuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JComboBox<String> cbTipo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jtUsuario;

@@ -23,6 +23,9 @@
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Ctrl+R"/>
                 </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Imagens/reserva30.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Realizar Reserva"/>
               </Properties>
               <Events>
@@ -34,6 +37,9 @@
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Ctrl+P"/>
                 </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Imagens/buscausuario30.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Consulta Professores"/>
               </Properties>
               <Events>
@@ -44,6 +50,9 @@
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Ctrl+L"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Imagens/buscalivros30.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Consulta Livros"/>
               </Properties>

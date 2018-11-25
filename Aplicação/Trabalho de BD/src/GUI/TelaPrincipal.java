@@ -56,7 +56,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         setIcon();
     }
 
-     private void setIcon() {
+    private void setIcon() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagens/principal.png")));
     }
     
