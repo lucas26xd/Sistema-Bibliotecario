@@ -80,6 +80,7 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
         usuario = new javax.swing.JMenuItem();
         separador2 = new javax.swing.JPopupMenu.Separator();
         emprestimos = new javax.swing.JMenuItem();
+        consultaEmprestimos = new javax.swing.JMenuItem();
         configuracao = new javax.swing.JMenu();
         configUser = new javax.swing.JMenuItem();
 
@@ -145,7 +146,7 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
         });
         biblioteca.add(reserva);
 
-        consultaReserva.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
+        consultaReserva.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         consultaReserva.setText("Consulta de Reserva");
         consultaReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -185,6 +186,16 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
             }
         });
         biblioteca.add(emprestimos);
+
+        consultaEmprestimos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        consultaEmprestimos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/emprestimo30.png"))); // NOI18N
+        consultaEmprestimos.setText("Consultar Empréstimos");
+        consultaEmprestimos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultaEmprestimosActionPerformed(evt);
+            }
+        });
+        biblioteca.add(consultaEmprestimos);
 
         barra_menu.add(biblioteca);
 
@@ -252,6 +263,10 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_consultaReservaActionPerformed
 
+    private void consultaEmprestimosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaEmprestimosActionPerformed
+        new ConsultaEmprestimo(serv).setVisible(true);
+    }//GEN-LAST:event_consultaEmprestimosActionPerformed
+
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -290,6 +305,7 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
     private javax.swing.JButton btnLogout;
     private javax.swing.JMenuItem configUser;
     private javax.swing.JMenu configuracao;
+    private javax.swing.JMenuItem consultaEmprestimos;
     private javax.swing.JMenuItem consultaReserva;
     private javax.swing.JMenuItem emprestimos;
     private javax.swing.JLabel img;

@@ -35,7 +35,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="consultaReserva">
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Ctrl+V"/>
+                  <KeyStroke key="Shift+Ctrl+R"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Consulta de Reserva"/>
               </Properties>
@@ -87,6 +87,20 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="emprestimosActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="consultaEmprestimos">
+              <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Shift+Ctrl+E"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Imagens/emprestimo30.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Consultar Empr&#xe9;stimos"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="consultaEmprestimosActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
