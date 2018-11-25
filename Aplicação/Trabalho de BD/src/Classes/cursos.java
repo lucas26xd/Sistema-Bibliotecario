@@ -36,7 +36,7 @@ public class cursos {
         DefaultTableModel mod = (DefaultTableModel) jt.getModel();
         mod.setNumRows(0);
         try{
-            ArrayList<String> result = serv.Acao("SELECT * FROM curso WHERE cod_curso LIKE '"+cod_curso+"'%, "
+            ArrayList<String> result = serv.Acao("SELECT * FROM curso WHERE cod_curso LIKE '"+cod_curso+"%' AND "
                                                     + "nome_curso LIKE '%"+nome_curso+"%' ORDER BY nome_curso;");
             if (result != null) {
                 for (int i = 0; i < result.size(); i++){
