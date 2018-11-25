@@ -52,7 +52,7 @@
                   <Font name="Ubuntu" size="15" style="0"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Imagens/emprestimo30.png"/>
+                  <Image iconType="3" name="/Imagens/buscaemprestimo30.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Consultar Empr&#xe9;stimo"/>
               </Properties>
@@ -88,7 +88,7 @@
                   <Font name="Ubuntu" size="15" style="0"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Imagens/reserva30.png"/>
+                  <Image iconType="3" name="/Imagens/buscareserva30.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Consultar Reserva"/>
               </Properties>
@@ -516,9 +516,9 @@
                           <Component id="btnConsultaBibliotec" linkSize="1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="btnReserva" linkSize="1" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                               <Component id="btnEmprestimo" linkSize="1" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
@@ -532,7 +532,7 @@
                           <Component id="boasVindas" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           <Component id="btnLogout" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -800,7 +800,7 @@
         <Component class="javax.swing.JLabel" name="boasVindas">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Ubuntu" size="18" style="1"/>
+              <Font name="Segoe UI" size="18" style="2"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Seja Bem Vindo abcdef ghijk! Hoje &#xe9; dia 22 de Novembro de 2018, 14:05:13"/>
           </Properties>
@@ -814,7 +814,7 @@
               <Font name="Tahoma" size="14" style="1"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Imagens/reserva70.png"/>
+              <Image iconType="3" name="/Imagens/buscareserva70.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Consultar Reserva"/>
           </Properties>
@@ -831,7 +831,7 @@
               <Font name="Tahoma" size="14" style="1"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Imagens/emprestimo70.png"/>
+              <Image iconType="3" name="/Imagens/buscaemprestimo70.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Consultar Empr&#xe9;stimo"/>
           </Properties>

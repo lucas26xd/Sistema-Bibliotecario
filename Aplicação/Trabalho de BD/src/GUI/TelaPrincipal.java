@@ -276,12 +276,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        boasVindas.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
+        boasVindas.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
         boasVindas.setText("Seja Bem Vindo abcdef ghijk! Hoje é dia 22 de Novembro de 2018, 14:05:13");
 
         btnConsultaReserva.setBackground(new java.awt.Color(255, 255, 255));
         btnConsultaReserva.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnConsultaReserva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/reserva70.png"))); // NOI18N
+        btnConsultaReserva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/buscareserva70.png"))); // NOI18N
         btnConsultaReserva.setText("Consultar Reserva");
         btnConsultaReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -291,7 +291,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         btnConsultaEmprestimo.setBackground(new java.awt.Color(255, 255, 255));
         btnConsultaEmprestimo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnConsultaEmprestimo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/emprestimo70.png"))); // NOI18N
+        btnConsultaEmprestimo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/buscaemprestimo70.png"))); // NOI18N
         btnConsultaEmprestimo.setText("Consultar Empréstimo");
         btnConsultaEmprestimo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -371,9 +371,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnConsultaCurso)
                         .addComponent(btnConsultaBibliotec)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(painelLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
                         .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -384,7 +384,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addGap(18, 18, Short.MAX_VALUE)
                         .addComponent(boasVindas, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(painelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnLogout)))
                 .addContainerGap())
         );
@@ -412,7 +412,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         itemConsultaEmprestimo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         itemConsultaEmprestimo.setFont(new java.awt.Font("Ubuntu", 0, 15)); // NOI18N
-        itemConsultaEmprestimo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/emprestimo30.png"))); // NOI18N
+        itemConsultaEmprestimo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/buscaemprestimo30.png"))); // NOI18N
         itemConsultaEmprestimo.setText("Consultar Empréstimo");
         itemConsultaEmprestimo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -435,7 +435,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         itemConsultaReserva.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         itemConsultaReserva.setFont(new java.awt.Font("Ubuntu", 0, 15)); // NOI18N
-        itemConsultaReserva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/reserva30.png"))); // NOI18N
+        itemConsultaReserva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/buscareserva30.png"))); // NOI18N
         itemConsultaReserva.setText("Consultar Reserva");
         itemConsultaReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -674,7 +674,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConsultaUsuariosActionPerformed
 
     private void btnConsultaCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaCursoActionPerformed
-        btnConsultaCursoActionPerformed(evt);
+        new ConsultaCursos(serv).setVisible(true);
     }//GEN-LAST:event_btnConsultaCursoActionPerformed
 
     private void itemCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCursoActionPerformed
