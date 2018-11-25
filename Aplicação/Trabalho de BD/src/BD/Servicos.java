@@ -3,6 +3,9 @@ package BD;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+/**
+ * Classe onde separa/trata as expressões SQL que serão executadas, em expressões com ou sem retorno do SGBD.
+ */
 public class Servicos{
 
     Connection con;
@@ -11,6 +14,12 @@ public class Servicos{
         this.con = con;
     }
     
+    /**
+    * Método que divide as SQLs de acordo com seu retorno do SGBD (método chamado por todas as telas do sistema).
+    * @param sql Expressão SQL à ser executada
+    * @return ArrayList<String> contendo o resultado da execução da expresão SQL, 
+    * retorna <emph>null</emph> se o SGBD retornou algum erro.
+    */
     public ArrayList<String> Acao(String sql){
         ArrayList<String> resultado = null;
         try{

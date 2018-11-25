@@ -5,15 +5,15 @@ import Classes.categorias;
 import java.awt.Toolkit;
 
 /**
- *
- * @author angel, arquivo criado dia 13/11/2018 às 21:50:48
+ * @author angela, arquivo criado dia 13/11/2018 às 21:50:48
  */
+//Tela de consulta de categoria
 public class ConsultaCategoria extends javax.swing.JFrame {
 
     private Servicos serv;
     private categorias categorias;
     
-    
+    //construtor de funcionamento normal da tela
     public ConsultaCategoria(Servicos serv) {
         this.serv = serv;
         categorias = new categorias(serv);

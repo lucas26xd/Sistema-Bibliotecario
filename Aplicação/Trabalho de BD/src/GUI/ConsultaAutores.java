@@ -5,15 +5,16 @@ import Classes.autores;
 import java.awt.Toolkit;
 
 /**
- *
  * @author lucas, arquivo criado dia 07/11/2018 às 21:13:44
  */
+//Tela de consulta de autores
 public class ConsultaAutores extends javax.swing.JFrame {
 
     private Servicos serv;
     private autores autores;    
     private CadastroLivros Livros;
     
+    //construtor de funcionamento normal da tela
     public ConsultaAutores(Servicos serv) {
         this.serv = serv;
         autores = new autores(serv);
@@ -26,6 +27,7 @@ public class ConsultaAutores extends javax.swing.JFrame {
         setIcon();
     }
     
+    //construtor usado para modificar o funcionamento quando essa tela é chamada pela tela de cadastro de livros
     public ConsultaAutores(Servicos serv, CadastroLivros Livros) {
         this.serv = serv;
         autores = new autores(serv);

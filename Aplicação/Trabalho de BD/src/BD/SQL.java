@@ -7,6 +7,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
+/**
+ * Classe onde manda as expressões SQL para o SGBD, para serem executadas.
+ */
 public class SQL {
 
     Statement stmt;
@@ -20,6 +23,11 @@ public class SQL {
         }
     }
 
+    /**
+    * Método que executa SQLs que não tem retorno do SGBD.
+    * @param sql Expressão SQL à ser executada
+    * @return <emph>TRUE</emph> se foi executaod com sucesso, <emph>FALSE</emph> se ocorreu algum erro no SGBD.
+    */
     public boolean inserirDados(String sql) {
         try {
             stmt.execute(sql);
@@ -31,6 +39,12 @@ public class SQL {
         }
     }
 
+    /**
+    * Método que executa as SQLs que retornam algo do SGBD.
+    * @param sql Expressão SQL à ser executada
+    * @return ArrayList<String> contendo o resultado da execução da expresão SQL, 
+    * retorna <emph>null</emph> se o SGBD retornou algum erro.
+    */
     public ArrayList<String> retornarDados(String sql) {
         ArrayList<String> lista = new ArrayList<>();
         try {

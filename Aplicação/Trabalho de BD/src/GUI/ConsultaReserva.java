@@ -9,15 +9,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- *
  * @author lucas, arquivo criado dia 25/11/2018 às 02:15:09
  */
+//Tela de consulta de reserva
 public class ConsultaReserva extends javax.swing.JFrame {
 
     private Servicos serv;
     private emprestimo emp;
     private funcoes f = new funcoes();
     
+    //construtor de funcionamento normal da tela
     public ConsultaReserva(Servicos serv) {
         this.serv = serv;
         emp = new emprestimo(serv);

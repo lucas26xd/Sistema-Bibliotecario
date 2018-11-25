@@ -5,8 +5,13 @@ import BD.Servicos;
 import java.awt.Toolkit;
 
 /**
- *
  * @author lucas, arquivo criado dia 05/11/2018 às 13:16:22
+ */
+
+/**
+ * Tela onde se inicia a conexão com o banco de dados a partir do login e senha do Banco 
+ * passados pelo usuário e passa adiante o objeto do tipo Servicos para execuções de expressões SQL 
+ * (chama a tela de Login no sistema).
  */
 public class TelaConexao extends javax.swing.JFrame {
 

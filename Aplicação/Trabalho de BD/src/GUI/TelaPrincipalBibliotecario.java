@@ -7,8 +7,11 @@ import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
 /**
- *
  * @author lucas, arquivo criado dia 24/11/2018 às 10:36:02
+ */
+/**
+ * Tela Principal do bibliotecário do sistema, onde contém todos os botões que dão acesso 
+ * as telas referente ao que o bibliotecário poderá acessar.
  */
 public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
 

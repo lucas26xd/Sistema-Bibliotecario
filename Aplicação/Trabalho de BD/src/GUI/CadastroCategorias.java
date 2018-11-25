@@ -6,9 +6,9 @@ import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
 /**
- *
  * @author lucas, arquivo criado dia 05/11/2018 às 14:39:24
  */
+//Tela de cadastro de categorias
 public class CadastroCategorias extends javax.swing.JFrame {
 
     private Servicos serv;
@@ -16,6 +16,7 @@ public class CadastroCategorias extends javax.swing.JFrame {
     private CadastroLivros cadastraLivros;
     private ConsultaCategoria cc;
     
+    //construtor de funcionamento normal da tela
     public CadastroCategorias(Servicos serv) {
         this.serv = serv;
         categorias = new categorias(serv);
@@ -26,6 +27,7 @@ public class CadastroCategorias extends javax.swing.JFrame {
         setIcon();
     }
     
+    //construtor que modifica funcionamento caso tenha sido chamado pela tela de consulta de Livros
     public CadastroCategorias(CadastroLivros cadastraLivros, Servicos serv) {
         this.serv = serv;
         categorias = new categorias(serv);
@@ -37,6 +39,7 @@ public class CadastroCategorias extends javax.swing.JFrame {
         setIcon();
     }
     
+    //construtor que modifica a aparência e o funcionamento para alteração de uma categoria
     public CadastroCategorias(Servicos serv, ConsultaCategoria cc, String codigo, String descricao) {
         this.serv = serv;
         this.cc = cc;

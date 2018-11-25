@@ -6,8 +6,11 @@ import Classes.usuario;
 import java.awt.Toolkit;
 
 /**
- *
- * @author angel, arquivo criado dia 09/11/2018 às 19:47:26
+ * @author angela, arquivo criado dia 09/11/2018 às 19:47:26
+ */
+
+/**
+ * Tela Principal do administrador do sistema, onde contém todos os botões que dão acesso a todas as telas do sistema.
  */
 public class TelaPrincipal extends javax.swing.JFrame {
 
@@ -349,7 +352,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         painelLayout.setVerticalGroup(
             painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelLayout.createSequentialGroup()
-                .addGap(35, 35, 35)
+                .addGap(20, 20, 20)
                 .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCadastraAutores)
                     .addComponent(btnCadastraLivros, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -371,7 +374,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnConsultaCurso)
                         .addComponent(btnConsultaBibliotec)))
-                .addGap(30, 30, 30)
+                .addGap(18, 18, 18)
                 .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(painelLayout.createSequentialGroup()
                         .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)

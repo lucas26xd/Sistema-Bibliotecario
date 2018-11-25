@@ -8,9 +8,9 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
  * @author lucas, arquivo criado dia 20/11/2018 às 23:40:51
  */
+//Tela de cadastro de usuários
 public class CadastroUsuario extends javax.swing.JFrame {
 
     private Servicos serv;
@@ -20,6 +20,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
     private ArrayList<String> cods;
     private ConsultaUsuario cUser;
     
+    //construtor de funcionamento normal da tela
     public CadastroUsuario(Servicos serv) {
         this.serv = serv;
         
@@ -33,6 +34,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
         setIcon();
     }
     
+    //construtor usado para usar a tela como alteração de usuário passado pelo parâmetro
     public CadastroUsuario(Servicos serv, String usuario_id) {
         this.serv = serv;
         this.usuario_id = usuario_id;

@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
 /**
- *
  * @author angela, arquivo criado em 07/11/2018 às 22:15:12
  */
 public class cursos {
@@ -17,21 +17,25 @@ public class cursos {
         this.serv = serv;
     }
     
+    //cadastra curso
     public void cadastra(String cod_curso, String nome_curso){
         if(serv.Acao("INSERT INTO curso VALUES ('"+cod_curso+"', '"+nome_curso+"');") != null)
             JOptionPane.showMessageDialog(null, "Curso Inserido com Sucesso!");
     }
     
+    //altera curso
     public void altera(String cod_curso, String nome_curso){
         if(serv.Acao("UPDATE curso SET nome_curso = '"+nome_curso+"' WHERE cod_curso = '"+cod_curso+"';") != null)
             JOptionPane.showMessageDialog(null, "Alteração Realizada com Sucesso!");
     }
     
+    //apaga curso
     public void apaga(String cod_curso) {
         if(serv.Acao("DELETE FROM curso WHERE cod_curso = '"+cod_curso+"';") != null)
             JOptionPane.showMessageDialog(null, "Apagado com Sucesso!");
     }
     
+    //consulta e povoa tabela de curso por codigo e nome
     public void consulta(JTable jt, String cod_curso, String nome_curso){
         DefaultTableModel mod = (DefaultTableModel) jt.getModel();
         mod.setNumRows(0);

@@ -4,14 +4,15 @@ import BD.Servicos;
 import Classes.bibliotecario;
 
 /**
- *
- * @author angel, arquivo criado dia 25/11/2018 às 00:13:37
+ * @author angela, arquivo criado dia 25/11/2018 às 00:13:37
  */
+//Tela de consulta de bibliotecario
 public class ConsultaBibliotecario extends javax.swing.JFrame {
 
     private Servicos serv;
     private bibliotecario bib;
     
+    //construtor de funcionamento normal da tela    
     public ConsultaBibliotecario(Servicos serv) {
         this.serv = serv;
         bib = new bibliotecario(serv);

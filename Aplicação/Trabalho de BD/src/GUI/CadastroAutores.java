@@ -6,15 +6,17 @@ import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
 /**
- *
  * @author lucas, arquivo criado dia 05/11/2018 às 14:44:44
  */
+
+//Tela de cadastro de autores
 public class CadastroAutores extends javax.swing.JFrame {
 
     private Servicos serv;
     private autores autores;
     private ConsultaAutores ca;
     
+    //construtor de funcionamento padrão
     public CadastroAutores(Servicos serv) {
         this.serv = serv;
         
@@ -26,6 +28,7 @@ public class CadastroAutores extends javax.swing.JFrame {
         setIcon();
     }
     
+    //construtor caso tenha sido chamado pelo consulta autores
     public CadastroAutores(Servicos serv, ConsultaAutores ca) {
         this.serv = serv;
         this.ca = ca;
@@ -38,6 +41,7 @@ public class CadastroAutores extends javax.swing.JFrame {
         setIcon();
     }
     
+    //construtor usado para modificar a instancia da tela e usá-la como alteração de autores
     public CadastroAutores(Servicos serv, String nome, String cpf, String nacionalidade) {
         this.serv = serv;
         
@@ -62,12 +66,6 @@ public class CadastroAutores extends javax.swing.JFrame {
     }
     
     private CadastroAutores(){}
-
-    private void limpar(){
-        tfNome.setText("");
-        tfCPF.setText("");
-        tfNacionalidade.setText("");
-    }
     
     private boolean camposPreenchidos(){
         if(tfCPF.getText().length() == 0 && tfNacionalidade.getText().length() == 0 &&

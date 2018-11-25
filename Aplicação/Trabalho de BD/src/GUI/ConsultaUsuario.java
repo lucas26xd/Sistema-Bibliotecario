@@ -5,9 +5,9 @@ import Classes.usuario;
 import java.awt.Toolkit;
 
 /**
- *
  * @author lucas, arquivo criado dia 15/11/2018 às 20:07:33
  */
+//Tela de consulta de usuário
 public class ConsultaUsuario extends javax.swing.JFrame {
 
     private Servicos serv;
@@ -15,6 +15,7 @@ public class ConsultaUsuario extends javax.swing.JFrame {
     private Emprestimo emp;
     private Reserva res;
     
+    //construtor que modifica funcionamento normal da tela caso tenha sido chamada pela tela de emprestimo
     public ConsultaUsuario(Emprestimo emp, Servicos serv) {
         this.serv = serv;
         user = new usuario(serv);
@@ -28,6 +29,7 @@ public class ConsultaUsuario extends javax.swing.JFrame {
         setIcon();
     }
     
+    //construtor que modifica funcionamento normal da tela caso tenha sido chamada pela tela de reserva
     public ConsultaUsuario(Reserva res, Servicos serv) {
         this.serv = serv;
         user = new usuario(serv);
@@ -41,6 +43,7 @@ public class ConsultaUsuario extends javax.swing.JFrame {
         setIcon();
     }
     
+    //construtor de funcionamento normal da tela
     public ConsultaUsuario(Servicos serv) {
         this.serv = serv;
         user = new usuario(serv);

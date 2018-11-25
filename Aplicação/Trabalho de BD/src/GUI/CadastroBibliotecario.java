@@ -5,15 +5,16 @@ import Classes.bibliotecario;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author angel, arquivo criado dia 05/11/2018 às 15:50:33
+ * @author angela, arquivo criado dia 05/11/2018 às 15:50:33
  */
+//Tela de cadastro de bibliotecário
 public class CadastroBibliotecario extends javax.swing.JFrame {
 
     private Servicos serv;
     private bibliotecario bib;
     private ConsultaBibliotecario cb;
     
+    //construtor de funcionamento normal
     public CadastroBibliotecario(Servicos serv) {
         this.serv = serv;
         bib = new bibliotecario(serv);        
@@ -22,6 +23,7 @@ public class CadastroBibliotecario extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }
     
+    //construtor que é chamado sempre que se deseja alterar o bibliotecário com ID pasado no parâmetro
     public CadastroBibliotecario(Servicos serv, String usuario_id){
         this.serv = serv;
         
@@ -38,6 +40,7 @@ public class CadastroBibliotecario extends javax.swing.JFrame {
         tfLogin.setEditable(false);
     }
     
+    //construtor que modifica a visualização e passa a alterar o bibliotecário
     public CadastroBibliotecario(Servicos serv, ConsultaBibliotecario cb, String login, String nome, String endereco){
         this.serv = serv;
         this.cb = cb;
@@ -58,14 +61,7 @@ public class CadastroBibliotecario extends javax.swing.JFrame {
     }
     
     private CadastroBibliotecario(){}
-    
-    private void limpar(){
-        tfLogin.setText("");
-        pfSenha.setText("");
-        tfNome.setText("");
-        tfEndereco.setText("");        
-    }
-    
+        
     private boolean camposPreenchidos(){
         if(tfLogin.getText().length() == 0 && pfSenha.getText().length() == 0 &&
             tfNome.getText().length() == 0 && tfEndereco.getText().length() == 0){

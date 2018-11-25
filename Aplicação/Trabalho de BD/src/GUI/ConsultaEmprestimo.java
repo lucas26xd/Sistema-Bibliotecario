@@ -11,9 +11,9 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
- *
  * @author lucas, arquivo criado dia 24/11/2018 às 23:51:07
  */
+//Tela de consulta de empréstimos
 public class ConsultaEmprestimo extends javax.swing.JFrame {
 
     private Servicos serv;
@@ -23,6 +23,7 @@ public class ConsultaEmprestimo extends javax.swing.JFrame {
     private boolean podeDarBaixa = false;
     private ArrayList<String> usuarios_ids;
     
+    //construtor de funcionamento normal da tela
     public ConsultaEmprestimo(Servicos serv) {
         this.serv = serv;
         emp = new emprestimo(serv);

@@ -5,14 +5,15 @@ import Classes.buscarbyViews;
 import java.awt.Toolkit;
 
 /**
- *
  * @author lucas, arquivo criado dia 24/11/2018 às 12:31:51
  */
+//Tela de consulta de professores por curso pela view do banco
 public class ConsultaProfbyCurso extends javax.swing.JFrame {
 
     private Servicos serv;
     private buscarbyViews views;
     
+    //construtor de funcionamento normal da tela
     public ConsultaProfbyCurso(Servicos serv) {
         this.serv = serv;
         views = new buscarbyViews(serv);

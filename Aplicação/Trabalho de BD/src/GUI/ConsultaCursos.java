@@ -5,14 +5,15 @@ import Classes.cursos;
 import java.awt.Toolkit;
 
 /**
- *
  * @author lucas, arquivo criado dia 24/11/2018 às 17:21:59
  */
+//Tela de consulta de cursos
 public class ConsultaCursos extends javax.swing.JFrame {
 
     private Servicos serv;
     private cursos c;
     
+    //construtor de funcionamento normal da tela
     public ConsultaCursos(Servicos serv) {
         this.serv = serv;
         

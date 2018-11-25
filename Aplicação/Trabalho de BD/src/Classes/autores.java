@@ -7,7 +7,6 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
  * @author lucas, arquivo criado dia 07/11/2018 às 16:12:34
  */
 public class autores {
@@ -18,21 +17,25 @@ public class autores {
         this.serv = serv;
     }
 
+    //cadastra autores
     public void cadastra(String nome, String cpf, String nacionalidade) {
         if(serv.Acao("INSERT INTO autores VALUES ('" + nome + "', '" + cpf + "', '" + nacionalidade + "');") != null)
             JOptionPane.showMessageDialog(null, "Inserido com Sucesso!");
     }
 
+    //altera autores
     public void altera(String nome, String cpf, String nacionalidade) {
         if(serv.Acao("UPDATE autores SET nome = '" + nome + "', nacionalidade = '" + nacionalidade + "' WHERE CPF = '" + cpf + "';") != null)
             JOptionPane.showMessageDialog(null, "Alterado com Sucesso!");
     }
 
+    //apaga autores
     public void apaga(String cpf) {
         if(serv.Acao("DELETE FROM autores WHERE CPF = '" + cpf + "';") != null)
             JOptionPane.showMessageDialog(null, "Apagado com Sucesso!");
     }
 
+    //consulta e pova tabela de autores
     public void consulta(JTable jt, String nome, String cpf, String nacionalidade) {
         DefaultTableModel mod = (DefaultTableModel) jt.getModel();
         mod.setNumRows(0);

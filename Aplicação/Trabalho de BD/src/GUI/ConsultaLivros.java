@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
- *
  * @author lucas, arquivo criado dia 08/11/2018 às 00:40:55
  */
+//Tela de consulta de livros
 public class ConsultaLivros extends javax.swing.JFrame {
 
     private Servicos serv;
@@ -23,6 +23,7 @@ public class ConsultaLivros extends javax.swing.JFrame {
     private boolean reserva = false;
     private String usuario_id;
 
+    //construtor de funcionamento normal da tela
     public ConsultaLivros(Servicos serv) {
         this.serv = serv;
         livros = new livros(serv);
@@ -37,6 +38,7 @@ public class ConsultaLivros extends javax.swing.JFrame {
         setIcon();
     }
 
+    //construtor que modifica o funcionamento normal caso tenha sido chamada pela emprestimo
     public ConsultaLivros(Emprestimo emp, Servicos serv) {
         this.serv = serv;
         livros = new livros(serv);
@@ -52,6 +54,7 @@ public class ConsultaLivros extends javax.swing.JFrame {
         setIcon();
     }
     
+    //construtor que modifica o funcionamento normal caso tenha sido chamada pela reserva
     public ConsultaLivros(Reserva res, Servicos serv) {
         this.serv = serv;
         livros = new livros(serv);
@@ -67,6 +70,7 @@ public class ConsultaLivros extends javax.swing.JFrame {
         setIcon();
     }
     
+    //construtor que modifica o funcionamento normal caso tenha sido chamada por um usuário comum e esta tela vira uma cadastra reserva
     public ConsultaLivros(Servicos serv, boolean reserva, String usuario_id) {
         this.serv = serv;
         livros = new livros(serv);

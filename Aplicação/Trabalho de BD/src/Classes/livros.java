@@ -8,7 +8,6 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
  * @author lucas, arquivo criado dia 07/11/2018 às 21:52:46
  */
 public class livros {
@@ -19,6 +18,7 @@ public class livros {
         this.serv = serv;
     }
     
+    //cadastra livro no banco
     public void cadastra(String isbn, String titulo, String ano, String editora, String qtd, String categoria, JTable jtAutores){
         if(serv.Acao("INSERT INTO livros VALUES ('"+isbn+"', '"+titulo+"', '"+ano+"', '"+editora+"', '"+qtd+"', '"+categoria+"');") != null){
             if(cadastraAutoresdosLivros(isbn, jtAutores))
@@ -26,6 +26,7 @@ public class livros {
         }
     }
     
+    //cadastra autores dos livros no banco
     private boolean cadastraAutoresdosLivros(String isbn, JTable jtAutores){
         String sql = "INSERT INTO livros_tem_autores VALUES ";
         for (int i = 0; i < jtAutores.getRowCount(); i++) {
@@ -38,10 +39,12 @@ public class livros {
         return serv.Acao(sql) != null;
     }
     
+    //apaga autores do livro especificado
     private boolean apagaAutoresdosLivros(String isbn){
         return serv.Acao("DELETE FROM livros_tem_autores WHERE isbn_livro = '"+isbn+"';") != null;
     }
     
+    //altera informações do livro no banco
     public void altera(String isbn, String titulo, String ano, String editora, String qtd, String categoria, JTable jtAutores){
         if(serv.Acao("UPDATE livros SET titulo = '"+titulo+"', ano_lancamento = '"+ano+"', editora = '"+editora+"', qtd_copias = '"+qtd+"', "
                     + "codigo_categoria = '"+categoria+"' WHERE isbn = '"+isbn+"';") != null){
@@ -53,6 +56,7 @@ public class livros {
         }
     }
     
+    //apaga livro
     public void apaga(String isbn){
         if(apagaAutoresdosLivros(isbn)){
             if(serv.Acao("DELETE FROM livros WHERE isbn = '"+isbn+"';") != null)
@@ -60,6 +64,7 @@ public class livros {
         }
     }
     
+    //consulta e pova tabela de livros por isbn, titulo, ano, editora, qtd, categoria e autor
     public void consulta(JTable jt, String isbn, String titulo, String ano, String editora, String qtd, String categoria, String autor){
         DefaultTableModel mod = (DefaultTableModel) jt.getModel();
         mod.setNumRows(0);
@@ -81,6 +86,7 @@ public class livros {
         }
     }
     
+    //consulta e povoa tabela de livros pela view agrupado por categoria
     public void consultaView(JTable jt, String isbn, String titulo, String ano, String editora, String qtd, String categoria, String autor){
         try {
             ArrayList<String> a = serv.Acao("SELECT * FROM viewLivrosbyCategoria "
@@ -101,6 +107,7 @@ public class livros {
         } catch (IndexOutOfBoundsException ioob) {}
     }
     
+    //consulta autores do livro especificado
     public void consultaAutoresdosLivros(JTable jtAutores, String isbn){
         DefaultTableModel mod = (DefaultTableModel) jtAutores.getModel();
         mod.setNumRows(0);
@@ -118,6 +125,7 @@ public class livros {
         }
     }
     
+    //povoa combobox de categorias
     public ArrayList<String> povoaCategorias(JComboBox cbCategorias){
         cbCategorias.removeAllItems();
         ArrayList<String> cods = new ArrayList<>();

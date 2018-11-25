@@ -7,7 +7,6 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
  * @author lucas, arquivo criado dia 24/11/2018 às 12:52:43
  */
 public class buscarbyViews {
@@ -20,6 +19,7 @@ public class buscarbyViews {
         this.serv = serv;
     }
     
+    //povoa comboBox pela sql passada no parâmetro
     public void povoaCombo (JComboBox cb, String sql) {
         try{
             ArrayList<String> r = serv.Acao(sql);
@@ -31,6 +31,7 @@ public class buscarbyViews {
         }catch(IndexOutOfBoundsException ioob){}
     }
     
+    //executa view de profbyCurso e povoa a tabela
     public void ProfbyCurso (JTable jt, String nome, String regime, String curso) {
         try {
             a = serv.Acao("SELECT * FROM viewProfbyCurso WHERE nome LIKE '" + nome + "%' AND regime_trabalho LIKE '" + regime + "%' AND nome_curso = '" + curso + "%';");
@@ -44,6 +45,7 @@ public class buscarbyViews {
         } catch (IndexOutOfBoundsException ioob) {}
     }
     
+    //executa views referente aos livros
     public void LivrosbyX (String view, JTable jt, String titulo, String autor, String ano, String editora, String categoria) {
         try {
             a = serv.Acao("SELECT * FROM " + view 

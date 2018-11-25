@@ -8,9 +8,9 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author angel, arquivo criado dia 05/11/2018 às 15:09:56
+ * @author angela, arquivo criado dia 05/11/2018 às 15:09:56
  */
+//Tela de cadastro de livros
 public class CadastroLivros extends javax.swing.JFrame {
 
     private Servicos serv;
@@ -19,6 +19,7 @@ public class CadastroLivros extends javax.swing.JFrame {
     private ArrayList<String> codCategorias;
     private ConsultaLivros consultaLivros;
     
+    //construtor de funcionamento normal da tela
     public CadastroLivros(Servicos serv) {
         this.serv = serv;
         livro = new livros(serv);
@@ -32,6 +33,7 @@ public class CadastroLivros extends javax.swing.JFrame {
         setIcon();
     }
     
+    //construtor usado para usar a tela como alteração de livros
     public CadastroLivros(ConsultaLivros consultaLivros, Servicos serv, String isbn, String titulo, String ano, String editora, String qtd, String categoria) {
         this.serv = serv;
         livro = new livros(serv);

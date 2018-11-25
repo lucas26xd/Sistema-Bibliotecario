@@ -7,15 +7,16 @@ import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
 /**
- *
  * @author lucas, arquivo criado dia 24/11/2018 às 17:50:28
  */
+//Tela de realizar reserva
 public class Reserva extends javax.swing.JFrame {
 
     private Servicos serv;
     private emprestimo emp;
     private String usuario_id;
     
+    //construtor de funcionamento normal da tela
     public Reserva(Servicos serv) {
         this.serv = serv;
         emp = new emprestimo(serv);

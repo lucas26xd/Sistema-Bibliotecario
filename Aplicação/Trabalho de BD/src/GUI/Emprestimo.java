@@ -7,15 +7,16 @@ import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
 /**
- *
  * @author lucas, arquivo criado dia 15/11/2018 às 17:44:16
  */
+//Tela de realizar emprestimo
 public class Emprestimo extends javax.swing.JFrame {
 
     private Servicos serv;
     private emprestimo emp;
     private String usuario_id;
     
+    //construtor de funcionamento normal da tela
     public Emprestimo(Servicos serv) {
         this.serv = serv;
         emp = new emprestimo(serv);

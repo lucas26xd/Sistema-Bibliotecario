@@ -9,8 +9,7 @@ import javax.swing.table.DefaultTableModel;
 
 
 /**
- *
- * @author angel, arquivo criado em 24/11/2018 às 19:24:08
+ * @author angela, arquivo criado em 24/11/2018 às 19:24:08
  */
 public class bibliotecario {
     
@@ -22,21 +21,25 @@ public class bibliotecario {
         user = new usuario(serv);
     }
     
+    //cadastra bibliotecario
     public void cadastra(String login, String nome, String endereco, String senha) {
         if(!user.cadastraUsuario(login, senha, nome, endereco, "bibliotecario").equals("0"))
             JOptionPane.showMessageDialog(null, "Cadastrado com Sucesso!");
     }       
     
+    //altera bibliotecario
     public void altera(String login, String senha, String nome, String endereco) {
         if(user.alteraUsuario(user.pegaID(login), nome, endereco, senha))
             JOptionPane.showMessageDialog(null, "Alterado com Sucesso!");
     }
     
+    //apaga bibliotecario
     public void apaga(String usuario_id) {
         if(serv.Acao("DELETE FROM usuarios WHERE id = '" +usuario_id+ "'; ") != null)
             JOptionPane.showMessageDialog(null, "Apagado com Sucesso!");
     }
     
+    //consulta e povoa a tabela de bibliotecario pelo endereco e nome
     public void consulta(JTable jt, String nome, String endereco) {        
         DefaultTableModel mod = (DefaultTableModel) jt.getModel();
         mod.setNumRows(0);
@@ -53,6 +56,7 @@ public class bibliotecario {
         }        
     }
     
+    //consulta e povoa os campos de bibliotecario
     public void consulta (String usuario_id, JTextField tfNome, JTextField tfEndereco, JTextField tfLogin){
         user.consultaUsuario(usuario_id, tfNome, tfEndereco, tfLogin);
     }

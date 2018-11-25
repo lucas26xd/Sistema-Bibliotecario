@@ -5,14 +5,15 @@ import Classes.cursos;
 import java.awt.Toolkit;
 
 /**
- *
  * @author lucas, arquivo criado dia 05/11/2018 às 14:31:47
  */
+//Tela de cadastro de curso
 public class CadastroCurso extends javax.swing.JFrame {
 
     private Servicos serv;
     private cursos cursos;
     
+    //construtor de funcionamento normal da tela
     public CadastroCurso(Servicos serv) {
         this.serv = serv;
         cursos = new cursos(serv);
@@ -23,6 +24,7 @@ public class CadastroCurso extends javax.swing.JFrame {
         setIcon();
     }
     
+    //construtor usado para usar a tela como alteração de curso
     public CadastroCurso(Servicos serv, String cod_curso, String nome_curso) {
         this.serv = serv;
         cursos = new cursos(serv);

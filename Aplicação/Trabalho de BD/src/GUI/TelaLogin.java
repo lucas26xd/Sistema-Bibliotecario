@@ -1,14 +1,18 @@
 package GUI;
 
-import BD.Inicia;
 import BD.Servicos;
 import Classes.usuario;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
 /**
- *
  * @author lucas, arquivo criado dia 06/11/2018 às 09:33:02
+ */
+
+/**
+ * Primeira tela do sistema, de fato, já com a conexão com o Banco iniciada,
+ * pode abrir a tela de cadastro de usuários ou entrar na tela principal do sistema após a autenticação
+ * do usuário, passando login e senha previamente cadastrado no banco de dados.
  */
 public class TelaLogin extends javax.swing.JFrame {
 
@@ -129,6 +133,7 @@ public class TelaLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
+        //Verifica se os dados de login e senha são correspondentes no banco e, caso seja abre a tela principal correspondente ao tipo de usuário que está logando neste instante
         if(user.autentica(tfLogin.getText(), tfSenha.getText())){
             if (user.pegaTipo(user.pegaID(tfLogin.getText())).matches("alunos|professores|funcionarios"))
                 new TelaPrincipalUsuario(serv, user.pegaID(tfLogin.getText())).setVisible(true);
@@ -179,7 +184,7 @@ public class TelaLogin extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaLogin(new Inicia().Inicia("root", "root", "equipe378981", "localhost")).setVisible(true);
+                new TelaLogin().setVisible(true);
             }
         });
     }

@@ -7,8 +7,12 @@ import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
 /**
- *
  * @author lucas, arquivo criado dia 23/11/2018 às 13:56:14
+ */
+
+/**
+ * Tela Principal do usuário comum (aluno, professor, funcionário) do sistema, onde contém todos 
+ * os botões que dão acesso as telas do sistema que são permitido o acesso à estes tipos de usuário.
  */
 public class TelaPrincipalUsuario extends javax.swing.JFrame {
 
