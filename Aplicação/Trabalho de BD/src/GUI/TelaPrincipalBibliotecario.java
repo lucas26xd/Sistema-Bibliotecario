@@ -84,7 +84,7 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
         configuracao = new javax.swing.JMenu();
         configUser = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela Principal");
         setResizable(false);
 
@@ -238,7 +238,7 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
     }//GEN-LAST:event_reservaActionPerformed
 
     private void configUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configUserActionPerformed
-        new CadastroUsuario(serv, usuario_id).setVisible(true);
+        new CadastroBibliotecario(serv, usuario_id).setVisible(true);
     }//GEN-LAST:event_configUserActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed

@@ -372,6 +372,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Configura&#xe7;&#xf5;es de Usu&#xe1;rio"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="configUserActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

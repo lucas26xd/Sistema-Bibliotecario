@@ -22,6 +22,22 @@ public class CadastroBibliotecario extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }
     
+    public CadastroBibliotecario(Servicos serv, String usuario_id){
+        this.serv = serv;
+        
+        bib = new bibliotecario(serv);
+        
+        initComponents();
+        setLocationRelativeTo(null);
+        
+        setTitle("Alterar Config. de Usuário");
+        Cadastrar.setText("Alterar");
+        Cadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/editar.png")));
+        
+        bib.consulta(usuario_id, tfNome, tfEndereco, tfLogin);
+        tfLogin.setEditable(false);
+    }
+    
     public CadastroBibliotecario(Servicos serv, ConsultaBibliotecario cb, String login, String nome, String endereco){
         this.serv = serv;
         this.cb = cb;

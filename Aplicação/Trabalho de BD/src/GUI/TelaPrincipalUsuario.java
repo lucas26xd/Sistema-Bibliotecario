@@ -79,7 +79,7 @@ public class TelaPrincipalUsuario extends javax.swing.JFrame {
         configuracao = new javax.swing.JMenu();
         configUser = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela Principal");
         setResizable(false);
 

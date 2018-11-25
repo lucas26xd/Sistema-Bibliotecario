@@ -4,6 +4,7 @@ import BD.Servicos;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -50,5 +51,9 @@ public class bibliotecario {
         } catch (IndexOutOfBoundsException ioob) {
             JOptionPane.showMessageDialog(null, "Erro na consulta!", "Erro", JOptionPane.ERROR_MESSAGE);
         }        
+    }
+    
+    public void consulta (String usuario_id, JTextField tfNome, JTextField tfEndereco, JTextField tfLogin){
+        user.consultaUsuario(usuario_id, tfNome, tfEndereco, tfLogin);
     }
 }    

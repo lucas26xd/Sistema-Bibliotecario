@@ -600,6 +600,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         configUser.setFont(new java.awt.Font("Ubuntu", 0, 15)); // NOI18N
         configUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/user.jpg"))); // NOI18N
         configUser.setText("Configurações de Usuário");
+        configUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                configUserActionPerformed(evt);
+            }
+        });
         config.add(configUser);
 
         BarraDeMenu.add(config);
@@ -748,6 +753,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void itemConsultaReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemConsultaReservaActionPerformed
         btnConsultaReservaActionPerformed(evt);
     }//GEN-LAST:event_itemConsultaReservaActionPerformed
+
+    private void configUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configUserActionPerformed
+        new CadastroBibliotecario(serv, usuario_id).setVisible(true);
+    }//GEN-LAST:event_configUserActionPerformed
 
    
     public static void main(String args[]) {
