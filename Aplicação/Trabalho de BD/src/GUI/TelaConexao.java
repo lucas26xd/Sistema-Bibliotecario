@@ -18,7 +18,7 @@ public class TelaConexao extends javax.swing.JFrame {
     }
 
     private void setIcon() {
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagens/conexao.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagens/conexaoBD.png")));
     }
     
     @SuppressWarnings("unchecked")
@@ -92,7 +92,7 @@ public class TelaConexao extends javax.swing.JFrame {
                     .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(tfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(tfLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         painelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {tfLogin, tfSenha});

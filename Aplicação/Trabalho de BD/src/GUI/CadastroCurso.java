@@ -134,11 +134,12 @@ public class CadastroCurso extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActionPerformed
-        if(btn.getText().equals("Alterar")){
+        if(btn.getText().equals("Alterar"))
             cursos.altera(tfCod.getText(), tfNome.getText());
-        }else{
+        else
             cursos.cadastra(tfCod.getText(), tfNome.getText());
-        }
+        tfCod.setText("");
+        tfNome.setText("");
     }//GEN-LAST:event_btnActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed

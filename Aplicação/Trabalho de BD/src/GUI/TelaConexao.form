@@ -58,7 +58,7 @@
                           <Component id="tfLogin" linkSize="1" min="-2" pref="229" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="30" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
