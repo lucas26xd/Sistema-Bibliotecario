@@ -1,6 +1,8 @@
 package GUI;
 
 import BD.Servicos;
+import Classes.bibliotecario;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -9,25 +11,66 @@ import BD.Servicos;
 public class CadastroBibliotecario extends javax.swing.JFrame {
 
     private Servicos serv;
+    private bibliotecario bib;
     
     public CadastroBibliotecario(Servicos serv) {
         this.serv = serv;
+        bib = new bibliotecario(serv);
+        
         initComponents();
         setLocationRelativeTo(null);
     }
     
+    public CadastroBibliotecario(Servicos serv, String login, String senha, String nome, String endereco){
+        this.serv = serv;
+        
+        bib = new bibliotecario(serv);
+        
+        initComponents();
+        setLocationRelativeTo(null);
+        
+        setTitle("Alterar Bibliotecário");
+        
+        Cadastrar.setText("Alterar");
+        tfLogin.setText(login);
+        tfLogin.setEditable(false);
+        pfSenha.setText(senha);
+        tfNome.setText(nome);
+        tfEndereco.setText(endereco);
+    }
+    
     private CadastroBibliotecario(){}
+    
+    private void limpar(){
+        tfLogin.setText("");
+        pfSenha.setText("");
+        tfNome.setText("");
+        tfEndereco.setText("");        
+    }
+    
+    private boolean camposPreenchidos(){
+        if(tfLogin.getText().length() == 0 && pfSenha.getText().length() == 0 &&
+            tfNome.getText().length() == 0 && tfEndereco.getText().length() == 0){
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios!", "Campos não preenchidos", JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+        return true;
+    }
    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPasswordField1 = new javax.swing.JPasswordField();
         painel = new javax.swing.JPanel();
         tfLogin = new javax.swing.JTextField();
         pfSenha = new javax.swing.JPasswordField();
         tfNome = new javax.swing.JTextField();
         tfEndereco = new javax.swing.JTextField();
         Cadastrar = new javax.swing.JButton();
+        btnVoltar = new javax.swing.JButton();
+
+        jPasswordField1.setText("jPasswordField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Bibliotecários");
@@ -52,45 +95,62 @@ public class CadastroBibliotecario extends javax.swing.JFrame {
         Cadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/ok30.png"))); // NOI18N
         Cadastrar.setText("Cadastrar");
         Cadastrar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        Cadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CadastrarActionPerformed(evt);
+            }
+        });
+
+        btnVoltar.setBackground(new java.awt.Color(255, 255, 255));
+        btnVoltar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/voltar.png"))); // NOI18N
+        btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout painelLayout = new javax.swing.GroupLayout(painel);
         painel.setLayout(painelLayout);
         painelLayout.setHorizontalGroup(
             painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelLayout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Cadastrar)
-                    .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(tfEndereco)
-                        .addComponent(pfSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
-                        .addComponent(tfLogin)
-                        .addComponent(tfNome)))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addGap(34, 34, 34)
+                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(painelLayout.createSequentialGroup()
+                        .addComponent(btnVoltar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                        .addComponent(Cadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfEndereco, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tfLogin, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pfSenha, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tfNome, javax.swing.GroupLayout.Alignment.LEADING))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         painelLayout.setVerticalGroup(
             painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelLayout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(tfLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addComponent(tfLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(pfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(tfEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tfEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(Cadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Cadastrar)
+                    .addComponent(btnVoltar))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(painel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(painel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -100,7 +160,23 @@ public class CadastroBibliotecario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-   
+    private void CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarActionPerformed
+        if(camposPreenchidos()){    
+            //if(Cadastrar.getText().equals("Alterar"))
+              //bib.altera(tfLogin.getText(), pfSenha.getText(), tfNome.getText(), tfEndereco.getText());               
+            //else
+                bib.cadastra(tfLogin.getText(), pfSenha.getText(), tfNome.getText(), tfEndereco.getText());
+            //if(cb != null)
+                //cb.consulta();
+            dispose();
+        }
+    }//GEN-LAST:event_CadastrarActionPerformed
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnVoltarActionPerformed
+
+    
     public static void main(String args[]) {
        
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -134,6 +210,8 @@ public class CadastroBibliotecario extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cadastrar;
+    private javax.swing.JButton btnVoltar;
+    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JPanel painel;
     private javax.swing.JPasswordField pfSenha;
     private javax.swing.JTextField tfEndereco;

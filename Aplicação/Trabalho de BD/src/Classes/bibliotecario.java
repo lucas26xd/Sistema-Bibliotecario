@@ -26,8 +26,8 @@ public class bibliotecario {
             JOptionPane.showMessageDialog(null, "Cadastrado com Sucesso!");
     }       
     
-    public void altera(String usuario_id, String nome, String endereco, String senha) {
-        if(user.alteraUsuario(usuario_id, nome, endereco, senha))
+    public void altera(String login, String senha, String nome, String endereco) {
+        if(user.alteraUsuario(login, senha, nome, endereco))
             JOptionPane.showMessageDialog(null, "Alterado com Sucesso!");
     }
     
