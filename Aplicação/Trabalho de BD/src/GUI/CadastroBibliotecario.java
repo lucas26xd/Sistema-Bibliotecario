@@ -15,7 +15,7 @@ public class CadastroBibliotecario extends javax.swing.JFrame {
     
     public CadastroBibliotecario(Servicos serv) {
         this.serv = serv;
-        bib = new bibliotecario(serv);
+        bib = new bibliotecario(serv);        
         
         initComponents();
         setLocationRelativeTo(null);
@@ -162,12 +162,10 @@ public class CadastroBibliotecario extends javax.swing.JFrame {
 
     private void CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarActionPerformed
         if(camposPreenchidos()){    
-            //if(Cadastrar.getText().equals("Alterar"))
-              //bib.altera(tfLogin.getText(), pfSenha.getText(), tfNome.getText(), tfEndereco.getText());               
-            //else
-                bib.cadastra(tfLogin.getText(), pfSenha.getText(), tfNome.getText(), tfEndereco.getText());
-            //if(cb != null)
-                //cb.consulta();
+            if(Cadastrar.getText().equals("Alterar"))
+                bib.altera(tfLogin.getText(), pfSenha.getText(), tfNome.getText(), tfEndereco.getText());               
+            else
+                bib.cadastra(tfLogin.getText(), pfSenha.getText(), tfNome.getText(), tfEndereco.getText());          
             dispose();
         }
     }//GEN-LAST:event_CadastrarActionPerformed
