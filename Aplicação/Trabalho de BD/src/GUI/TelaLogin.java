@@ -130,9 +130,9 @@ public class TelaLogin extends javax.swing.JFrame {
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         if(user.autentica(tfLogin.getText(), tfSenha.getText())){
-            if (user.pegaTipo(tfLogin.getText()).matches("alunos|professores|funcionarios"))
+            if (user.pegaTipo(user.pegaID(tfLogin.getText())).matches("alunos|professores|funcionarios"))
                 new TelaPrincipalUsuario(serv, user.pegaID(tfLogin.getText())).setVisible(true);
-            if (user.pegaTipo(tfLogin.getText()).matches("bibliotecario"))
+            if (user.pegaTipo(user.pegaID(tfLogin.getText())).matches("bibliotecario"))
                 new TelaPrincipalBibliotecario(serv, user.pegaID(tfLogin.getText())).setVisible(true);
             else
                 new TelaPrincipal(serv, user.pegaID(tfLogin.getText())).setVisible(true);

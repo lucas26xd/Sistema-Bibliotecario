@@ -46,9 +46,9 @@ public class usuario {
         }
     }
     
-    public String pegaTipo(String login) {
+    public String pegaTipo(String usuario_id) {
         try{
-            return serv.Acao("SELECT tipo_usuario FROM usuarios WHERE login = '" + login + "';").get(0);
+            return serv.Acao("SELECT tipo_usuario FROM usuarios WHERE id = '" + usuario_id + "';").get(0);
         }catch(IndexOutOfBoundsException ioob){
             return "";
         }
