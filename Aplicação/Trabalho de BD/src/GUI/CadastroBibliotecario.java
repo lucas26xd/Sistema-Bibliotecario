@@ -12,6 +12,7 @@ public class CadastroBibliotecario extends javax.swing.JFrame {
 
     private Servicos serv;
     private bibliotecario bib;
+    private ConsultaBibliotecario cb;
     
     public CadastroBibliotecario(Servicos serv) {
         this.serv = serv;
@@ -21,8 +22,9 @@ public class CadastroBibliotecario extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }
     
-    public CadastroBibliotecario(Servicos serv, String login, String senha, String nome, String endereco){
+    public CadastroBibliotecario(Servicos serv, ConsultaBibliotecario cb, String login, String nome, String endereco){
         this.serv = serv;
+        this.cb = cb;
         
         bib = new bibliotecario(serv);
         
@@ -32,9 +34,9 @@ public class CadastroBibliotecario extends javax.swing.JFrame {
         setTitle("Alterar Bibliotecário");
         
         Cadastrar.setText("Alterar");
+        Cadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/editar.png")));
         tfLogin.setText(login);
         tfLogin.setEditable(false);
-        pfSenha.setText(senha);
         tfNome.setText(nome);
         tfEndereco.setText(endereco);
     }
@@ -61,7 +63,6 @@ public class CadastroBibliotecario extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPasswordField1 = new javax.swing.JPasswordField();
         painel = new javax.swing.JPanel();
         tfLogin = new javax.swing.JTextField();
         pfSenha = new javax.swing.JPasswordField();
@@ -69,8 +70,6 @@ public class CadastroBibliotecario extends javax.swing.JFrame {
         tfEndereco = new javax.swing.JTextField();
         Cadastrar = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
-
-        jPasswordField1.setText("jPasswordField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Bibliotecários");
@@ -165,7 +164,9 @@ public class CadastroBibliotecario extends javax.swing.JFrame {
             if(Cadastrar.getText().equals("Alterar"))
                 bib.altera(tfLogin.getText(), pfSenha.getText(), tfNome.getText(), tfEndereco.getText());               
             else
-                bib.cadastra(tfLogin.getText(), pfSenha.getText(), tfNome.getText(), tfEndereco.getText());          
+                bib.cadastra(tfLogin.getText(), tfNome.getText(), tfEndereco.getText(), pfSenha.getText());
+            if (cb != null)
+                cb.consulta();
             dispose();
         }
     }//GEN-LAST:event_CadastrarActionPerformed
@@ -209,7 +210,6 @@ public class CadastroBibliotecario extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cadastrar;
     private javax.swing.JButton btnVoltar;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JPanel painel;
     private javax.swing.JPasswordField pfSenha;
     private javax.swing.JTextField tfEndereco;

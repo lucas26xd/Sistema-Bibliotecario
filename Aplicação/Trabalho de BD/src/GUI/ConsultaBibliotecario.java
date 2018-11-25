@@ -18,6 +18,12 @@ public class ConsultaBibliotecario extends javax.swing.JFrame {
               
         initComponents();
         setLocationRelativeTo(null);
+        
+        consulta();
+    }
+    
+    public void consulta(){
+        bib.consulta(jtBibliotecario, tfNome.getText(), tfEndereco.getText());
     }
     
     private ConsultaBibliotecario(){}
@@ -33,8 +39,10 @@ public class ConsultaBibliotecario extends javax.swing.JFrame {
         jtBibliotecario = new javax.swing.JTable();
         btnVoltar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Consulta de Bibliotecário");
         setBackground(new java.awt.Color(255, 255, 255));
+        setResizable(false);
 
         painel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -75,6 +83,11 @@ public class ConsultaBibliotecario extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jtBibliotecario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtBibliotecarioMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtBibliotecario);
 
         btnVoltar.setBackground(new java.awt.Color(255, 255, 255));
@@ -111,8 +124,8 @@ public class ConsultaBibliotecario extends javax.swing.JFrame {
             .addGroup(painelLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -130,7 +143,7 @@ public class ConsultaBibliotecario extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 322, Short.MAX_VALUE)
+            .addGap(0, 314, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addComponent(painel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -141,7 +154,7 @@ public class ConsultaBibliotecario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tfNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNomeActionPerformed
-        bib.consulta(jtBibliotecario, tfNome.getText(), tfEndereco.getText());
+        consulta();
     }//GEN-LAST:event_tfNomeActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
@@ -149,8 +162,15 @@ public class ConsultaBibliotecario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void tfEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfEnderecoActionPerformed
-        bib.consulta(jtBibliotecario, tfNome.getText(), tfEndereco.getText());
+        consulta();
     }//GEN-LAST:event_tfEnderecoActionPerformed
+
+    private void jtBibliotecarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtBibliotecarioMouseClicked
+        if (evt.getClickCount() >= 2) {
+            int row = jtBibliotecario.getSelectedRow();
+            new CadastroBibliotecario(serv, this, jtBibliotecario.getValueAt(row, 0)+"", jtBibliotecario.getValueAt(row, 1)+"", jtBibliotecario.getValueAt(row, 2)+"").setVisible(true);
+        }
+    }//GEN-LAST:event_jtBibliotecarioMouseClicked
 
    
     public static void main(String args[]) {

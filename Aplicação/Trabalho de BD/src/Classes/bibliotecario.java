@@ -27,7 +27,7 @@ public class bibliotecario {
     }       
     
     public void altera(String login, String senha, String nome, String endereco) {
-        if(user.alteraUsuario(login, senha, nome, endereco))
+        if(user.alteraUsuario(user.pegaID(login), nome, endereco, senha))
             JOptionPane.showMessageDialog(null, "Alterado com Sucesso!");
     }
     
@@ -41,8 +41,8 @@ public class bibliotecario {
         mod.setNumRows(0);
         
         try {
-            if(serv.Acao("SELECT login, nome, endereco FROM usuarios WHERE nome LIKE '%" +nome+ "%' AND endereco LIKE '%" +endereco+ "%';") != null) { 
-                ArrayList<String> result = serv.Acao("SELECT login, nome, endereco FROM usuarios WHERE nome LIKE '%" +nome+ "%' AND endereco LIKE '%" +endereco+ "%';");
+            ArrayList<String> result = serv.Acao("SELECT login, nome, endereco FROM usuarios WHERE nome LIKE '%" +nome+ "%' AND endereco LIKE '%" +endereco+ "%' AND tipo_usuario = 'bibliotecario';");
+            if (result != null) {
                 for (int i = 0; i < result.size(); i++) {
                     mod.addRow(new Object[]{result.get(i), result.get(++i), result.get(++i)});
                 }

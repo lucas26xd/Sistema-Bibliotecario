@@ -105,9 +105,9 @@ public class ConsultaEmprestimo extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         cbNao = new javax.swing.JCheckBox();
         cbSim = new javax.swing.JCheckBox();
+        tfDataInicial = new com.toedter.calendar.JDateChooser();
         jLabel1 = new javax.swing.JLabel();
         tfDataFinal = new com.toedter.calendar.JDateChooser();
-        tfDataInicial = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Consulta de Empréstimos");
@@ -211,6 +211,13 @@ public class ConsultaEmprestimo extends javax.swing.JFrame {
                 .addGap(0, 0, 0))
         );
 
+        tfDataInicial.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Data Final", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
+        tfDataInicial.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                tfDataInicialPropertyChange(evt);
+            }
+        });
+
         jLabel1.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
         jLabel1.setText("<-->");
 
@@ -218,13 +225,6 @@ public class ConsultaEmprestimo extends javax.swing.JFrame {
         tfDataFinal.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 tfDataFinalPropertyChange(evt);
-            }
-        });
-
-        tfDataInicial.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Data Final", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
-        tfDataInicial.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                tfDataInicialPropertyChange(evt);
             }
         });
 
@@ -246,12 +246,12 @@ public class ConsultaEmprestimo extends javax.swing.JFrame {
                                 .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnVoltar)
                                     .addGroup(painelLayout.createSequentialGroup()
-                                        .addComponent(tfDataInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(tfDataInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel1)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(tfDataFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 110, Short.MAX_VALUE)))
+                                        .addComponent(tfDataFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 70, Short.MAX_VALUE)))
                         .addGap(18, 18, 18)
                         .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -268,10 +268,10 @@ public class ConsultaEmprestimo extends javax.swing.JFrame {
                     .addComponent(tfTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 14, Short.MAX_VALUE)
                 .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(tfDataFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(tfDataInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -319,10 +319,12 @@ public class ConsultaEmprestimo extends javax.swing.JFrame {
     }//GEN-LAST:event_cbNaoMouseClicked
 
     private void tfDataFinalPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tfDataFinalPropertyChange
+        if(tfDataFinal.getDate() != null)
         consulta();
     }//GEN-LAST:event_tfDataFinalPropertyChange
 
     private void tfDataInicialPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tfDataInicialPropertyChange
+        if(tfDataInicial.getDate() != null)
         consulta();
     }//GEN-LAST:event_tfDataInicialPropertyChange
 
