@@ -77,7 +77,9 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
         consultaReserva = new javax.swing.JMenuItem();
         separador1 = new javax.swing.JPopupMenu.Separator();
         livros = new javax.swing.JMenuItem();
+        separador3 = new javax.swing.JPopupMenu.Separator();
         usuario = new javax.swing.JMenuItem();
+        consultaUsuario = new javax.swing.JMenuItem();
         separador2 = new javax.swing.JPopupMenu.Separator();
         emprestimos = new javax.swing.JMenuItem();
         consultaEmprestimos = new javax.swing.JMenuItem();
@@ -131,7 +133,7 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        biblioteca.setForeground(new java.awt.Color(255, 255, 255));
+        biblioteca.setForeground(new java.awt.Color(0, 10, 85));
         biblioteca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/livros.png"))); // NOI18N
         biblioteca.setText("Biblioteca");
         biblioteca.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
@@ -166,6 +168,7 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
             }
         });
         biblioteca.add(livros);
+        biblioteca.add(separador3);
 
         usuario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.CTRL_MASK));
         usuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/usuario30.png"))); // NOI18N
@@ -176,6 +179,16 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
             }
         });
         biblioteca.add(usuario);
+
+        consultaUsuario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        consultaUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/buscausuario30.png"))); // NOI18N
+        consultaUsuario.setText("Consultar Usuário");
+        consultaUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultaUsuarioActionPerformed(evt);
+            }
+        });
+        biblioteca.add(consultaUsuario);
         biblioteca.add(separador2);
 
         emprestimos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
@@ -200,7 +213,7 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
 
         barra_menu.add(biblioteca);
 
-        configuracao.setForeground(new java.awt.Color(255, 255, 255));
+        configuracao.setForeground(new java.awt.Color(0, 10, 85));
         configuracao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/config.png"))); // NOI18N
         configuracao.setText("Configurações");
         configuracao.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
@@ -265,8 +278,14 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
     }//GEN-LAST:event_consultaReservaActionPerformed
 
     private void consultaEmprestimosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaEmprestimosActionPerformed
-        new ConsultaEmprestimo(serv).setVisible(true);
+        ConsultaEmprestimo ce = new ConsultaEmprestimo(serv);
+        ce.podeDarBaixa();
+        ce.setVisible(true);
     }//GEN-LAST:event_consultaEmprestimosActionPerformed
+
+    private void consultaUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaUsuarioActionPerformed
+        new ConsultaUsuario(serv).setVisible(true);
+    }//GEN-LAST:event_consultaUsuarioActionPerformed
 
     public static void main(String args[]) {
 
@@ -308,6 +327,7 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
     private javax.swing.JMenu configuracao;
     private javax.swing.JMenuItem consultaEmprestimos;
     private javax.swing.JMenuItem consultaReserva;
+    private javax.swing.JMenuItem consultaUsuario;
     private javax.swing.JMenuItem emprestimos;
     private javax.swing.JLabel img;
     private javax.swing.JMenuItem livros;
@@ -315,6 +335,7 @@ public class TelaPrincipalBibliotecario extends javax.swing.JFrame {
     private javax.swing.JMenuItem reserva;
     private javax.swing.JPopupMenu.Separator separador1;
     private javax.swing.JPopupMenu.Separator separador2;
+    private javax.swing.JPopupMenu.Separator separador3;
     private javax.swing.JMenuItem usuario;
     // End of variables declaration//GEN-END:variables
 }

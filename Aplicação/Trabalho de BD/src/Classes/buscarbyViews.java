@@ -22,10 +22,10 @@ public class buscarbyViews {
     
     public void povoaCombo (JComboBox cb, String sql) {
         try{
-            a = serv.Acao(sql);
-            if(a != null){
-                for (int i = 0; i < a.size(); i++) {
-                    cb.addItem(a.get(i));
+            ArrayList<String> r = serv.Acao(sql);
+            if(r != null){
+                for (int i = 0; i < r.size(); i++) {
+                    cb.addItem(r.get(i));
                 }
             }
         }catch(IndexOutOfBoundsException ioob){}
@@ -44,9 +44,11 @@ public class buscarbyViews {
         } catch (IndexOutOfBoundsException ioob) {}
     }
     
-    public void LivrosbyX (String view, JTable jt, String editora, String categoria) {
+    public void LivrosbyX (String view, JTable jt, String titulo, String autor, String ano, String editora, String categoria) {
         try {
-            a = serv.Acao("SELECT * FROM " + view + " WHERE editora LIKE '" + editora + "%' AND descricao LIKE '" + categoria + "%';");
+            a = serv.Acao("SELECT * FROM " + view 
+                    + " WHERE ano_lancamento LIKE '" + ano + "%' AND nome LIKE '%" + autor + "%' AND titulo LIKE '" + titulo + "%' "
+                    + "AND editora LIKE '" + editora + "%' AND descricao LIKE '" + categoria + "%';");
             String isbn, emprestados, reservas;
             if (a != null) {
                 mod = (DefaultTableModel) jt.getModel();

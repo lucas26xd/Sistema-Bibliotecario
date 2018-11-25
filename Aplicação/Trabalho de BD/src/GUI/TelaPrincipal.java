@@ -394,10 +394,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         BarraDeMenu.setForeground(new java.awt.Color(255, 255, 255));
         BarraDeMenu.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
-        menuBiblioteca.setForeground(new java.awt.Color(255, 255, 255));
+        menuBiblioteca.setForeground(new java.awt.Color(0, 10, 85));
         menuBiblioteca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/livros.png"))); // NOI18N
         menuBiblioteca.setText("Biblioteca");
-        menuBiblioteca.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        menuBiblioteca.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
 
         itemEmprestimo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
         itemEmprestimo.setFont(new java.awt.Font("Ubuntu", 0, 15)); // NOI18N
@@ -446,10 +446,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         BarraDeMenu.add(menuBiblioteca);
 
-        menuCadastros.setForeground(new java.awt.Color(255, 255, 255));
+        menuCadastros.setForeground(new java.awt.Color(0, 10, 85));
         menuCadastros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/adcionar30.png"))); // NOI18N
         menuCadastros.setText("Cadastros");
-        menuCadastros.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        menuCadastros.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
 
         itemAutor.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
         itemAutor.setFont(new java.awt.Font("Ubuntu", 0, 15)); // NOI18N
@@ -514,10 +514,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         BarraDeMenu.add(menuCadastros);
 
-        menuConsultas.setForeground(new java.awt.Color(255, 255, 255));
+        menuConsultas.setForeground(new java.awt.Color(0, 10, 85));
         menuConsultas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/search.png"))); // NOI18N
         menuConsultas.setText("Consultas");
-        menuConsultas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        menuConsultas.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
 
         itemCAutor.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         itemCAutor.setFont(new java.awt.Font("Ubuntu", 0, 15)); // NOI18N
@@ -592,9 +592,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         BarraDeMenu.add(menuConsultas);
 
-        config.setForeground(new java.awt.Color(255, 255, 255));
+        config.setForeground(new java.awt.Color(0, 10, 85));
         config.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/config.png"))); // NOI18N
         config.setText("Configurações");
+        config.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
 
         configUser.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_K, java.awt.event.InputEvent.CTRL_MASK));
         configUser.setFont(new java.awt.Font("Ubuntu", 0, 15)); // NOI18N
@@ -747,7 +748,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConsultaReservaActionPerformed
 
     private void btnConsultaEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaEmprestimoActionPerformed
-        new ConsultaEmprestimo(serv).setVisible(true);
+        ConsultaEmprestimo ce = new ConsultaEmprestimo(serv);
+        ce.podeDarBaixa();
+        ce.setVisible(true);
     }//GEN-LAST:event_btnConsultaEmprestimoActionPerformed
 
     private void itemConsultaReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemConsultaReservaActionPerformed

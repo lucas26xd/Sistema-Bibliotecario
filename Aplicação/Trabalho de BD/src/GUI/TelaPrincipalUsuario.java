@@ -76,6 +76,7 @@ public class TelaPrincipalUsuario extends javax.swing.JFrame {
         reserva = new javax.swing.JMenuItem();
         professores = new javax.swing.JMenuItem();
         livros = new javax.swing.JMenuItem();
+        emprestimos = new javax.swing.JMenuItem();
         configuracao = new javax.swing.JMenu();
         configUser = new javax.swing.JMenuItem();
 
@@ -126,7 +127,7 @@ public class TelaPrincipalUsuario extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        biblioteca.setForeground(new java.awt.Color(255, 255, 255));
+        biblioteca.setForeground(new java.awt.Color(0, 10, 85));
         biblioteca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/livros.png"))); // NOI18N
         biblioteca.setText("Biblioteca");
         biblioteca.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
@@ -161,9 +162,19 @@ public class TelaPrincipalUsuario extends javax.swing.JFrame {
         });
         biblioteca.add(livros);
 
+        emprestimos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
+        emprestimos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/buscaemprestimo30.png"))); // NOI18N
+        emprestimos.setText("Consulta seus Empréstimos");
+        emprestimos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emprestimosActionPerformed(evt);
+            }
+        });
+        biblioteca.add(emprestimos);
+
         barra_menu.add(biblioteca);
 
-        configuracao.setForeground(new java.awt.Color(255, 255, 255));
+        configuracao.setForeground(new java.awt.Color(0, 10, 85));
         configuracao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/config.png"))); // NOI18N
         configuracao.setText("Configurações");
         configuracao.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
@@ -219,6 +230,12 @@ public class TelaPrincipalUsuario extends javax.swing.JFrame {
         new ConsultaViewLivros(serv).setVisible(true);
     }//GEN-LAST:event_livrosActionPerformed
 
+    private void emprestimosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emprestimosActionPerformed
+        ConsultaEmprestimo ce = new ConsultaEmprestimo(serv);
+        ce.setaUsuarioID(usuario_id);
+        ce.setVisible(true);
+    }//GEN-LAST:event_emprestimosActionPerformed
+
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -257,6 +274,7 @@ public class TelaPrincipalUsuario extends javax.swing.JFrame {
     private javax.swing.JButton btnLogout;
     private javax.swing.JMenuItem configUser;
     private javax.swing.JMenu configuracao;
+    private javax.swing.JMenuItem emprestimos;
     private javax.swing.JLabel img;
     private javax.swing.JMenuItem livros;
     private javax.swing.JPanel painel;

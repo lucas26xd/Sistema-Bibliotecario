@@ -23,7 +23,7 @@ public class ConsultaViewLivros extends javax.swing.JFrame {
         
         views.povoaCombo(cbCategoria, "SELECT descricao FROM categorias;");
         cbCategoria.setSelectedIndex(-1);
-        
+                
         consulta();
         
         setIcon();
@@ -45,8 +45,8 @@ public class ConsultaViewLivros extends javax.swing.JFrame {
             view = "viewLivrosbyEditora";
         else if (rbAutor.isSelected())
             view = "viewLivrosbyAutor";
-        String categoria = (cbCategoria.getSelectedItem() == null ? "" : cbCategoria.getSelectedItem())+"";
-        views.LivrosbyX(view, jtLivros, tfEditora.getText(), categoria);
+        String categoria = (cbCategoria.getSelectedIndex() == -1 ? "" : cbCategoria.getSelectedItem())+"";
+        views.LivrosbyX(view, jtLivros, tfTitulo.getText(), tfAutor.getText(), tfAno.getText(), tfEditora.getText(), categoria);
     }
     
     @SuppressWarnings("unchecked")
@@ -66,6 +66,9 @@ public class ConsultaViewLivros extends javax.swing.JFrame {
         rbAno = new javax.swing.JRadioButton();
         rbAutor = new javax.swing.JRadioButton();
         btnVoltar = new javax.swing.JButton();
+        tfTitulo = new javax.swing.JTextField();
+        tfAno = new javax.swing.JTextField();
+        tfAutor = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Consulta de Livros");
@@ -101,11 +104,11 @@ public class ConsultaViewLivros extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ISBN", "Titulo", "Ano", "Editora", "Cópias", "Emprestados", "Reservas", "Categoria"
+                "ISBN", "Titulo", "Ano", "Editora", "Cópias", "Emprestados", "Reservas", "Categoria", "Autor"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -191,6 +194,30 @@ public class ConsultaViewLivros extends javax.swing.JFrame {
             }
         });
 
+        tfTitulo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        tfTitulo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Título", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
+        tfTitulo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfTituloActionPerformed(evt);
+            }
+        });
+
+        tfAno.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        tfAno.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ano de Publicação", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
+        tfAno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfAnoActionPerformed(evt);
+            }
+        });
+
+        tfAutor.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        tfAutor.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nome do Autor", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
+        tfAutor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfAutorActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout painelLayout = new javax.swing.GroupLayout(painel);
         painel.setLayout(painelLayout);
         painelLayout.setHorizontalGroup(
@@ -202,31 +229,43 @@ public class ConsultaViewLivros extends javax.swing.JFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(painelLayout.createSequentialGroup()
                         .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnVoltar)
                             .addGroup(painelLayout.createSequentialGroup()
-                                .addComponent(tfEditora, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tfEditora, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(btnVoltar))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                    .addComponent(cbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(18, 18, 18)
+                        .addComponent(tfAno))
+                    .addGroup(painelLayout.createSequentialGroup()
+                        .addComponent(tfTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addComponent(tfAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         painelLayout.setVerticalGroup(
             painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
-                .addGap(1, 1, 1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfEditora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(tfEditora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tfAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnVoltar)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -252,7 +291,8 @@ public class ConsultaViewLivros extends javax.swing.JFrame {
     }//GEN-LAST:event_rbCategoriaMouseClicked
 
     private void cbCategoriaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbCategoriaItemStateChanged
-        consulta();
+        if (cbCategoria.getSelectedIndex() != -1)
+            consulta();
     }//GEN-LAST:event_cbCategoriaItemStateChanged
 
     private void rbEditoraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbEditoraMouseClicked
@@ -270,6 +310,18 @@ public class ConsultaViewLivros extends javax.swing.JFrame {
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void tfTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfTituloActionPerformed
+        consulta();
+    }//GEN-LAST:event_tfTituloActionPerformed
+
+    private void tfAnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfAnoActionPerformed
+        consulta();
+    }//GEN-LAST:event_tfAnoActionPerformed
+
+    private void tfAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfAutorActionPerformed
+        consulta();
+    }//GEN-LAST:event_tfAutorActionPerformed
 
     public static void main(String args[]) {
 
@@ -315,6 +367,9 @@ public class ConsultaViewLivros extends javax.swing.JFrame {
     private javax.swing.JRadioButton rbAutor;
     private javax.swing.JRadioButton rbCategoria;
     private javax.swing.JRadioButton rbEditora;
+    private javax.swing.JTextField tfAno;
+    private javax.swing.JTextField tfAutor;
     private javax.swing.JTextField tfEditora;
+    private javax.swing.JTextField tfTitulo;
     // End of variables declaration//GEN-END:variables
 }

@@ -59,7 +59,7 @@ public class ConsultaUsuario extends javax.swing.JFrame {
     
     private ConsultaUsuario(){}
     
-    private void consulta () {
+    public void consulta () {
         String tipo = "";
         switch (cbTipo.getSelectedIndex()) {
             case 0:
@@ -212,7 +212,9 @@ public class ConsultaUsuario extends javax.swing.JFrame {
                 res.setaValoresUsuario(user.pegaID(jtUsuario.getValueAt(row, 1)+""), jtUsuario.getValueAt(row, 0)+"", jtUsuario.getValueAt(row, 3)+"");
                 dispose();
             } else {
-                new CadastroUsuario(serv, user.pegaID(jtUsuario.getValueAt(row, 1)+"")).setVisible(true);
+                CadastroUsuario cadUser = new CadastroUsuario(serv, user.pegaID(jtUsuario.getValueAt(row, 1)+""));
+                cadUser.setConsultaUsuario(this);
+                cadUser.setVisible(true);                
             }
         }
     }//GEN-LAST:event_jtUsuarioMouseClicked

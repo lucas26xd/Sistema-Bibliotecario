@@ -198,24 +198,33 @@ public class emprestimo {
             JOptionPane.showMessageDialog(null, "Alterado com Sucesso!");
     }
 
+    public void darBaixaEmprestimo(String usuario_id, String isbn, String data){
+        if (serv.Acao("UPDATE emprestimo SET entregue = 'Sim' WHERE usuarios_id = '" + usuario_id + "' AND "
+                        + "isbn_livro = '" + isbn + "' AND data = '" + f.converteDataJ2BD(data) + "';") != null)
+            JOptionPane.showMessageDialog(null, "Livro Entregue!");
+    }
+    
     public void cadastraReserva(String usuario_id, String isbn, String data) {
         if(serv.Acao("INSERT INTO reserva VALUES ('" + usuario_id + "', '" + isbn + "', '" + f.converteDataJ2BD(data) + "', 'Não');") != null)
             JOptionPane.showMessageDialog(null, "Reservado com Sucesso!");
     }
 
-    public void consultar(JTable jt, String sql) {
+    public ArrayList<String> consultar(JTable jt, String sql) {
         try {
-            ArrayList<String> a = serv.Acao(sql);
+            ArrayList<String> a = serv.Acao(sql), b = new ArrayList<>();
             if (a != null) {
                 DefaultTableModel mod = (DefaultTableModel) jt.getModel();
                 mod.setNumRows(0);
                 for (int i = 0; i < a.size(); i++) {
+                    b.add(a.get(i++));
                     mod.addRow(new Object[]{a.get(i), a.get(++i), a.get(++i), f.converteDataBD2J(a.get(++i)), f.converteDataBD2J(a.get(++i)), a.get(++i)});
                 }
             }
+            return b;
         } catch (IndexOutOfBoundsException ioob) {
             JOptionPane.showMessageDialog(null, "Erro na consulta!", "Erro", JOptionPane.ERROR_MESSAGE);
         }
+        return null;
     }
     
     public void consultarReserva(JTable jt, String sql) {

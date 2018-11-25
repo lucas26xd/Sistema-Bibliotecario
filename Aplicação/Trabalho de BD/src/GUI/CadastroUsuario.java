@@ -18,6 +18,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
     private String usuario_id = "";
     private DefaultTableModel mod;
     private ArrayList<String> cods;
+    private ConsultaUsuario cUser;
     
     public CadastroUsuario(Servicos serv) {
         this.serv = serv;
@@ -108,6 +109,10 @@ public class CadastroUsuario extends javax.swing.JFrame {
         cbCursoAluno.setEnabled(false);
         cbCursoProf.setEnabled(false);
         cbRegime.setEnabled(false);
+    }
+    
+    public void setConsultaUsuario(ConsultaUsuario cUser){
+        this.cUser = cUser;
     }
     
     @SuppressWarnings("unchecked")
@@ -271,11 +276,6 @@ public class CadastroUsuario extends javax.swing.JFrame {
 
         cbCursoAluno.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cbCursoAluno.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Curso", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
-        cbCursoAluno.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbCursoAlunoActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout painelAlunoLayout = new javax.swing.GroupLayout(painelAluno);
         painelAluno.setLayout(painelAlunoLayout);
@@ -584,7 +584,12 @@ public class CadastroUsuario extends javax.swing.JFrame {
                         break;
                 }
             }
-            dispose();
+            if (b) {
+                if (cUser != null)
+                    cUser.consulta();
+                dispose();
+            } else
+                serv.Acao("DELETE FROM usuarios WHERE id = '" + usuario_id + "';");
         } else
             JOptionPane.showMessageDialog(null, "Preencha todos os campos corretamente!", "Campos obrigatórios", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_btnActionPerformed
@@ -631,14 +636,12 @@ public class CadastroUsuario extends javax.swing.JFrame {
         if(!usuario_id.equals("")){
             if(JOptionPane.showConfirmDialog(null, "Deseja realmente excluir o registro deste usuário?", "Excluir?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
                 u.apaga(usuario_id);
+                if (cUser != null)
+                    cUser.consulta();
                 dispose();
             }
         }
     }//GEN-LAST:event_btnApagarActionPerformed
-
-    private void cbCursoAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCursoAlunoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbCursoAlunoActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         dispose();

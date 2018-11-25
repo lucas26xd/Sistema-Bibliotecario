@@ -6,6 +6,7 @@ import Classes.funcoes;
 import com.toedter.calendar.JDateChooser;
 import java.awt.Toolkit;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
@@ -18,6 +19,9 @@ public class ConsultaEmprestimo extends javax.swing.JFrame {
     private Servicos serv;
     private emprestimo emp;
     private funcoes f = new funcoes();
+    private String usuario_id = "";
+    private boolean podeDarBaixa = false;
+    private ArrayList<String> usuarios_ids;
     
     public ConsultaEmprestimo(Servicos serv) {
         this.serv = serv;
@@ -37,10 +41,19 @@ public class ConsultaEmprestimo extends javax.swing.JFrame {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagens/buscaemprestimo70.png")));
     }
     
+    public void setaUsuarioID(String usuario_id){
+        this.usuario_id = usuario_id;
+        consulta();
+    }
+    
+    public void podeDarBaixa(){
+        podeDarBaixa = true;
+    }
+    
     private ConsultaEmprestimo(){}
     
     private void consulta(){
-        String cond = "", entregue = "", sql = "SELECT isbn, titulo, nome, data, data_entrega, entregue "
+        String cond = "", entregue = "", sql = "SELECT id, isbn, titulo, nome, data, data_entrega, entregue "
                                                 + "FROM ((emprestimo JOIN livros ON isbn = isbn_livro) "
                                                 + "JOIN usuarios ON usuarios_id = id)";
         
@@ -54,9 +67,11 @@ public class ConsultaEmprestimo extends javax.swing.JFrame {
         cond = "data BETWEEN '" + dataFormatada(tfDataInicial) + "' AND '" + dataFormatada(tfDataFinal) + "' AND "
                 + "titulo LIKE '%" + tfTitulo.getText() + "%' AND nome LIKE '%" + tfNome.getText() + "%' AND isbn LIKE '" + tfISBN.getText() + "%'";
         
-        sql += " WHERE " + cond + entregue + ";";
+        if (!usuario_id.equals(""))
+            entregue += " AND id = '" + usuario_id + "'";
+        sql += " WHERE " + cond + entregue + " GROUP BY entregue, isbn, titulo, nome, data, data_entrega;";
         
-        emp.consultar(jtEmprestimo, sql);
+        usuarios_ids = emp.consultar(jtEmprestimo, sql);
     }
     
     private void setDatas(){
@@ -129,6 +144,11 @@ public class ConsultaEmprestimo extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        jtEmprestimo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtEmprestimoMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(jtEmprestimo);
@@ -327,6 +347,18 @@ public class ConsultaEmprestimo extends javax.swing.JFrame {
         if(tfDataInicial.getDate() != null)
         consulta();
     }//GEN-LAST:event_tfDataInicialPropertyChange
+
+    private void jtEmprestimoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtEmprestimoMouseClicked
+        if (podeDarBaixa) {
+            if (JOptionPane.showConfirmDialog(null, "Deseja realmente dar baixa neste Empréstimo?", "Dar baixa?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                if (usuarios_ids != null){
+                    int row = jtEmprestimo.getSelectedRow();
+                    emp.darBaixaEmprestimo(usuarios_ids.get(row), jtEmprestimo.getValueAt(row, 0)+"", jtEmprestimo.getValueAt(row, 3)+"");
+                    consulta();
+                }
+            }
+        }
+    }//GEN-LAST:event_jtEmprestimoMouseClicked
 
     public static void main(String args[]) {
 
