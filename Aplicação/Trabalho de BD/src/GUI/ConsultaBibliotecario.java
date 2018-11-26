@@ -2,6 +2,7 @@ package GUI;
 
 import BD.Servicos;
 import Classes.bibliotecario;
+import java.awt.Toolkit;
 
 /**
  * @author angela, arquivo criado dia 25/11/2018 às 00:13:37
@@ -21,6 +22,12 @@ public class ConsultaBibliotecario extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         
         consulta();
+        
+        setIcon();
+    }
+    
+    private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagens/buscabibliotecario70.png")));
     }
     
     public void consulta(){

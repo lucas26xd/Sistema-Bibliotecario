@@ -224,8 +224,8 @@ public class TelaPrincipalUsuario extends javax.swing.JFrame {
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         if(JOptionPane.showConfirmDialog(null, "Deseja realmente sair do sistema?", "Sair?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
-            dispose();
             new TelaLogin(serv).setVisible(true);
+            dispose();
         }
     }//GEN-LAST:event_btnLogoutActionPerformed
 

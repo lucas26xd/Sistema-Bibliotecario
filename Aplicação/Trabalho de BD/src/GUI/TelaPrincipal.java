@@ -4,6 +4,7 @@ import BD.Servicos;
 import Classes.funcoes;
 import Classes.usuario;
 import java.awt.Toolkit;
+import javax.swing.JOptionPane;
 
 /**
  * @author angela, arquivo criado dia 09/11/2018 às 19:47:26
@@ -730,8 +731,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_itemReservaActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
-        new TelaLogin(serv).setVisible(true);
-        dispose();
+        if(JOptionPane.showConfirmDialog(null, "Deseja realmente sair do sistema?", "Sair?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+            new TelaLogin(serv).setVisible(true);
+            dispose();
+        }
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     private void itemConsultaEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemConsultaEmprestimoActionPerformed
