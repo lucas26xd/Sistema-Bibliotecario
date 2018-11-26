@@ -2,6 +2,7 @@ package GUI;
 
 import BD.Servicos;
 import Classes.bibliotecario;
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,6 +22,8 @@ public class CadastroBibliotecario extends javax.swing.JFrame {
         
         initComponents();
         setLocationRelativeTo(null);
+        
+        setIcon();
     }
     
     //construtor que é chamado sempre que se deseja alterar o bibliotecário com ID pasado no parâmetro
@@ -38,6 +41,8 @@ public class CadastroBibliotecario extends javax.swing.JFrame {
         
         bib.consulta(usuario_id, tfNome, tfEndereco, tfLogin);
         tfLogin.setEditable(false);
+        
+        setIcon();
     }
     
     //construtor que modifica a visualização e passa a alterar o bibliotecário
@@ -58,6 +63,12 @@ public class CadastroBibliotecario extends javax.swing.JFrame {
         tfLogin.setEditable(false);
         tfNome.setText(nome);
         tfEndereco.setText(endereco);
+        
+        setIcon();
+    }
+    
+    private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagens/bibliotecario70.png")));
     }
     
     private CadastroBibliotecario(){}

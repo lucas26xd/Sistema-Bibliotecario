@@ -44,7 +44,9 @@ public class ConsultaCursos extends javax.swing.JFrame {
         jtCursos = new javax.swing.JTable();
         btnVoltar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Consulta de Cursos");
+        setResizable(false);
 
         painel.setBackground(new java.awt.Color(255, 255, 255));
 

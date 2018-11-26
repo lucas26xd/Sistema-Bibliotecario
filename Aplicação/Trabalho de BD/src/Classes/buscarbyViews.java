@@ -34,7 +34,7 @@ public class buscarbyViews {
     //executa view de profbyCurso e povoa a tabela
     public void ProfbyCurso (JTable jt, String nome, String regime, String curso) {
         try {
-            a = serv.Acao("SELECT * FROM viewProfbyCurso WHERE nome LIKE '" + nome + "%' AND regime_trabalho LIKE '" + regime + "%' AND nome_curso = '" + curso + "%';");
+            a = serv.Acao("SELECT * FROM viewProfbyCurso WHERE nome LIKE '" + nome + "%' AND regime_trabalho = '" + regime + "' AND nome_curso LIKE '" + curso + "%';");
             if (a != null) {
                 mod = (DefaultTableModel) jt.getModel();
                 mod.setNumRows(0);
