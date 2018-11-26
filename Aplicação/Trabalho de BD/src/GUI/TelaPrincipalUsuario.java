@@ -78,6 +78,7 @@ public class TelaPrincipalUsuario extends javax.swing.JFrame {
         barra_menu = new javax.swing.JMenuBar();
         biblioteca = new javax.swing.JMenu();
         reserva = new javax.swing.JMenuItem();
+        conssultaReserva = new javax.swing.JMenuItem();
         professores = new javax.swing.JMenuItem();
         livros = new javax.swing.JMenuItem();
         emprestimos = new javax.swing.JMenuItem();
@@ -145,6 +146,16 @@ public class TelaPrincipalUsuario extends javax.swing.JFrame {
             }
         });
         biblioteca.add(reserva);
+
+        conssultaReserva.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        conssultaReserva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/buscareserva30.png"))); // NOI18N
+        conssultaReserva.setText("Consultar suas Reservas");
+        conssultaReserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                conssultaReservaActionPerformed(evt);
+            }
+        });
+        biblioteca.add(conssultaReserva);
 
         professores.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
         professores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/buscausuario30.png"))); // NOI18N
@@ -240,6 +251,12 @@ public class TelaPrincipalUsuario extends javax.swing.JFrame {
         ce.setVisible(true);
     }//GEN-LAST:event_emprestimosActionPerformed
 
+    private void conssultaReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_conssultaReservaActionPerformed
+        ConsultaReserva cr = new ConsultaReserva(serv);
+        cr.setaUsuarioID(usuario_id);
+        cr.setVisible(true);
+    }//GEN-LAST:event_conssultaReservaActionPerformed
+
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -278,6 +295,7 @@ public class TelaPrincipalUsuario extends javax.swing.JFrame {
     private javax.swing.JButton btnLogout;
     private javax.swing.JMenuItem configUser;
     private javax.swing.JMenu configuracao;
+    private javax.swing.JMenuItem conssultaReserva;
     private javax.swing.JMenuItem emprestimos;
     private javax.swing.JLabel img;
     private javax.swing.JMenuItem livros;

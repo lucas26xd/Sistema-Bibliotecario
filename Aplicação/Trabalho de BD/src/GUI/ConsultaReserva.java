@@ -17,6 +17,7 @@ public class ConsultaReserva extends javax.swing.JFrame {
     private Servicos serv;
     private emprestimo emp;
     private funcoes f = new funcoes();
+    private String usuario_id = "";
     
     //construtor de funcionamento normal da tela
     public ConsultaReserva(Servicos serv) {
@@ -37,6 +38,11 @@ public class ConsultaReserva extends javax.swing.JFrame {
     
     private ConsultaReserva(){}
     
+    public void setaUsuarioID(String usuario_id){
+        this.usuario_id = usuario_id;
+        consulta();
+    }
+    
     private void consulta(){
         String cond = "", entregue = "", sql = "SELECT isbn, titulo, nome, data, atendida "
                                                 //+ "FROM ((reserva JOIN livros ON isbn = isbn_livro) "
@@ -53,6 +59,8 @@ public class ConsultaReserva extends javax.swing.JFrame {
         cond = "data BETWEEN '" + dataFormatada(tfDataInicial) + "' AND '" + dataFormatada(tfDataFinal) + "' AND "
                 + "titulo LIKE '%" + tfTitulo.getText() + "%' AND nome LIKE '%" + tfNome.getText() + "%' AND isbn LIKE '" + tfISBN.getText() + "%'";
         
+        if (!usuario_id.equals(""))
+            entregue += " AND id = '" + usuario_id + "'";        
         sql += " WHERE " + cond + entregue + ";";
         
         emp.consultarReserva(jtEmprestimo, sql);
