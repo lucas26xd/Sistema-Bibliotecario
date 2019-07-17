@@ -1,3 +1,7 @@
-/Aplicação/Trabalho de BD/nbproject/private/
-/Aplicação/Trabalho de BD/build/
-/Aplicação/Trabalho de BD/dist/
+.gitignore
+nbproject/
+build/
+dist/
+*.bak
+*.mf
+*.xml
