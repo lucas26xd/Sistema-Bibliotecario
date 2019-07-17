@@ -1,7 +1,0 @@
-.gitignore
-nbproject/
-build/
-dist/
-*.bak
-*.mf
-*.xml
